@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><!-- ARTICLE_TITLE_PLACEHOLDER --> - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage" id="meta-grade"><!-- META_GRADE_PLACEHOLDER --></span>
+        <span class="tag-badge tag-coral" id="meta-category"><!-- META_CATEGORY_PLACEHOLDER --></span>
+        <span class="tag-badge tag-clay" id="meta-level"><!-- META_LEVEL_PLACEHOLDER --></span>
+        <span class="tag-badge tag-blue" id="meta-issue"><!-- META_ISSUE_PLACEHOLDER --></span>
+      </div>
+      <h1 class="article-main-title"><!-- ARTICLE_TITLE_PLACEHOLDER --></h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：<!-- ARTICLE_AUTHOR_PLACEHOLDER --></span>
+        <span>📖 出處：<!-- ARTICLE_SOURCE_PLACEHOLDER --></span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 主題互動遊戲
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          <!-- ARTICLE_HTML_CONTENT_PLACEHOLDER -->
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認真讀完全文！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（每層次 4 題）＋ 1 題開放式生活思考題
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績與詳解
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div id="game-dynamic-container">
+          <!-- GAME_HTML_PLACEHOLDER -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入點 (往後替換 PDF 時自動產生此段配置) -->
+  <script>
+    /* __ARTICLE_CONFIG_PLACEHOLDER__ */
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>認識鳥朋友第七站：水邊的捕魚高手——翠鳥 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">自然生態・鳥類觀察</span>
+        <span class="tag-badge tag-clay">★ 難度</span>
+        <span class="tag-badge tag-blue">第 82 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">水邊的捕魚高手——翠鳥</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：塗振洋</span>
+        <span>📖 出處：【得報】第82期「說明」專欄 (2026年9月4日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：翠鳥捕魚大挑戰
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、水池邊的藍綠色閃影</h2>
+          <p class="reading-paragraph">
+            小朋友，你有沒有在公園的水池，或是住家附近的小溪，看過一隻藍綠色的小鳥快速飛過水面呢？牠的身體和麻雀差不多大，卻有一張又長又尖的嘴巴，還會一邊飛，一邊發出清脆的叫聲。如果你曾經看過牠，那很可能就是今天要介紹給你認識的鳥朋友——<span class="vocab-bubble" title="體型小巧、捕魚技巧極佳的水邊鳥類，又稱魚狗或翡翠">翠鳥</span>。
+          </p>
+          <p class="reading-paragraph">
+            翠鳥很喜歡吃魚，所以大部分的時間都待在有水的地方。牠會飛來飛去，尋找適合抓魚的位置。找到喜歡的地方後，牠就會停在樹枝、石頭或其他地方，靜靜地低著頭，專心看著水裡的動靜。一旦發現小魚，牠就會用非常快的速度衝進水裡，用長長的嘴巴夾住小魚，再飛回原來停留的地方，慢慢享用這頓美味的大餐。
+          </p>
+
+          <h2 class="article-section-title">二、耐心等待的老位置習慣</h2>
+          <p class="reading-paragraph">
+            翠鳥還有一個很有趣的習慣。如果牠曾經在某個地方抓到魚，常常還會再回到同一個地方抓魚。所以，如果你想看看翠鳥，不妨回到你曾經發現過牠的地方，說不定牠正站在老位置，耐心等待下一條小魚游過來呢！
+          </p>
+
+          <h2 class="article-section-title">三、亮眼的外形與像小刀般的嘴巴</h2>
+          <p class="reading-paragraph">
+            翠鳥的外形很特別。牠有一顆大大的頭、短短的尾巴，還有一張又長又尖、像小刀一樣的嘴巴。牠的頭、背部和尾巴大多是藍綠色，從背部一直到尾巴，還有一道特別亮眼的藍色羽毛。喉嚨是白色的，胸部和肚子是橘紅色，短短的腳則是紅色，鮮豔的羽毛讓牠看起來格外漂亮。
+          </p>
+
+          <h2 class="article-section-title">四、捕魚後的處理與浪漫的求偶禮物</h2>
+          <p class="reading-paragraph">
+            翠鳥抓到魚後，如果魚還在掙扎，牠會先把魚甩一甩，或是用力敲向樹枝或石頭，把魚敲暈後再吃。這樣做，是為了讓魚更容易吞下去。除了填飽自己的肚子，在繁殖季時，抓魚也是雄翠鳥追求伴侶的一種方式。雄翠鳥會把抓到的魚當作禮物送給雌翠鳥，如果雌翠鳥接受了這份禮物，就表示牠願意接受雄翠鳥的追求。原來，在自然界裡，也有許多鳥類會用送食物來表達心意呢！
+          </p>
+
+          <h2 class="article-section-title">五、防水羽毛與天然「蛙鏡」大秘密</h2>
+          <p class="reading-paragraph">
+            翠鳥是一種會把整個身體衝進水裡抓魚的鳥類，所以牠們整理羽毛時，會用嘴巴把尾巴分泌的油脂塗抹在羽毛上，形成一層<span class="vocab-bubble" title="能隔絕水分浸透羽毛的保護油脂">防水保護</span>。這樣一來，牠們從水裡飛出來後，只要輕輕抖一抖身體，水珠就會掉落，羽毛很快又恢復乾爽。
+          </p>
+          <p class="reading-paragraph">
+            更神奇的是，當牠們衝進水裡時，眼睛還會蓋上一層半透明的薄膜（<span class="vocab-bubble" title="鳥類的一層半透明眼瞼，又稱瞬膜">瞬膜</span>），就像戴上蛙鏡一樣，不但可以保護眼睛，還能看清楚水裡的動靜。
+          </p>
+
+          <h2 class="article-section-title">六、誰擦了口紅？雌雄翠鳥巧分辨</h2>
+          <p class="reading-paragraph">
+            雄翠鳥和雌翠鳥的外表雖然很像，但其實不難分辨，只要仔細看看牠們的嘴巴，就能知道牠是雄鳥還是雌鳥。雄翠鳥的嘴巴幾乎全是黑色，雌翠鳥的下嘴巴則帶有一點紅色，就像擦了一點口紅一樣。下次看到翠鳥時，不妨仔細觀察一下牠們的嘴巴，看你是不是也能分辨出牠是雄鳥，還是雌鳥。
+          </p>
+          <p class="reading-paragraph">
+            長相可愛又漂亮的翠鳥，是水邊的捕魚高手，也是很值得欣賞的鳥朋友。尤其是牠快速衝進水裡抓魚的那一瞬間，真是精采極了！下次到公園的水池旁，或是在住家附近的小溪散步時，不妨放慢腳步，仔細找找那藍綠色的小身影。也許下一秒，你就能親眼看見牠們精采的抓魚表演！
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認識了美麗的水邊捕魚高手！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（每層次 4 題）＋ 1 題開放式生活思考題
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績與詳解
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-3",
+      pageFile: "index4.html",
+      title: "水邊的捕魚高手——翠鳥",
+      subtitle: "第82期【說明】專欄 / 作者：塗振洋",
+      meta: {
+        grade: "國小四年級",
+        category: "自然生態・鳥類觀察",
+        level: "★ 難度",
+        issue: "第 82 期"
+      },
+      // 16 題四層次題庫（四個層次各 4 題，A/B/C/D 均衡輪流）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "翠鳥身形小巧，文章指出牠的身體大小和我們生活周遭哪一種常見鳥類差不多大？",
+          options: {
+            A: "麻雀",
+            B: "白鷺鷥",
+            C: "企鵝",
+            D: "鴕鳥"
+          },
+          answer: "A",
+          explanation: "文中第一頁開頭明確寫道：「牠的身體和麻雀差不多大，卻有一張又長又尖的嘴巴。」",
+          sourceQuote: "「牠的身體和麻雀差不多大，卻有一張又長又尖的嘴巴，還會一邊飛，一邊發出清脆的叫聲。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "想要分辨眼前的翠鳥究竟是「雄鳥」還是「雌鳥」，最關鍵的觀察部位是哪裡？",
+          options: {
+            A: "眼睛四周有沒有長白毛",
+            B: "嘴巴的顏色（雌鳥下嘴巴帶有口紅般的紅色）",
+            C: "雙腳腳趾的長度與爪子數量",
+            D: "翅膀尾端是否有黑色條紋"
+          },
+          answer: "B",
+          explanation: "文中第四頁指出：雄翠鳥的嘴巴幾乎全是黑色，雌翠鳥的下嘴巴則帶有一點紅色，就像擦了口紅一樣。",
+          sourceQuote: "「雄翠鳥的嘴巴幾乎全是黑色，雌翠鳥的下嘴巴則帶有一點紅色，就像擦了一點口紅一樣。」（第4頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "當翠鳥衝進水裡抓魚時，眼睛會蓋上一層保護用的半透明薄膜，文章將它形容成什麼生活裝備？",
+          options: {
+            A: "雨衣雨帽",
+            B: "放大鏡",
+            C: "蛙鏡",
+            D: "太陽眼鏡"
+          },
+          answer: "C",
+          explanation: "文中第四頁說明：眼睛會蓋上一層半透明的薄膜，就像戴上蛙鏡一樣，不但能保護眼睛，還能看清動靜。",
+          sourceQuote: "「當牠們衝進水裡時，眼睛還會蓋上一層半透明的薄膜，就像戴上蛙鏡一樣，不但可以保護眼睛，還能看清楚水裡的動靜。」（第4頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "翠鳥從水裡飛出來後，只要抖一抖身體羽毛就能迅速乾爽，主要原因是什麼？",
+          options: {
+            A: "牠全身披著高溫的發熱羽毛",
+            B: "牠是用太陽能電池自動烘乾羽毛",
+            C: "牠的羽毛都是由塑膠纖維組成的",
+            D: "牠用嘴巴將尾巴分泌的油脂塗抹在羽毛上形成防水層"
+          },
+          answer: "D",
+          explanation: "第四頁提及：整理羽毛時，會用嘴巴把尾巴分泌的油脂塗抹在羽毛上，形成一層防水保護，水珠抖一抖就掉落。",
+          sourceQuote: "「牠們整理羽毛時，會用嘴巴把尾巴分泌的油脂塗抹在羽毛上，形成一層防水保護……水珠就會掉落，羽毛很快又恢復乾爽。」（第4頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "翠鳥抓到活跳跳的小魚後，為什麼要先在樹枝或石頭上用力敲一敲、甩一甩？",
+          options: {
+            A: "把魚敲暈避免掙扎刺傷喉嚨，讓魚更容易吞下肚",
+            B: "想要把魚肉敲碎拿來煮魚湯",
+            C: "敲打石頭發出節奏音樂向水鳥朋友炫耀",
+            D: "要把魚骨頭完全剔除後才吃"
+          },
+          answer: "A",
+          explanation: "第三頁指出：「如果魚還在掙扎，牠會先把魚甩一甩，或是用力敲向樹枝或石頭，把魚敲暈後再吃。這樣做，是為了讓魚更容易吞下去。」",
+          sourceQuote: "「用力敲向樹枝或石頭，把魚敲暈後再吃。這樣做，是為了讓魚更容易吞下去。」（第3頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "如果四年級的小朋友想在住家附近的小溪觀察翠鳥，根據牠的生活習性，下列哪一種方法最聰明？",
+          options: {
+            A: "在溪邊大聲敲鑼打鼓叫牠飛過來",
+            B: "回到曾經看過牠捕魚的『老位置』附近，保持安靜耐心等候",
+            C: "拿網子往水裡亂撈，把整條小溪的魚撈光",
+            D: "在草地上擺滿麵包屑吸引牠"
+          },
+          answer: "B",
+          explanation: "第二頁提到翠鳥有「回到同一個地方抓魚」的習慣：「不妨回到你曾經發現過牠的地方，說不定牠正站在老位置，耐心等待下一條小魚游過來呢！」",
+          sourceQuote: "「如果牠曾經在某個地方抓到魚，常常還會再回到同一個地方抓魚……不妨回到你曾經發現過牠的地方。」（第2頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "在繁殖季節時，雄翠鳥抓了魚送給雌翠鳥，這種行為具有什麼生態意義？",
+          options: {
+            A: "雄翠鳥吃不下多餘的獵物，向雌鳥借地方放冷藏",
+            B: "雄翠鳥在向雌鳥炫耀自己的捕魚速度有多快",
+            C: "用送食物來表達追求愛意，若雌鳥吃下表示接受追求",
+            D: "兩隻鳥正在進行商品交易買賣"
+          },
+          answer: "C",
+          explanation: "第三至四頁指出：抓魚是雄翠鳥追求伴侶的一種方式，把魚當禮物送給雌鳥，雌鳥接受禮物即表示願意接受追求。",
+          sourceQuote: "「雄翠鳥會把抓到的魚當作禮物送給雌翠鳥，如果雌翠鳥接受了這份禮物，就表示牠願意接受雄翠鳥的追求。」（第3-4頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "翠鳥站在水邊樹枝或石頭上時，為什麼總要「靜靜地低著頭」？",
+          options: {
+            A: "因為長嘴巴太重了抬不起來",
+            B: "因為牠正在傷心哭泣想找媽媽",
+            C: "因為牠對人類很害羞不敢抬頭看人",
+            D: "因為牠正在屏除雜念，全神貫注鎖定水面下的小魚動靜"
+          },
+          answer: "D",
+          explanation: "第一頁說明：停在樹枝或石頭上靜靜低著頭，是為了專心看著水裡的動靜，一發現小魚便立刻衝進水裡。",
+          sourceQuote: "「停在樹枝、石頭或其他地方，靜靜地低著頭，專心看著水裡的動靜。一旦發現小魚，牠就會用非常快的速度衝進水裡。」（第1-2頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "綜合全文，翠鳥之所以能在競爭激烈的水邊成為優秀的「捕魚高手」，主要仰賴哪一組特徵的完美結合？",
+          options: {
+            A: "尖長如小刀的利嘴、神速俯衝技巧、防水羽毛與如蛙鏡般的眼膜保護",
+            B: "像鴨子般寬大的腳蹼與像老鷹一樣長達數公尺的巨大雙翼",
+            C: "在陸地上奔跑飛快的長腿與強大咬合力的牙齒",
+            D: "在深海中長時間潛水憋氣一整天的肺部構造"
+          },
+          answer: "A",
+          explanation: "統整全文各段：尖長嘴巴用來夾魚、閃電俯衝捕魚、尾脂腺防水羽毛與眼睛半透明薄膜，都是牠捕魚的獨特生理構造優勢。",
+          sourceQuote: "綜合第1至4頁全文之嘴型、俯衝、尾脂防水、眼部瞬膜防護描述。"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "作者在文章中形容雌翠鳥下嘴巴「就像擦了一點口紅一樣」，這樣形容主要有什麼好處？",
+          options: {
+            A: "鼓勵大家去水邊幫鳥類化妝畫口紅",
+            B: "結合兒童熟悉的生活觀察經驗，生動且精準地傳遞雌雄性徵的辨識關鍵",
+            C: "說明翠鳥是化妝品工廠最喜歡的代言動物",
+            D: "表示雌翠鳥因為咬小魚而導致嘴唇流血"
+          },
+          answer: "B",
+          explanation: "作者運用形象生動的生活化譬喻，讓四年級小學生能輕鬆記得雌翠鳥下嘴帶紅色的辨識要點。",
+          sourceQuote: "「雌翠鳥的下嘴巴則帶有一點紅色，就像擦了一點口紅一樣。」（第4頁）"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "下列哪一個流程圖最能精準呈現翠鳥一次完整的「獵捕進食流程」？",
+          options: {
+            A: "水底游泳 ➔ 飛回樹枝 ➔ 敲暈小魚 ➔ 塗抹油脂",
+            B: "大聲清脆叫 ➔ 在泥土挖洞 ➔ 吞下小魚 ➔ 戴上蛙鏡",
+            C: "站在老位置低頭凝視 ➔ 快速衝入水中夾魚 ➔ 飛回原處敲暈小魚 ➔ 慢慢吞下享用",
+            D: "在空中拋接樹葉 ➔ 衝進水中睡覺 ➔ 吐出食繭 ➔ 飛回巢中"
+          },
+          answer: "C",
+          explanation: "課文依序描寫：在老位置靜靜低頭專心觀察 ➔ 發現小魚急速衝入水夾住 ➔ 飛回停棲處敲暈獵物 ➔ 慢慢享用大餐。",
+          sourceQuote: "整理自第1頁至第3頁捕魚與進食流程段落。"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "讀完這篇科普說明文後，作者寫作這篇文章最希望帶給四年級讀者什麼啟發？",
+          options: {
+            A: "大家應該買釣竿去跟翠鳥比賽看誰抓的小魚比較多",
+            B: "小溪裡的水鳥太會吃魚，應該多放農藥消滅牠們",
+            C: "鳥類的羽毛很漂亮，可以抓來拔羽毛做裝飾品",
+            D: "認識生活在我們身邊的美麗水鳥，學會在散步時放慢腳步、用心欣賞與關懷自然生態"
+          },
+          answer: "D",
+          explanation: "作者在最後一段溫柔呼籲：「下次散步時不妨放慢腳步，仔細找找那藍綠色的小身影……」，傳遞欣賞與愛護自然的生命教育理念。",
+          sourceQuote: "「長相可愛又漂亮的翠鳥，是水邊的捕魚高手，也是很值得欣賞的鳥朋友……不妨放慢腳步，仔細找找那藍綠色的小身影。」（第4-5頁）"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "如果將本課的「翠鳥」與之前學過的猛禽「鳳頭蒼鷹」進行捕食特徵的比較，下列敘述何者最正確？",
+          options: {
+            A: "翠鳥用像小刀的長尖嘴衝水夾魚，蒼鷹則以如彎鉤般的強健腳爪扣住陸生動物再撕裂進食",
+            B: "翠鳥體型比蒼鷹大上十倍，所以抓的魚比蒼鷹的老鼠大很多",
+            C: "翠鳥無法消化的食物會吐出巨大的食繭，而蒼鷹不會吐食繭",
+            D: "翠鳥是夜行性猛禽，而蒼鷹只在白天抓水裡的魚"
+          },
+          answer: "A",
+          explanation: "跨單元知識遷移比較：翠鳥是中小型水鳥，靠尖長喙部夾魚；鳳頭蒼鷹是中型陸生猛禽，靠強爪抓扣、彎嘴撕開食物（且蒼鷹會吐食繭）。",
+          sourceQuote: "本課第3頁「嘴巴又長又尖像小刀」與上一篇《鳳頭蒼鷹》第10段「腳爪扣住、嘴巴撕開」之對比。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "文章第一段開頭寫道：「小朋友，你有沒有在公園的水池，或是住家附近的小溪，看過一隻藍綠色的小鳥……」這種開頭方式有什麼寫作優點？",
+          options: {
+            A: "作者字數不夠，故意用問句拖延時間",
+            B: "以親切提問連結讀者的生活經驗，喚起好奇心與觀察動機，自然引出主角翠鳥",
+            C: "顯得作者非常嚴肅，想要立刻考試測驗小朋友的記憶力",
+            D: "容易讓讀者以為這是一篇數學測驗卷"
+          },
+          answer: "B",
+          explanation: "運用生活情境問句開場，能拉近與四年級學生的距離，激發探索身邊大自然的好奇心。",
+          sourceQuote: "「小朋友，你有沒有在公園的水池，或是住家附近的小溪，看過一隻藍綠色的小鳥快速飛過水面呢？」（第1頁開頭）"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "如果都市公園裡的生態池經常被遊客丟棄塑膠垃圾、或是倒入油膩髒水，最可能對翠鳥的生存造成什麼嚴重危害？",
+          options: {
+            A: "翠鳥會把塑膠袋當作泳衣穿在身上，抓魚變得更快",
+            B: "翠鳥會自動演化成在陸地上吃塑膠垃圾為生",
+            C: "污水讓池水混濁無法看清獵物，油污更會破壞羽毛防水能力與水質生態，迫使翠鳥無法覓食而消失",
+            D: "油污會讓翠鳥的羽毛變成更美麗的彩虹色"
+          },
+          answer: "C",
+          explanation: "環境生態推論：翠鳥依賴清澈水質覓食與天然油脂防水，水污染將破壞食物鏈與其生理機能，導致鳥類無法生存。",
+          sourceQuote: "評估文章所提「專心看著水裡動靜」與「羽毛油脂防水」在面對污染時的生態連鎖反應。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "當我們在公園水池邊幸運看見翠鳥正站在樹枝上專心等待捕魚時，下列哪一種舉動最符合一個「稱職小公民」的觀察態度？",
+          options: {
+            A: "拿小石頭丟向水面幫翠鳥把魚趕上來",
+            B: "開起照相機的大閃光燈對著翠鳥連拍，大聲呼喊朋友來看",
+            C: "跨越護欄跑到樹枝底下伸手想要摸摸牠的羽毛",
+            D: "保持適當距離、放慢腳步不喧譁，靜靜欣賞牠精采的捕魚瞬間"
+          },
+          answer: "D",
+          explanation: "愛護野生動物的核心原則是「不驚擾、不餵食、不破壞棲地」，保持安靜遠觀才是文明素養的展現。",
+          sourceQuote: "最後一段叮嚀：「散步時不妨放慢腳步，仔細找找那藍綠色的小身影，也許下一秒就能親眼看見精采表演。」"
+        }
+      ],
+
+      // 開放式思考題
+      openQuestion: {
+        prompt: "【小小生態觀察家：水邊的色彩與生態小提案】翠鳥身穿亮麗的藍綠色與橘紅色羽毛，還有像戴蛙鏡、塗口紅般的奇妙特徵，深受大家喜愛。如果我們學校或住家附近有一座生態水池或小溪，為了讓翠鳥和其他水鳥願意常來作客，請你提出兩個「打造友善翠鳥水域」的好點子（例如：水質保護、岸邊植物種植、或是人類活動守則），並說明為什麼這樣做對牠們有幫助。",
+        hint: "可以想想看：1.水池邊需要什麼讓翠鳥停棲？（如樹枝、石頭） 2.水質清澈對牠看魚有什麼好處？（請至少寫下 20 個字喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：誰擦了口紅？雌雄大辨識】",
+            desc: "一隻美麗的翠鳥停在樹枝上，請仔細觀察牠的嘴巴，哪一隻是漂亮的「雌翠鳥」？",
+            options: [
+              { icon: "💄", name: "下嘴巴帶有一點紅色（像擦了口紅）", isSafe: true, feedback: "答對了！雌翠鳥的下嘴巴帶有口紅般的紅色，雄鳥嘴巴則幾乎全黑！" },
+              { icon: "⬛", name: "整張嘴巴上下全部都是純黑色", isSafe: false, feedback: "不對喔！嘴巴全部黑色的可是帥氣的雄翠鳥喔！" },
+              { icon: "🟡", name: "嘴巴長得像小鴨一樣又黃又扁", isSafe: false, feedback: "哈哈，那是小黃鴨，不是翠鳥長尖的小刀嘴喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：戴上天然蛙鏡神出擊】",
+            desc: "翠鳥發現水裡有小魚游過，準備衝進水裡前，牠的眼睛會開啟什麼神奇保護裝備？",
+            options: [
+              { icon: "🥽", name: "蓋上一層半透明薄膜（瞬膜，像戴蛙鏡）", isSafe: true, feedback: "太棒了！這層半透明薄膜既能保護眼睛，還能看清水底動靜！" },
+              { icon: "🕶️", name: "戴上一副黑漆漆的超黑太陽眼鏡", isSafe: false, feedback: "不對喔！戴超黑墨鏡進水裡就看不到小魚在哪裡了！" },
+              { icon: "🙈", name: "緊緊閉上眼睛完全盲衝", isSafe: false, feedback: "閉著眼睛就不能準確夾住小魚囉！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：羽毛不濕的乾爽秘密】",
+            desc: "翠鳥剛從水裡衝出來，只要抖一抖身體羽毛就完全乾爽，這是因為牠平常做了什麼保養？",
+            options: [
+              { icon: "✨", name: "用嘴巴把尾巴分泌的油脂塗抹在羽毛上防水", isSafe: true, feedback: "完全正確！尾巴分泌的天然油脂形成了最完美的防水防護罩！" },
+              { icon: "🧴", name: "每天洗澡都倒滿整罐人工沐浴乳", isSafe: false, feedback: "錯誤！人工清潔劑會破壞鳥類天然的羽毛油脂喔！" },
+              { icon: "🔌", name: "帶吹風機到水邊隨時插電吹乾", isSafe: false, feedback: "大自然裡可沒有插座讓鳥兒吹吹風機喔！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：水邊浪漫求婚禮物】",
+            desc: "到了溫馨的繁殖季節，雄翠鳥如果想向心愛的雌翠鳥示愛求婚，會送上什麼最棒的禮物？",
+            options: [
+              { icon: "🐟", name: "新鮮抓到的小魚作為心意大禮", isSafe: true, feedback: "恭喜答對！送上小魚代表能幹又貼心，雌鳥接受就會答應追求喔！" },
+              { icon: "💎", name: "在水底挖出一顆昂貴的大鑽石戒指", isSafe: false, feedback: "鳥類可不吃鑽石，鑽石不能填飽肚子喔！" },
+              { icon: "🍟", name: "路邊撿來的冷掉油膩炸薯條", isSafe: false, feedback: "錯誤！加工垃圾食物會傷害鳥類健康喔！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">捕魚挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭複習一下課文中的翠鳥捕魚秘密，再接再厲吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🏅</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【水邊捕魚高手・翠鳥守護特使】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太神準了！你獲得了 <strong>${score}</strong> 分滿分！你已經完全摸透了翠鳥的生活習性與神奇法寶，下次在溪邊散步，別忘了多看幾眼這位藍綠色的小朋友喔！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

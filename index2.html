@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>城市遊俠——鳳頭蒼鷹 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">自然生態・動物保育</span>
+        <span class="tag-badge tag-clay">★★ 難度</span>
+        <span class="tag-badge tag-blue">第 90 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">城市遊俠——鳳頭蒼鷹</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：塗振洋</span>
+        <span>📖 出處：【得報】第90期「說明」專欄 (2026年10月30日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：蒼鷹獵人大冒險
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、勇敢進城的森林猛禽</h2>
+          <p class="reading-paragraph">
+            近十幾年來，有一種白天活動的<span class="vocab-bubble" title="兇猛肉食性的鳥類">猛禽</span>，慢慢從原本居住的淺山森林，出現在熱鬧的城市公園，甚至把家搬進了都市裡。牠們不只在城市裡生活，還會築巢、繁殖下一代。而這種勇敢「進城」的猛禽，就是我們這一期要介紹的主角——鳳頭蒼鷹。
+          </p>
+          <p class="reading-paragraph">
+            鳳頭蒼鷹屬於鷹的一種，是臺灣常見的中型猛禽。從平地到海拔一千多公尺的山林，都能發現牠們的蹤跡。鷹的警覺性非常高，視力更是敏銳，據說比人類的視力還要好上許多倍，可以看得又遠又清楚。因此，當你走近牠的時候，可能還沒發現牠，牠早就注意到你了！這時候，牠很可能立刻展翅飛走。所以，雖然鳳頭蒼鷹並不少見，但是想要近距離觀察牠，卻不是一件容易的事。
+          </p>
+
+          <h2 class="article-section-title">二、為什麼山裡的猛禽會搬進城市？</h2>
+          <p class="reading-paragraph">
+            那麼，為什麼這位原本住在山林裡的鳳頭蒼鷹，會搬進城市裡生活呢？
+          </p>
+          <p class="reading-paragraph">
+            這十幾年來，城市裡種植了越來越多的樹木，公園、校園和社區也增加了許多綠地，讓城市變得更像一座座小森林。再加上城市裡食物來源不少，而威脅幼鳥的天敵，例如：蛇類，也可能比山林裡少。因此，鳳頭蒼鷹移居都市、築巢繁殖的情形，就逐漸被人們所發現。現在，只要走進一些都會公園或校園，抬起頭來，就有機會看見這位白天活動的猛禽在樹梢間飛翔。
+          </p>
+
+          <h2 class="article-section-title">三、帥氣的外表與「尿布」小秘密</h2>
+          <p class="reading-paragraph">
+            鳳頭蒼鷹的外表也很有特色。成鳥的頭部帶著灰色，背部和翅膀則呈現褐色。頭部後方還藏著一撮短短的冠羽，不過平常可不容易看見。只有在受到驚嚇或情緒比較緊張的時候，冠羽才會豎起來，這也是牠名字裡「鳳頭」的由來。
+          </p>
+          <p class="reading-paragraph">
+            牠的喉部是白色的，中間有一道黑色的紋路；胸前布滿縱向斑紋，到了腹部，斑紋卻變成了橫向。最有趣的地方，就是尾巴基部下方那一塊白色、蓬鬆的羽毛了。當牠張開翅膀飛行時，這團白羽毛特別醒目，看起來就像屁股包了一塊「小尿布」一樣，讓威風凜凜的鳳頭蒼鷹多了一點可愛的模樣。
+          </p>
+
+          <h2 class="article-section-title">四、頂級獵人的菜單與神秘「食繭」</h2>
+          <p class="reading-paragraph">
+            鳳頭蒼鷹在臺灣的生態食物鏈中，屬於<span class="vocab-bubble" title="位在食物鏈最上層，捕食其他動物">頂級的消費者</span>。牠們的食物種類不少，包括：老鼠、松鼠等小型哺乳動物，也會捕捉麻雀、白頭翁、斑鳩、鴿子等鳥類，還有蜥蜴、蛇等爬蟲類。
+          </p>
+          <p class="reading-paragraph">
+            仔細看看鳳頭蒼鷹的嘴巴和腳爪，就知道牠為什麼是個厲害的獵人了。牠的嘴巴彎彎的，腳爪也像鉤子一樣，又尖又銳利。當牠抓住獵物時，會先用強而有力的腳爪牢牢扣住，再用彎鉤般的嘴巴撕開食物，一口一口地吞下肚。
+          </p>
+          <p class="reading-paragraph">
+            可是，食物裡有些毛髮和骨頭並不能被消化。這些東西會在牠的胃裡慢慢聚集，形成一團小小的「<span class="vocab-bubble" title="鳥類無法消化而吐出的一團毛髮骨骼">食繭</span>」，經過一段時間後，鳳頭蒼鷹就會把它從嘴巴裡吐出來。對研究鳥類的人來說，這些被吐出來的食繭可不是沒用的垃圾，反而能幫助他們瞭解鳳頭蒼鷹平常都吃了哪些食物呢！
+          </p>
+
+          <h2 class="article-section-title">五、溫馨的繁殖季與育雛日記</h2>
+          <p class="reading-paragraph">
+            每年的三月到六月，是鳳頭蒼鷹主要的繁殖季節。牠們喜歡在枝葉茂密的大樹上築巢，而且巢通常位在離地面有一段高度的地方。這樣既有樹葉可以遮陽、擋雨，也能降低幼鳥被其他動物發現的機會。
+          </p>
+          <p class="reading-paragraph">
+            剛出生的鳳頭蒼鷹寶寶，全身覆蓋著白白的絨毛，看起來十分可愛。育雛的時候，鷹媽媽通常會守護在巢的附近，而鷹爸爸則負責外出尋找食物。找到食物後，鷹爸爸會把食物帶回巢，再由鷹媽媽負責處理並餵給寶寶吃。這樣的育雛生活，大約要持續一個月左右。
+          </p>
+          <p class="reading-paragraph">
+            所以，如果你發現住家附近的大樹上，有鳳頭蒼鷹正在築巢、育雛，可千萬不要為了看清楚小寶寶而靠得太近。人類的靠近可能會讓牠們受到驚嚇，甚至影響繁殖。現在，臺灣猛禽研究會也會選擇一些巢位進行攝影觀察與記錄，讓大家不用靠近鳥巢，也能透過研究會的網站觀看鳳頭蒼鷹每天的育雛生活，一起關心小寶寶是怎麼長大的。
+          </p>
+
+          <h2 class="article-section-title">六、城市遊俠的生活與隱形危機</h2>
+          <p class="reading-paragraph">
+            住在城市裡的鳳頭蒼鷹，穿梭在車水馬龍的街道與林木之間，進行活動與覓食，就像一位在都市裡來去自如的「城市遊俠」。有時候，在公園有水窪的地方，還能看到牠們飛下來戲水、洗澡。更難得的是，牠們偶爾會從地上叼起一片葉子，往空中拋出去，看起來就像自己找了個小玩具在玩遊戲一樣。
+          </p>
+          <p class="reading-paragraph">
+            不過，生活在都市，也可能讓鳳頭蒼鷹遇到一些新的危險。例如：牠們可能因為靠近住家活動，而增加「<span class="vocab-bubble" title="鳥類誤認玻璃為通道而高速撞擊傷亡">窗殺</span>」的機會，也可能因為捕食吃了老鼠藥的老鼠，而受到毒害。
+          </p>
+          <p class="reading-paragraph">
+            什麼是「窗殺」呢？透明的玻璃窗，對人類來說很容易看見，但對飛行中的鳥兒來說，卻可能像一條可以穿越的道路。當鳳頭蒼鷹快速飛行時，如果沒有發現眼前的玻璃，就可能直接撞上去而受傷。因此，臺灣猛禽研究會建議大家，可以在住家窗戶的外側貼上一些貼紙，而且每個貼紙上下左右的距離最好不要超過五公分。這些圖案就像是在玻璃上掛起一道「請勿通行」的標誌，提醒飛行中的鳥兒：「前面有障礙物，不能飛過去！」如此一來，就能減少鳥類撞窗的情形。
+          </p>
+          <p class="reading-paragraph">
+            至於老鼠藥，也可能帶來另一個問題。鳳頭蒼鷹會捕食老鼠，如果老鼠吃了毒餌後還沒有死亡，就可能成為鳳頭蒼鷹的食物。這樣一來，毒物就可能沿著食物鏈一路傳下去，傷害的就不只是老鼠，還可能包括捕食老鼠的猛禽。因此，都市裡如何安全地控制老鼠數量，也成為我們人類需要仔細思考的問題。
+          </p>
+
+          <h2 class="article-section-title">七、共存的美好願景</h2>
+          <p class="reading-paragraph">
+            過去，我們可能只有在山林裡、高高的天空中才可以看見老鷹飛翔。但現在我們已經有機會在每天熟悉的城市裡，欣賞到這位威風凜凜的「城市遊俠」——鳳頭蒼鷹，是不是很棒的事呢？當牠們選擇和我們一起生活，也提醒著我們：一座真正適合人類居住的城市，也應該能讓其他動物安心的生活。所以下次走在城市裡，別忘了偶爾抬起頭來看看天空和樹梢；說不定，就會有一隻鳳頭蒼鷹正從你的頭頂飛過，帶著牠那威武又帥氣的模樣，繼續在城市裡展開牠的冒險。
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認真讀完這篇生動的報導！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（每層次 4 題）＋ 1 題開放式生活思考題
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績與詳解
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-1",
+      pageFile: "index2.html",
+      title: "城市遊俠——鳳頭蒼鷹",
+      subtitle: "第90期【說明】專欄 / 作者：塗振洋",
+      meta: {
+        grade: "國小四年級",
+        category: "自然生態・動物保育",
+        level: "★★ 難度",
+        issue: "第 90 期"
+      },
+      // 16 題四層次題庫（四個層次各 4 題）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "鳳頭蒼鷹在臺灣常見於哪些高度與環境？",
+          options: {
+            A: "只生活在海拔三千公尺以上的高山",
+            B: "從平地到海拔一千多公尺的山林",
+            C: "只棲息在無人居住的深海離島",
+            D: "只生活在乾燥炎熱的沙漠地區"
+          },
+          answer: "B",
+          explanation: "文中第二段明確提及：『從平地到海拔一千多公尺的山林，都能發現牠們的蹤跡。』",
+          sourceQuote: "「從平地到海拔一千多公尺的山林，都能發現牠們的蹤跡。」（第二段）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "鳳頭蒼鷹名字裡的「鳳頭」兩個字，是因為牠外觀有什麼特徵？",
+          options: {
+            A: "頭頂羽毛是漂亮的鳳凰彩色",
+            B: "頭部長得非常像母雞",
+            C: "頭部後方藏有一撮短冠羽，緊張或受驚嚇時會豎立",
+            D: "嘴巴上方長了一根紅色的大肉冠"
+          },
+          answer: "C",
+          explanation: "文中第六段指出：頭部後方藏著一撮短短的冠羽，只有在受到驚嚇或情緒緊張時才會豎起來，這是名字裡「鳳頭」的由來。",
+          sourceQuote: "「頭部後方還藏著一撮短短的冠羽……只有在受到驚嚇或情緒比較緊張的時候，冠羽才會豎起來，這也是牠名字裡『鳳頭』的由來。」（第六段）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "鳳頭蒼鷹吃下獵物後，無法消化的毛髮和骨頭聚集後從嘴裡吐出來的物體稱為什麼？",
+          options: {
+            A: "鳥糞",
+            B: "食繭",
+            C: "胃石",
+            D: "珍珠"
+          },
+          answer: "B",
+          explanation: "文中第十一段說明：食物裡無法消化的毛髮和骨頭會在胃裡聚集形成小團的「食繭」，之後會從嘴巴吐出來。",
+          sourceQuote: "「食物裡有些毛髮和骨頭並不能被消化。這些東西會在牠的胃裡慢慢聚集，形成一團小小的『食繭』，經過一段時間後，鳳頭蒼鷹就會把它從嘴巴裡吐出來。」（第十一段）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "為了預防都市裡的「窗殺」，臺灣猛禽研究會建議在玻璃外側貼貼紙，每個貼紙上下左右間隔最好不要超過多少？",
+          options: {
+            A: "五公分",
+            B: "二十公分",
+            C: "五十公分",
+            D: "一公尺"
+          },
+          answer: "A",
+          explanation: "第十七段明確建議：在住家窗戶外側貼貼紙，每個貼紙上下左右的距離最好不要超過五公分。",
+          sourceQuote: "「每個貼紙上下左右的距離最好不要超過五公分。這些圖案就像是在玻璃上掛起一道『請勿通行』的標誌。」（第十七段）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "根據文章內容，為什麼人類想要近距離觀察鳳頭蒼鷹並不是一件容易的事？",
+          options: {
+            A: "因為鳳頭蒼鷹是夜行性動物，白天都在睡覺",
+            B: "因為鳳頭蒼鷹警覺性高且視力極敏銳，人類靠近前牠就已警覺飛走",
+            C: "因為鳳頭蒼鷹體積太小，肉眼無法看見",
+            D: "因為鳳頭蒼鷹會主動攻擊走近的人類"
+          },
+          answer: "B",
+          explanation: "文中第二段提到鷹的警覺性高、視力比人類好許多倍，當你走近時牠早就注意到並飛走了，因此不易近距離觀察。",
+          sourceQuote: "「鷹的警覺性非常高，視力更是敏銳……當你走近牠的時候，可能還沒發現牠，牠早就注意到你了！這時候，牠很可能立刻展翅飛走。」（第二段）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "鳳頭蒼鷹選擇在「枝葉茂密的大樹高處」築巢，最主要的用意是什麼？",
+          options: {
+            A: "方便直接曬日光浴與吹強風",
+            B: "遮陽、擋雨，並降低幼鳥被其他天敵發現的危險",
+            C: "因為離地面近會太吵雜睡不著",
+            D: "樹頂上有現成的鳥巢可以直接接收"
+          },
+          answer: "B",
+          explanation: "文中第十二段指出：在離地有高度的大樹上築巢，既有樹葉遮陽擋雨，也能降低幼鳥被其他動物發現的機會。",
+          sourceQuote: "「在枝葉茂密的大樹上築巢，而且巢通常位在離地面有一段高度的地方。這樣既有樹葉可以遮陽、擋雨，也能降低幼鳥被其他動物發現的機會。」（第十二段）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "為什麼研究鳥類的專家會特別重視鳳頭蒼鷹吐出的「食繭」？",
+          options: {
+            A: "可以拿去市場販售做成中藥材",
+            B: "可以分析其中毛髮骨骼，瞭解鳳頭蒼鷹在都市的攝食習性與獵物種類",
+            C: "可以拿來當作大樹施肥的珍貴肥料",
+            D: "能證明鳳頭蒼鷹的消化器官生病了"
+          },
+          answer: "B",
+          explanation: "第十一段提及：吐出來的食繭不是垃圾，反而能幫助研究學者瞭解鳳頭蒼鷹平常都吃了哪些食物。",
+          sourceQuote: "「對研究鳥類的人來說，這些被吐出來的食繭可不是沒用的垃圾，反而能幫助他們瞭解鳳頭蒼鷹平常都吃了哪些食物呢！」（第十一段）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "在長達約一個月的育雛期間，鷹爸爸和鷹媽媽是如何分工合作照顧寶寶的？",
+          options: {
+            A: "鷹爸爸守在巢邊，鷹媽媽全天外出抓老鼠",
+            B: "鷹爸爸負責外出尋找獵物，鷹媽媽留守在巢附近並餵食寶寶",
+            C: "由鳥寶寶自己練習飛出去抓蟲吃",
+            D: "鷹爸爸鷹媽媽一起飛走，讓猛禽研究會志工餵食"
+          },
+          answer: "B",
+          explanation: "第十三段說明：鷹媽媽守護在巢附近，鷹爸爸負責外出覓食帶回巢，再由鷹媽媽負責處理並餵食寶寶。",
+          sourceQuote: "「鷹媽媽通常會守護在巢的附近，而鷹爸爸則負責外出尋找食物。找到食物後，鷹爸爸會把食物帶回巢，再由鷹媽媽負責處理並餵給寶寶吃。」（第十三段）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "統整文章內容，下列哪一項「不是」鳳頭蒼鷹近年來逐漸搬進都市生活的原因？",
+          options: {
+            A: "都市公園、校園綠地增加，像是一座座小森林",
+            B: "都市裡有老鼠、鳥類等充足的食物來源",
+            C: "威脅幼鳥的天敵（如蛇類）可能比山林少",
+            D: "都市的大馬路開闊，適合群體遷徙避寒"
+          },
+          answer: "D",
+          explanation: "第四段說明移居都市的三大原因：綠地樹木增加、食物來源不少、天敵（如蛇類）較山林少；選項 D 並非文章所述原因。",
+          sourceQuote: "「城市裡種植了越來越多的樹木……綠地讓城市變得更像一座座小森林。再加上城市裡食物來源不少，而威脅幼鳥的天敵，例如：蛇類，也可能比山林裡少。」（第四段）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "作者為什麼把住在都市裡的鳳頭蒼鷹比喻為「城市遊俠」？",
+          options: {
+            A: "因為牠們會像古代俠客一樣幫助人類打小偷",
+            B: "因為牠們穿梭在車水馬龍的街林間自由覓食，甚至還會玩拋接樹葉",
+            C: "因為牠們只在晚上夜深人靜時才會出沒行俠仗義",
+            D: "因為牠們身上穿著像遊俠一樣的黑色斗篷羽毛"
+          },
+          answer: "B",
+          explanation: "第十五段提及鳳頭蒼鷹穿梭在街道與林木間活動覓食，像來去自如的遊俠，還會在水窪戲水、拋葉子玩遊戲。",
+          sourceQuote: "「穿梭在車水馬龍的街道與林木之間，進行活動與覓食，就像一位在都市裡來去自如的『城市遊俠』。」（第十五段）"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "關於老鼠藥對生態系統造成的威脅，下列哪一個流程最符合「食物鏈毒物傳遞」的現象？",
+          options: {
+            A: "老鼠吃毒餌 ➔ 尚未死亡被鳳頭蒼鷹捕食 ➔ 毒素累積傷害猛禽",
+            B: "鳳頭蒼鷹直接飛到地面搶食老鼠藥餌劑 ➔ 當場中毒",
+            C: "老鼠吃毒餌 ➔ 跳入河川 ➔ 導致大樹枯萎無處築巢",
+            D: "人類在窗戶上塗抹老鼠藥 ➔ 導致鳥類飛過撞窗"
+          },
+          answer: "A",
+          explanation: "第十八段解釋：老鼠吃了毒餌後未死成為老鷹食物，毒物便沿著食物鏈一路傳遞，傷害捕食老鼠的猛禽。",
+          sourceQuote: "「如果老鼠吃了毒餌後還沒有死亡，就可能成為鳳頭蒼鷹的食物。這樣一來，毒物就可能沿著食物鏈一路傳下去……傷害捕食老鼠的猛禽。」（第十八段）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "閱讀全文後，你認為這篇文章最主要的「核心主旨」是什麼？",
+          options: {
+            A: "呼籲大家到山林裡大量捕捉猛禽當寵物飼養",
+            B: "介紹都市害鼠的危害以及滅鼠藥的成分",
+            C: "介紹鳳頭蒼鷹進城的生活特徵與困境，喚起人與野生動物和諧共存的生態意識",
+            D: "教導大家如何在玻璃窗上畫畫彩繪"
+          },
+          answer: "C",
+          explanation: "整篇文章從鳳頭蒼鷹的外貌、食性、繁殖，介紹到窗殺與藥害，最後結語呼籲建立人與動物能安心生活的城市，主旨為 C。",
+          sourceQuote: "「當牠們選擇和我們一起生活，也提醒著我們：一座真正適合人類居住的城市，也應該能讓其他動物安心的生活。」（第十九段）"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "作者描寫鳳頭蒼鷹尾部蓬鬆白羽毛時，用了「像屁股包了一塊小尿布」的比喻，這樣寫作有什麼好處？",
+          options: {
+            A: "嘲笑鳳頭蒼鷹很幼稚不會自己上廁所",
+            B: "運用生動貼切的形象化比喻，化解猛禽的威猛嚴肅感，增添趣味與親和力",
+            C: "向大家介紹真正給寵物鳥穿尿布的方法",
+            D: "表示鳳頭蒼鷹其實還沒有長大成鳥"
+          },
+          answer: "B",
+          explanation: "第七段作者用幽默的生活譬喻形容白羽毛，讓四年級小學生在閱讀時產生親近感與生動畫面。",
+          sourceQuote: "「當牠張開翅膀飛行時，這團白羽毛特別醒目，看起來就像屁股包了一塊『小尿布』一樣，讓威風凜凜的鳳頭蒼鷹多了一點可愛的模樣。」（第七段）"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "如果學校或住家附近的大樹上有鳳頭蒼鷹正在育雛，根據文章作者與猛禽研究會的觀點，下列哪一種做法最值得讚賞？",
+          options: {
+            A: "拿長竹竿去戳鳥巢確認小寶寶長出羽毛了沒",
+            B: "搬梯子爬到樹上近距離天天打閃光燈拍照打卡",
+            C: "在樹下大聲放音樂慶祝老鷹誕生",
+            D: "保持尊重距離不上前驚擾，並可利用猛禽研究會的遠距即時影像關心育雛"
+          },
+          answer: "D",
+          explanation: "第十四段特別叮嚀：千萬不要靠得太近以免驚嚇影響繁殖，建議透過研究會攝影直播觀看。",
+          sourceQuote: "「可千萬不要為了看清楚小寶寶而靠得太近。人類的靠近可能會讓牠們受到驚嚇，甚至影響繁殖……可以透過研究會的網站觀看每天的育雛生活。」（第十四段）"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "文章最後提到：「一座真正適合人類居住的城市，也應該能讓其他動物安心的生活。」這句話表達了怎樣的價值觀？",
+          options: {
+            A: "城市發展只能為人類利益著想，野生動物必須全面遷出",
+            B: "城市的文明與永續發展，應建立在友善生態環境、與野生動物共生共榮的基礎上",
+            C: "所有的城市大樓都應該拆除改建為原始森林",
+            D: "只要人類生活方便，動物會不會撞窗都無所謂"
+          },
+          answer: "B",
+          explanation: "作者在第十九段結語提出進步城市的真諦：一座好城市不僅讓人類幸福，也能為其他野生生靈提供安全的生存空間。",
+          sourceQuote: "「一座真正適合人類居住的城市，也應該能讓其他動物安心的生活。」（第十九段）"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "請分析作者在撰寫這篇科普說明文時的「段落安排結構」，下列何者最符合全文的佈局？",
+          options: {
+            A: "先寫老鼠藥的成分 ➔ 再介紹各種鳥類 ➔ 最後批判城市建築",
+            B: "以進城現象引起好奇 ➔ 介紹外貌習性與繁殖 ➔ 探討都會生存危機 ➔ 提出共存期許",
+            C: "一開頭就指責人類破壞大自然 ➔ 接著寫鳳頭蒼鷹飛去外太空",
+            D: "從鳳頭蒼鷹的死亡 ➔ 倒敘到出生 ➔ 完全沒有提到城市環境"
+          },
+          answer: "B",
+          explanation: "文章結構從發現猛禽進城的現象切入，依序說明習性、育雛，進而點出都市帶來的窗殺與毒害，最後昇華為生態共存理念，層次分明。",
+          sourceQuote: "全文結構：現象引起動機（段1-4）➔ 外型特徵與獵食（段5-11）➔ 育雛繁殖（段12-14）➔ 都市危機窗殺與毒餌（段15-18）➔ 共存總結（段19）"
+        }
+      ],
+
+      // 開放式思考題
+      openQuestion: {
+        prompt: "【生活實踐題】在我們生活的校園或社區中，除了鳳頭蒼鷹，你還觀察過哪些野生小動物（例如：麻雀、白頭翁、松鼠或攀木蜥蜴）？請結合課文提到的「防窗殺貼紙」或「老鼠藥食物鏈危害」，提出一個你可以和同學或家人一起實踐的「校園／社區友善動物小行動」，並說明你的理由。",
+        hint: "可以想想看：教室窗戶是否能貼防撞標記？或是如何安全減少垃圾廚餘，避免依賴老鼠藥？"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：蒼鷹肚子餓了】",
+            desc: "鳳頭蒼鷹在樹梢尋找獵物，下列哪一個是牠自然健康的天然獵物？",
+            options: [
+              { icon: "🐦", name: "麻雀／斑鳩", isSafe: true, feedback: "答對了！小型鳥類是鳳頭蒼鷹常捕食的自然獵物！" },
+              { icon: "☠️", name: "吃了毒餌的老鼠", isSafe: false, feedback: "危險！吃了老鼠藥的老鼠會讓毒素沿食物鏈傷害老鷹！" },
+              { icon: "🧃", name: "遊客丟棄的塑膠飲料盒", isSafe: false, feedback: "錯誤！人工垃圾無法消化，千萬不能吃！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：高空飛行巡邏】",
+            desc: "前方有大樓建築，鳳頭蒼鷹要往哪裡飛行才是安全的？",
+            options: [
+              { icon: "🪟", name: "貼有5公分間隔貼紙的防撞窗戶外側", isSafe: true, feedback: "太棒了！貼紙就像『請勿通行』標誌，能有效防止鳥類撞窗！" },
+              { icon: "🪞", name: "大片完全透明乾淨的反光落地窗", isSafe: false, feedback: "危險！透明玻璃會讓鳥類誤認是可以穿越的通道造成『窗殺』！" },
+              { icon: "⚡", name: "裸露的高壓電線桿縫隙", isSafe: false, feedback: "危險！太靠近電線可能有觸電受傷風險！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：溫馨育雛大作戰】",
+            desc: "每年的三到六月是繁殖期，鳳頭蒼鷹最適合在哪裡築巢照顧小寶寶？",
+            options: [
+              { icon: "🌳", name: "枝葉茂密的大樹高處", isSafe: true, feedback: "完全正確！枝葉茂密能遮陽擋雨，離地有高度能避免天敵發現！" },
+              { icon: "⛺", name: "公園人來人往的草地上", isSafe: false, feedback: "危險！地面有太多人群與犬貓干擾，寶寶很容易受害！" },
+              { icon: "🚗", name: "馬路正中央的安全島矮灌木", isSafe: false, feedback: "危險！車水馬龍噪音與廢氣過多，不適宜育雛！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：我是友善城市小特使】",
+            desc: "如果發現校園大樹上有鳳頭蒼鷹正在築巢，身為四年級學生的我們應該怎麼做？",
+            options: [
+              { icon: "🔭", name: "保持適當距離靜靜觀察，或看猛禽會直播", isSafe: true, feedback: "恭喜答對！不驚擾動物才是真正愛護自然的表現！" },
+              { icon: "📸", name: "爬到樹上開大閃光燈近距離跟鳥寶寶自拍", isSafe: false, feedback: "錯誤！強光與靠近會讓鷹爸媽受到驚嚇甚至棄巢！" },
+              { icon: "🍟", name: "把吃剩下的薯條和熱狗丟進鳥巢餵食", isSafe: false, feedback: "錯誤！人類加工食品重油高鹽，會害小鳥生病！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">冒險挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">城市中有不少危險威脅著猛禽，再複習一下課文重新挑戰吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始冒險</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🏅</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">恭喜榮獲【城市小小生態特使】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太棒了！你獲得了 <strong>${score}</strong> 分！你已經深刻了解鳳頭蒼鷹在都市的生活智慧與保育方法，讓我們一起為友善動物城市盡一份心力！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

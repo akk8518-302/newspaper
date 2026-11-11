@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海上一隻烏龜 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">地理觀察・人文美學</span>
+        <span class="tag-badge tag-clay">★★★ 難度</span>
+        <span class="tag-badge tag-blue">第 89 期【故事】專欄</span>
+      </div>
+      <h1 class="article-main-title">海上一隻烏龜</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：小甜根</span>
+        <span>📖 出處：【得報】第89期「故事」專欄 (2026年10月23日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：龜山島觀察家
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、海面上的神祕黑影</h2>
+          <p class="reading-paragraph">
+            嗨，我是小甜根。我在宜蘭挖到一隻海上的烏龜。那天，車子往海邊開。遠遠的海面上，有一個黑黑的影子。小甜根趴在窗邊看。
+          </p>
+
+          <h2 class="article-section-title">二、安安靜靜趴在海上的大烏龜</h2>
+          <p class="reading-paragraph">
+            「那是甚麼？」<br>
+            「那是龜山島。」<br>
+            龜山島？小甜根又看了一次。真的有一點像烏龜。前面像頭。中間像背。後面像尾巴。一隻很大的烏龜，安安靜靜趴在海上。小甜根小聲問：「你在睡覺嗎？」
+          </p>
+
+          <h2 class="article-section-title">三、人很會看形狀</h2>
+          <p class="reading-paragraph">
+            龜山島沒有回答。海浪在他旁邊一下一下動。雲也慢慢飄過去。小甜根看著看著，忽然覺得奇怪。「你明明是島，為什麼大家叫你烏龜？」
+          </p>
+          <p class="reading-paragraph">
+            龜山島好像笑了一下。「因為人很會看形狀。」小甜根愣了一下。「看形狀？」「嗯。」龜山島說，「有人看見山，就想到烏龜的背。看見海上的島，就幫我取了這個名字。」
+          </p>
+
+          <h2 class="article-section-title">四、同一個地方，可以有不只一種看法</h2>
+          <p class="reading-paragraph">
+            小甜根再看一次。如果只看地圖，它是一座島。如果從海邊看，它像一隻烏龜。如果聽名字，它又變成會慢慢游動的故事。原來，同一個地方，可以有不只一種看法。
+          </p>
+
+          <h2 class="article-section-title">五、你怎麼一直跟著我們？</h2>
+          <p class="reading-paragraph">
+            車子繼續往前。龜山島一下子被房子擋住。一下子又從樹後面跑出來。「你怎麼一直跟著我們？」小甜根問。
+          </p>
+          <p class="reading-paragraph">
+            龜山島遠遠地趴著。好像在說：「不是我跟著你，是你一直在看我。」小甜根笑了。他把手貼在車窗上。那隻海上的烏龜，還在遠方。沒有真的游過來。可是，只要他一抬頭，就好像看見宜蘭在海上留下的一個記號。
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你讀完這篇充滿想像力與溫度的故事！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（每層次 4 題）＋ 1 題開放式生活思考題
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績與詳解
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-2",
+      pageFile: "index3.html",
+      title: "海上一隻烏龜",
+      subtitle: "第89期【故事】專欄 / 作者：小甜根",
+      meta: {
+        grade: "國小四年級",
+        category: "地理觀察・人文美學",
+        level: "★★★ 難度",
+        issue: "第 89 期"
+      },
+      // 16 題四層次題庫（四個層次各 4 題）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "故事中，小甜根是在哪一個臺灣縣市搭車前往海邊時看見這隻「海上的烏龜」？",
+          options: {
+            A: "花蓮",
+            B: "宜蘭",
+            C: "臺東",
+            D: "屏東"
+          },
+          answer: "B",
+          explanation: "文中第一頁開頭明確寫道：「我在宜蘭挖到一隻海上的烏龜。那天，車子往海邊開。」",
+          sourceQuote: "「我在宜蘭挖到一隻海上的烏龜。那天，車子往海邊開。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "遠遠海面上那個黑黑的影子，真正的名稱是什麼島嶼？",
+          options: {
+            A: "綠島",
+            B: "蘭嶼",
+            C: "龜山島",
+            D: "小琉球"
+          },
+          answer: "C",
+          explanation: "文中第二頁對話中寫出：「那是甚麼？」「那是龜山島。」",
+          sourceQuote: "「『那是甚麼？』『那是龜山島。』」（第2頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "小甜根趴在窗邊仔細觀察這座島時，形容它長得像烏龜的哪三個部分？",
+          options: {
+            A: "左邊像翅膀、右邊像尾巴、中間像蛋",
+            B: "前面像頭、中間像背、後面像尾巴",
+            C: "上面像觸角、下面像腳掌、中間像殼",
+            D: "前面像嘴巴、中間像魚鰭、後面像浪花"
+          },
+          answer: "B",
+          explanation: "文中第二頁指出：「真的有一點像烏龜。前面像頭。中間像背。後面像尾巴。」",
+          sourceQuote: "「前面像頭。中間像背。後面像尾巴。一隻很大的烏龜，安安靜靜趴在海上。」（第2頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "根據文章內容，龜山島回答為什麼大家會叫它「烏龜」？",
+          options: {
+            A: "因為島上有上萬隻海龜在產卵",
+            B: "因為人很會看形狀，看見山想到烏龜的背",
+            C: "因為這座島每天都在海面上慢慢爬行",
+            D: "因為古代有神仙把巨龜變成島"
+          },
+          answer: "B",
+          explanation: "第三頁龜山島說：「因為人很會看形狀……有人看見山，就想到烏龜的背。看見海上的島，就幫我取了這個名字。」",
+          sourceQuote: "「『因為人很會看形狀。』……『有人看見山，就想到烏龜的背。看見海上的島，就幫我取了這個名字。』」（第3頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "當車子往前開時，小甜根為什麼會覺得「龜山島怎麼一直跟著我們」？",
+          options: {
+            A: "因為龜山島被海流推著跟車子一起賽跑",
+            B: "因為龜山島位於遠方且視野開闊，沿途景物移動遮擋，加上小甜根的視線一直注視著它",
+            C: "因為司機一直在海邊繞同一個圓圈開車",
+            D: "因為海面上起大霧產生了海市蜃樓"
+          },
+          answer: "B",
+          explanation: "遠處巨大的景物在車輛行駛時相對角速度小，加上被路旁的房子和樹木短暫遮擋又出現，會造成好像一直跟著人的視覺感受；而文中龜山島也幽默點出「是你一直在看我」。",
+          sourceQuote: "「車子繼續往前。龜山島一下子被房子擋住。一下子又從樹後面跑出來……『不是我跟著你，是你一直在看我。』」（第4-5頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "當小甜根問「你在睡覺嗎？」，文章接著描寫「海浪在他旁邊一下一下動。雲也慢慢飄過去」，這段話營造出怎樣的感覺？",
+          options: {
+            A: "狂風暴雨即將來臨的緊張感",
+            B: "熱鬧喧嘩、充滿遊客的吵雜氣氛",
+            C: "寧靜安詳、島嶼彷彿亙古沉睡在大自然懷抱中的靜謐感",
+            D: "神秘可怕的鬼故事氣氛"
+          },
+          answer: "C",
+          explanation: "海浪規律拍打、雲朵悠閒飄過，襯托出龜山島安安靜靜臥在海面上的恬靜沉穩意境。",
+          sourceQuote: "「一隻很大的烏龜，安安靜靜趴在海上……海浪在他旁邊一下一下動。雲也慢慢飄過去。」（第2-3頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "當小甜根聽到龜山島說「不是我跟著你，是你一直在看我」時，他「笑了」，這個微笑表達了什麼心境？",
+          options: {
+            A: "嘲笑龜山島根本不會說話",
+            B: "體會到自己的視線一直牽掛著島嶼，領悟到這份奇妙心意後的喜悅與默契",
+            C: "發現自己迷路了不知所措的苦笑",
+            D: "因為聽到笑話而忍不住捧腹大笑"
+          },
+          answer: "B",
+          explanation: "小甜根意識到自己因為被這座島深深吸引而不斷注視著它，這份人與景物之間的心靈互動讓他感到溫暖而會心一笑。",
+          sourceQuote: "「『不是我跟著你，是你一直在看我。』小甜根笑了。他把手貼在車窗上。」（第5頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "文章最後說「好像看見宜蘭在海上留下的一個記號」，這裡的「記號」最可能是指什麼？",
+          options: {
+            A: "宜蘭漁民捕魚時隨手插在海裡的旗子",
+            B: "龜山島是宜蘭最具代表性、最能喚起故鄉記憶的地理地標",
+            C: "宜蘭縣政府在地圖上畫的紅色圓點",
+            D: "漂浮在海上的大型塑膠浮標"
+          },
+          answer: "B",
+          explanation: "「記號」象徵著龜山島在宜蘭人心目中的獨特地位，只要抬頭望見龜山島，就知道宜蘭到了，是土地與海洋共同凝聚的文化精神印記。",
+          sourceQuote: "「可是，只要他一抬頭，就好像看見宜蘭在海上留下的一個記號。」（第5頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "文中寫道：「如果只看地圖，它是一座島。如果從海邊看，它像一隻烏龜。如果聽名字，它又變成會慢慢游動的故事。」作者這段話主要想說明什麼道理？",
+          options: {
+            A: "看地圖常常會畫錯，只有到現場看才準確",
+            B: "同一個地方或事物，從不同角度與感受出發，可以有豐富多元的看法",
+            C: "聽故事比看地圖更容易讓人想睡覺",
+            D: "烏龜的名字比島嶼的名字更具有科學價值"
+          },
+          answer: "B",
+          explanation: "作者緊接著總結：「原來，同一個地方，可以有不只一種看法。」體現了多元視角與心靈想像的啟發。",
+          sourceQuote: "「如果只看地圖，它是一座島……如果聽名字，它又變成會慢慢游動的故事。原來，同一個地方，可以有不只一種看法。」（第4頁）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "作者在文章開頭說「我在宜蘭『挖到』一隻海上的烏龜」，這裡使用動詞「挖到」有什麼特殊的文學意涵？",
+          options: {
+            A: "小甜根拿著鏟子在沙灘挖到一隻真正的活海龜",
+            B: "用生動活潑的語氣，形容自己在旅途中如獲至寶般驚喜發現了龜山島的美麗景致與故事",
+            C: "表示龜山島原本埋在地底下一萬公尺",
+            D: "小甜根在宜蘭買了一隻玩具烏龜"
+          },
+          answer: "B",
+          explanation: "作者的自我介紹提到「最喜歡挖故事給大家聽」，因此用「挖到」形象化地表達發現美好在地故事的驚喜與童趣。",
+          sourceQuote: "「我在宜蘭挖到一隻海上的烏龜。」（第1頁）及作者簡介「最喜歡挖故事給大家聽」"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "下列哪一句古典詩詞名句所表達的哲理，最符合本文「同一個地方，可以有不只一種看法」的體悟？",
+          options: {
+            A: "床前明月光，疑是地上霜",
+            B: "橫看成嶺側成峰，遠近高低各不同",
+            C: "少小離家老大回，鄉音無改鬢毛衰",
+            D: "春眠不覺曉，處處聞啼鳥"
+          },
+          answer: "B",
+          explanation: "蘇軾《題西林壁》中的「橫看成嶺側成峰，遠近高低各不同」，正是說明從不同角度觀察事物會看見不同姿態的哲理，與本文主題完全契合。",
+          sourceQuote: "「原來，同一個地方，可以有不只一種看法。」（第4頁）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "統整全文，下列何者最能概括這篇故事的主要意旨？",
+          options: {
+            A: "介紹宜蘭海岸線各種交通工具的速度快慢",
+            B: "透過純真童趣的視角與對話，引導我們跳脫刻板認知，用想像力與多元角度欣賞土地與地景",
+            C: "呼籲大家到宜蘭海邊大量放生海龜",
+            D: "討論如何把龜山島改造成大型水上樂園"
+          },
+          answer: "B",
+          explanation: "本文透過小甜根看龜山島的過程，啟發孩子用多重視角（地圖、視覺、傳說）看世界，感受人與土地之間的情感連結。",
+          sourceQuote: "全文核心：「原來，同一個地方，可以有不只一種看法。」及「看見宜蘭在海上留下的一個記號。」"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "作者在故事中讓「龜山島」好像會笑、會開口回答小甜根的問題，這種「擬人化」的手法產生了什麼閱讀效果？",
+          options: {
+            A: "讓讀者以為龜山島真的是外星怪物，感到非常害怕",
+            B: "拉近讀者與自然地景的距離，使原本沉默遙遠的島嶼變得親切可愛、富有生命靈性",
+            C: "證明地理課本上的資料全部都是假的",
+            D: "降低文章的可信度，讓文章失去閱讀價值"
+          },
+          answer: "B",
+          explanation: "擬人化讓宏大遙遠的地理島嶼化身為能與孩子對話的朋友，不僅增添童趣，更能激發讀者對大自然的同理與親近感。",
+          sourceQuote: "「龜山島好像笑了一下。『因為人很會看形狀。』……好像在說：『不是我跟著你，是你一直在看我。』」（第3、5頁）"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "這篇故事的段落多半只有簡短一兩句話（例如：「海浪在他旁邊一下一下動。」「雲也慢慢飄過去。」），這樣的版面與節奏設計有什麼優點？",
+          options: {
+            A: "作者懶得寫字，想要草草應付結束",
+            B: "營造出寧靜舒緩的留白美感，像電影鏡頭般緩慢推移，非常適合四年級學童靜心體會與朗讀",
+            C: "容易造成排版浪費紙張，沒有任何好處",
+            D: "會讓讀者看不懂句子的意思"
+          },
+          answer: "B",
+          explanation: "短句與詩意留白能營造沉靜溫柔的閱讀節奏，給予孩子充足的想像空間，符合四年級文學美感教育的引導。",
+          sourceQuote: "「龜山島沒有回答。海浪在他旁邊一下一下動。雲也慢慢飄過去。」（第3頁）"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "比較「地理百科全書中的龜山島介紹」與「本篇故事中的龜山島」，兩者在寫作目的上有什麼最大不同？",
+          options: {
+            A: "地理百科注重提供經緯度、火山地質等客觀事實；本篇故事注重引發情感共鳴、想像力與哲理反思",
+            B: "兩者完全沒有不同，都是在背誦考試重點",
+            C: "地理百科都是假的，本篇故事才是真實科學",
+            D: "本篇故事只適合給幼稚園看，地理百科只適合給科學家看"
+          },
+          answer: "A",
+          explanation: "科普說明文與文學故事的文類目的不同：前者傳遞客觀知識，後者啟發心靈感悟、審美想像與人文關懷。",
+          sourceQuote: "客觀與主觀視角的整合：「如果只看地圖，它是一座島；如果聽名字，它又變成會慢慢游動的故事。」（第4頁）"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "讀完這篇故事後，如果你想向一位沒去過宜蘭的外地朋友介紹龜山島，下列哪一種說法最能體現本文的精神？",
+          options: {
+            A: "「那只是一座漂在海上的大石頭，沒什麼特別好看的。」",
+            B: "「它既是一座自然島嶼，從海邊看更像一隻守護宜蘭的大烏龜；從不同角度看它，會發現許多有趣的故事喔！」",
+            C: "「去宜蘭只要搭車看房子就好，不用抬頭看海面。」",
+            D: "「龜山島每天晚上都會游去花蓮，白天再游回來。」"
+          },
+          answer: "B",
+          explanation: "選項 B 同時涵蓋了自然島嶼的認知、外型意象的趣味以及多元視角與在地情感，最契合文章核心主旨。",
+          sourceQuote: "「原來，同一個地方，可以有不只一種看法。」及「看見宜蘭在海上留下的一個記號。」（第4-5頁）"
+        }
+      ],
+
+      // 開放式思考題
+      openQuestion: {
+        prompt: "【生活觀察探究題】在小甜根眼裡，海上的龜山島就像一隻沉睡的大烏龜。在你的生活周遭（例如：天上的雲朵、遠處的山形、校園裡的大樹、甚至是家裡的杯子或石頭），有沒有哪一樣事物，當你「換個角度」或「發揮想像力」看它時，會覺得它很像某種動物或神奇角色？請寫出它「原本是什麼」、「你覺得它像什麼」，以及這個發現帶給你什麼心情！",
+        hint: "請寫出：1.原本的事物名稱 2.想像中的模樣 3.你的心情或想法（請至少寫下 20 個字喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：烏龜形狀大辨識】",
+            desc: "小甜根趴在車窗看龜山島，覺得它哪裡像烏龜的身體部位呢？",
+            options: [
+              { icon: "🐢", name: "前面像頭、中間像背、後面像尾巴", isSafe: true, feedback: "答對了！前面的龜首、中間的龜甲與後面的龜尾，就像一隻趴在海上的大烏龜！" },
+              { icon: "🪽", name: "左邊像翅膀、右邊像魚尾", isSafe: false, feedback: "不對喔！文中說它是趴在海上的烏龜，不是長翅膀的鳥喔！" },
+              { icon: "🐙", name: "到處都是長長的章魚爪", isSafe: false, feedback: "錯誤！這座島的外型是像沉靜溫和的烏龜喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：多重視角變變變】",
+            desc: "「同一個地方，可以有不只一種看法。」如果看地圖，它是什麼？聽名字，它又是什麼？",
+            options: [
+              { icon: "🗺️", name: "看地圖是一座島，聽名字是慢慢游動的故事", isSafe: true, feedback: "太棒了！地圖是客觀地理，名字賦予它會游動的豐富想像力！" },
+              { icon: "🎮", name: "看地圖是大型電動玩具，聽名字是一碗烏龜湯", isSafe: false, feedback: "不對喔！要仔細體會課文中小甜根的多元視角喔！" },
+              { icon: "🛸", name: "看地圖是外星太空船基地", isSafe: false, feedback: "不對喔！課文說看地圖它就是一座海上的島嶼！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：視角錯覺大解密】",
+            desc: "為什麼車子往前開時，小甜根會覺得「龜山島好像一直跟著我們」？",
+            options: [
+              { icon: "👀", name: "島在遠方視野廣闊，加上小甜根的視線一直注視著它", isSafe: true, feedback: "完全正確！『不是我跟著你，是你一直在看我』，這就是視角與專注的奇妙魔法！" },
+              { icon: "🏎️", name: "因為龜山島裝了渦輪引擎跟車子賽跑", isSafe: false, feedback: "哈哈，島嶼是不會真的裝引擎跑動的啦！" },
+              { icon: "🧲", name: "因為汽車和島嶼之間有巨大的磁鐵吸力", isSafe: false, feedback: "錯誤！這是遠景相對移動所產生的視覺心理現象喔！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：尋找土地的記憶記號】",
+            desc: "文章最後說龜山島是「宜蘭在海上留下的一個記號」。在臺灣，其他地方也有類似的象徵記號嗎？",
+            options: [
+              { icon: "👑", name: "野柳的女王頭、阿里山的神木", isSafe: true, feedback: "太優秀了！大自然創造的獨特地景，都是各個鄉鎮最具代表性的美好記號！" },
+              { icon: "🗑️", name: "隨便丟在馬路旁的塑膠垃圾袋", isSafe: false, feedback: "錯誤！垃圾是環境破壞，不能代表土地的美麗記號！" },
+              { icon: "🚧", name: "臨時擺設的三角交通錐", isSafe: false, feedback: "不對喔！交通錐只是臨時路障，不是長久的地景記憶！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">觀察挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">換個角度再讀一次課文，重新找回大烏龜的視角吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🐢</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【龜山島小小地景觀察家】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太精彩了！你獲得了 <strong>${score}</strong> 分滿分！你已經掌握了「同一個地方，可以有不只一種看法」的超能力，未來的每一段旅程，你都能挖出屬於自己的美好故事！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

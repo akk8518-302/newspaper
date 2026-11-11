@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國小四年級 AI 互動閱讀素養樂園 - 課程首頁</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area">
+        <div class="logo-icon-3d">🦉</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・素養導向深層閱讀平台</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- 歡迎大橫幅 (Hero Banner) -->
+    <section class="hero-banner">
+      <div class="hero-text">
+        <div style="display:inline-block; margin-bottom: 8px;">
+          <span class="tag-badge tag-sage">🌟 智慧閱讀素養養成</span>
+          <span class="tag-badge tag-coral">💡 四層次理解深度測驗</span>
+        </div>
+        <h1>探索自然・深度閱讀・趣味闖關！</h1>
+        <p>
+          歡迎來到四年級專屬的互動閱讀世界！每一篇文章都經過精心挑選，搭配 16 道四層次思考挑戰、語音朗讀與趣味主題遊戲，快輸入座號和姓名，開啟你的閱讀探險之旅吧！
+        </p>
+      </div>
+      <div class="hero-avatar-3d">
+        📖
+      </div>
+    </section>
+
+    <!-- 課程清單區 -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+        <div>
+          <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 4px;">
+            📚 精選閱讀課程清單
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            點選卡片即可開始閱讀文章、挑戰測驗並暢玩主題小遊戲
+          </p>
+        </div>
+        <span class="tag-badge tag-clay" id="total-lessons-badge" style="font-size: 0.95rem;">
+          已發佈 3 門課程
+        </span>
+      </div>
+
+      <!-- 課程卡片網格 -->
+      <div class="course-grid" id="course-cards-container">
+        
+        <!-- 課程 1：城市遊俠——鳳頭蒼鷹 (index2.html) -->
+        <a href="index2.html" class="course-card-3d">
+          <div class="course-card-img-placeholder">
+            <span class="course-badge-floating">第 1 課・第90期</span>
+            🦅
+          </div>
+          <div class="course-card-body">
+            <div>
+              <div class="meta-tags-row" style="margin-bottom: 10px;">
+                <span class="tag-badge tag-sage" style="font-size:0.75rem;">國小四年級</span>
+                <span class="tag-badge tag-coral" style="font-size:0.75rem;">自然生態</span>
+                <span class="tag-badge tag-clay" style="font-size:0.75rem;">★★ 難度</span>
+              </div>
+              <h3 class="course-title">城市遊俠——鳳頭蒼鷹</h3>
+              <p class="course-desc">
+                認識生活在熱鬧都市的猛禽「鳳頭蒼鷹」！了解牠的外表特徵、捕食習慣與食繭，探討「窗殺」與老鼠藥的生態危機，學習友善對待自然動物。
+              </p>
+            </div>
+            <div class="course-card-footer">
+              <span>📝 16 題四層次題庫 ＋ 🎮 蒼鷹冒險小遊戲</span>
+              <span style="font-size: 1.1rem;">👉 開始閱讀</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 課程 2：海上一隻烏龜 (index3.html) -->
+        <a href="index3.html" class="course-card-3d">
+          <div class="course-card-img-placeholder" style="background: linear-gradient(135deg, #DEECE5 0%, #E8EEF4 100%);">
+            <span class="course-badge-floating">第 2 課・第89期</span>
+            🐢
+          </div>
+          <div class="course-card-body">
+            <div>
+              <div class="meta-tags-row" style="margin-bottom: 10px;">
+                <span class="tag-badge tag-sage" style="font-size:0.75rem;">國小四年級</span>
+                <span class="tag-badge tag-coral" style="font-size:0.75rem;">地理觀察</span>
+                <span class="tag-badge tag-clay" style="font-size:0.75rem;">★★★ 難度</span>
+              </div>
+              <h3 class="course-title">海上一隻烏龜</h3>
+              <p class="course-desc">
+                搭車前往宜蘭海邊，看見像烏龜趴在海上的龜山島。體會「同一個地方，可以有不只一種看法」的視角哲思，認識宜蘭在海上的美麗記號。
+              </p>
+            </div>
+            <div class="course-card-footer">
+              <span>📝 16 題四層次題庫 ＋ 🎮 龜山島觀察家</span>
+              <span style="font-size: 1.1rem;">👉 開始閱讀</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 課程 3：水邊的捕魚高手——翠鳥 (index4.html) -->
+        <a href="index4.html" class="course-card-3d">
+          <div class="course-card-img-placeholder" style="background: linear-gradient(135deg, #D4EAE2 0%, #F5ECE5 100%);">
+            <span class="course-badge-floating">第 3 課・第82期</span>
+            🐦
+          </div>
+          <div class="course-card-body">
+            <div>
+              <div class="meta-tags-row" style="margin-bottom: 10px;">
+                <span class="tag-badge tag-sage" style="font-size:0.75rem;">國小四年級</span>
+                <span class="tag-badge tag-coral" style="font-size:0.75rem;">自然生態</span>
+                <span class="tag-badge tag-clay" style="font-size:0.75rem;">★ 難度</span>
+              </div>
+              <h3 class="course-title">水邊的捕魚高手——翠鳥</h3>
+              <p class="course-desc">
+                認識生活在溪邊與公園水池的藍綠色精靈！探索翠鳥的抓魚特技、天然防水羽毛、神奇瞬膜蛙鏡，以及擦了口紅般的雌雄鳥分辨秘密！
+              </p>
+            </div>
+            <div class="course-card-footer">
+              <span>📝 16 題四層次題庫 ＋ 🎮 翠鳥捕魚大挑戰</span>
+              <span style="font-size: 1.1rem;">👉 開始閱讀</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 系統功能特色說明 -->
+    <section style="margin-top: 50px;">
+      <div class="morandi-card" style="background: linear-gradient(135deg, #FBFDFC 0%, #F5F9F7 100%);">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
+          <span>🎯 本閱讀平台四大特色</span>
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+          <div style="background:white; padding:18px; border-radius:14px; border:1px solid #E2EAE5;">
+            <div style="font-size: 28px; margin-bottom: 6px;">🔊</div>
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">全文朗讀與字級調節</h4>
+            <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">專屬語音朗讀與段落高亮，字體自由縮放，適合不同閱讀速度的四年級學童。</p>
+          </div>
+          <div style="background:white; padding:18px; border-radius:14px; border:1px solid #E2EAE5;">
+            <div style="font-size: 28px; margin-bottom: 6px;">🧠</div>
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">四層次深度理解測驗</h4>
+            <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">提取訊息、推論訊息、詮釋整合、比較評估各4題，兼具開放思考題與文章依據標示。</p>
+          </div>
+          <div style="background:white; padding:18px; border-radius:14px; border:1px solid #E2EAE5;">
+            <div style="font-size: 28px; margin-bottom: 6px;">🎮</div>
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">主題情境闖關小遊戲</h4>
+            <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">根據每篇主題量身打造互動遊戲，包含生命值、得分與成就勳章，邊玩邊學！</p>
+          </div>
+          <div style="background:white; padding:18px; border-radius:14px; border:1px solid #E2EAE5;">
+            <div style="font-size: 28px; margin-bottom: 6px;">📊</div>
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">成績診斷與 CSV 匯出</h4>
+            <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">交卷後即時生成四層次分析報告，並可一鍵下載含座號姓名的學習成效 CSV 檔案！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // 嘗試動態同步 manifest.json（若是在伺服器環境或支援 fetch）
+    fetch("manifest.json")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const badge = document.getElementById("total-lessons-badge");
+          if (badge) badge.innerText = `已發佈 ${data.length} 門課程`;
+          
+          const container = document.getElementById("course-cards-container");
+          if (container) {
+            container.innerHTML = data.map((item, idx) => `
+              <a href="${item.page}" class="course-card-3d">
+                <div class="course-card-img-placeholder">
+                  <span class="course-badge-floating">第 ${item.id} 課</span>
+                  ${item.icon || "📖"}
+                </div>
+                <div class="course-card-body">
+                  <div>
+                    <div class="meta-tags-row" style="margin-bottom: 10px;">
+                      <span class="tag-badge tag-sage" style="font-size:0.75rem;">${item.grade || "國小四年級"}</span>
+                      <span class="tag-badge tag-coral" style="font-size:0.75rem;">${item.category || "主題閱讀"}</span>
+                      <span class="tag-badge tag-clay" style="font-size:0.75rem;">${item.level || "★★ 難度"}</span>
+                    </div>
+                    <h3 class="course-title">${item.title}</h3>
+                    <p class="course-desc">${item.summary || item.subtitle || ""}</p>
+                  </div>
+                  <div class="course-card-footer">
+                    <span>📝 ${item.questionCount || 16} 題四層次 ＋ 🎮 ${item.gameTitle || "主題遊戲"}</span>
+                    <span style="font-size: 1.1rem;">👉 開始閱讀</span>
+                  </div>
+                </div>
+              </a>
+            `).join("");
+          }
+        }
+      })
+      .catch(err => {
+        // 本地 file:// 協定時使用內嵌預設卡片
+        console.log("Local mode or fetch unavailable, using built-in course cards.");
+      });
+  </script>
+</body>
+</html>
