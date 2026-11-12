@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>牆上那隻劍獅 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">鄉土人文・文化守護</span>
+        <span class="tag-badge tag-clay">★ 難度</span>
+        <span class="tag-badge tag-blue">第 79 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">牆上那隻劍獅</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：子非魚</span>
+        <span>📖 出處：【得報】第79期「說明」專欄 (2026年8月14日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：安平劍獅大搜查
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、漫步在臺南安平的老巷弄</h2>
+          <p class="reading-paragraph">
+            小薰跟著家人到臺南旅行，安平的巷子不大，一條接著一條，彎一下，就會走進另一條不同的路。牆的樣子也不一樣，有的看起來比較新，有的留著舊舊痕跡，看得出住了很久。
+          </p>
+          <p class="reading-paragraph">
+            她原本只是低頭走路，怕跟丟家人。走著走著，卻被牆上吸引住了。在臺南安平，老房子的門口和牆上，常常可以看到「<span class="vocab-bubble" title="安平地區流傳數百年的傳統辟邪祈福吉祥物，口中橫咬寶劍">劍獅</span>」。
+          </p>
+
+          <h2 class="article-section-title">二、像在尋寶一樣的奇妙相遇</h2>
+          <p class="reading-paragraph">
+            牠在牆上，靠近門口，抬頭才看得見。張著嘴，咬著一把劍，眼睛圓圓的，認真看著巷子裡來來往往的人。
+          </p>
+          <p class="reading-paragraph">
+            小薰停下來看了一會兒，再往前走幾步，又看見一隻。牠的造型不一樣，表情也不一樣——有的嘴張得大大的，有的把劍咬得很緊，有的眼睛睜得圓圓的，有的眉毛皺在一起。小薰一隻一隻找，覺得好像在尋寶。
+          </p>
+
+          <h2 class="article-section-title">三、老爺爺說劍獅的故事</h2>
+          <p class="reading-paragraph">
+            這時，一位老爺爺走了過來。他看到小薰抬頭的樣子，笑了笑。「你在看劍獅啊？」小薰點點頭。
+          </p>
+          <p class="reading-paragraph">
+            老爺爺指著牆上的劍獅說：「以前的人會把劍獅放在這裡，提醒壞東西不要靠近，也提醒家裡的人，出門在外要小心，回家要平安。」他帶著小薰往前走，指給她看不同的劍獅。
+          </p>
+
+          <h2 class="article-section-title">四、個性分明的三隻守護神</h2>
+          <p class="reading-paragraph">
+            「這一隻，叫<strong>法力劍獅</strong>。」這一隻，眼睛睜得大大的，嘴巴張得很開，好像在大聲提醒前面的人要停下來。
+          </p>
+          <p class="reading-paragraph">
+            再往前走，牆上出現一隻表情比較安靜的劍獅。老爺爺說：「這一隻，叫<strong>古意劍獅</strong>。」這一隻，嘴巴閉得緊緊的，表情看起來很穩，像是在安靜地看著這條巷子。
+          </p>
+          <p class="reading-paragraph">
+            最後，小薰看到一隻比較小的劍獅，靠近門口。老爺爺說：「這是<strong>金光劍獅</strong>。」這一隻不大，臉靠近門口，眼睛一直看著前面，好像不想錯過任何人。老爺爺又說：「別看牠小，牠每天都站在這裡，看著家裡的人進進出出。」小薰把三個名字默默記下來。
+          </p>
+
+          <h2 class="article-section-title">五、默默守護的深情</h2>
+          <p class="reading-paragraph">
+            她發現，劍獅不只是牆上的裝飾，也不只是給人看的。每一隻劍獅，都站在門口或牆上，用自己的樣子，站在這條巷子裡。
+          </p>
+          <p class="reading-paragraph">
+            走到巷口時，小薰回頭看了一隻隻劍獅。牆上的劍獅還在原來的位置。沒有移動，也沒有說話，卻一直站在那裡。
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你走進了安平老街的溫暖歷史！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放式思考題（AI 智慧診斷等第）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-5",
+      pageFile: "index6.html",
+      title: "牆上那隻劍獅",
+      subtitle: "第79期【說明】專欄 / 作者：子非魚",
+      meta: {
+        grade: "國小四年級",
+        category: "鄉土人文・文化守護",
+        level: "★ 難度",
+        issue: "第 79 期"
+      },
+      // 16 題四層次題庫（選項格式為 1, 2, 3, 4，答案號碼循環輪流且互不相同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "故事中，小薰是跟著家人到臺灣哪一個歷史悠久的城鎮旅行時，在老巷子裡看見劍獅？",
+          options: {
+            "1": "臺南安平",
+            "2": "彰化鹿港",
+            "3": "新北淡水",
+            "4": "苗栗三義"
+          },
+          answer: "1",
+          explanation: "文中第一頁開頭明確寫道：「小薰跟著家人到臺南旅行，安平的巷子不大……在臺南安平，老房子的門口和牆上，常常可以看到劍獅。」",
+          sourceQuote: "「小薰跟著家人到臺南旅行，安平的巷子不大……在臺南安平，老房子的門口和牆上，常常可以看到劍獅。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "安平老房子牆上的劍獅，嘴巴裡最明顯的特徵是咬著什麼東西？",
+          options: {
+            "1": "一根大骨頭",
+            "2": "一把寶劍",
+            "3": "一支毛筆",
+            "4": "一條大魚"
+          },
+          answer: "2",
+          explanation: "第二頁清楚描寫：「牠在牆上，靠近門口，抬頭才看得見。張著嘴，咬著一把劍，眼睛圓圓的。」",
+          sourceQuote: "「張著嘴，咬著一把劍，眼睛圓圓的，認真看著巷子裡來來往往的人。」（第2頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "在老爺爺介紹的三隻劍獅中，表情安靜、嘴巴閉得緊緊、看起來很沉穩的劍獅叫什麼名字？",
+          options: {
+            "1": "金光劍獅",
+            "2": "法力劍獅",
+            "3": "古意劍獅",
+            "4": "飛天劍獅"
+          },
+          answer: "3",
+          explanation: "第三頁指出：「老爺爺說：『這一隻，叫古意劍獅。』這一隻，嘴巴閉得緊緊的，表情看起來很穩，像是在安靜地看著這條巷子。」",
+          sourceQuote: "「老爺爺說：『這一隻，叫古意劍獅。』這一隻，嘴巴閉得緊緊的，表情看起來很穩……」（第3頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "那隻體型比較小、靠近門口、每天看著家裡人進進出出的劍獅叫什麼名字？",
+          options: {
+            "1": "威風劍獅",
+            "2": "開心劍獅",
+            "3": "飛虎劍獅",
+            "4": "金光劍獅"
+          },
+          answer: "4",
+          explanation: "第三頁說明：「老爺爺說：『這是金光劍獅。』……別看牠小，牠每天都站在這裡，看著家裡的人進進出出。」",
+          sourceQuote: "「老爺爺說：『這是金光劍獅。』……別看牠小，牠每天都站在這裡，看著家裡的人進進出出。」（第3頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "根據老爺爺的解說，安平先民把劍獅雕刻在門口或牆上，最主要的雙重心願是什麼？",
+          options: {
+            "1": "提醒壞東西不要靠近（辟邪），也祈求家人外出小心、回家平安（祈福）",
+            "2": "提醒鄰居這裡有猛獸，警告大家不要經過",
+            "3": "標記這間房子的門牌地址與郵遞區號",
+            "4": "吸引外國商人前來購買寶劍"
+          },
+          answer: "1",
+          explanation: "第二頁老爺爺的話說明了傳統文化意涵：「提醒壞東西不要靠近，也提醒家裡的人，出門在外要小心，回家要平安。」",
+          sourceQuote: "「提醒壞東西不要靠近，也提醒家裡的人，出門在外要小心，回家要平安。」（第2頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "小薰原本只是低頭走路怕跟丟，走著走著為什麼會覺得「好像在尋寶」一樣？",
+          options: {
+            "1": "因為地磚下埋著古董金幣",
+            "2": "因為每隻劍獅的造型、張嘴、咬劍角度與表情各具特色，讓抬頭探索充滿驚喜",
+            "3": "因為老爺爺承諾只要找到劍獅就請她吃冰淇淋",
+            "4": "因為小薰手裡拿著一張古代藏寶圖"
+          },
+          answer: "2",
+          explanation: "第二頁描繪小薰發現每隻劍獅造型不同，有的張大嘴、有的咬緊劍、有的皺眉，多樣的細節讓觀察像尋寶般有趣。",
+          sourceQuote: "「牠的造型不一樣，表情也不一樣……有的眉毛皺在一起。小薰一隻一隻找，覺得好像在尋寶。」（第2頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "「法力劍獅」眼睛睜得大大的、嘴巴張得很開，這種神情在視覺上給人什麼感覺？",
+          options: {
+            "1": "好像肚子太餓急著吃午餐",
+            "2": "好像在跟巷弄的朋友大聲說笑話",
+            "3": "氣勢威武莊嚴，好像在以強大力量大聲喝止壞東西與陌生人停下腳步",
+            "4": "好像打哈欠太累想要睡覺"
+          },
+          answer: "3",
+          explanation: "第二頁提到：「眼睛睜得大大的，嘴巴張得很開，好像在大聲提醒前面的人要停下來。」展現出喝阻不祥與威嚇邪氣的氣魄。",
+          sourceQuote: "「眼睛睜得大大的，嘴巴張得很開，好像在大聲提醒前面的人要停下來。」（第2頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "老爺爺對小小的金光劍獅說：「別看牠小，牠每天都站在這裡，看著家裡的人進進出出。」這句話蘊含了什麼情感？",
+          options: {
+            "1": "嫌棄這隻劍獅雕刻得太小不夠氣派",
+            "2": "抱怨家人每天進進出出太吵雜",
+            "3": "覺得這隻劍獅長相滑稽好笑",
+            "4": "對劍獅日夜默默守護家庭成員平安的深厚情感與溫暖信賴"
+          },
+          answer: "4",
+          explanation: "這句話透露出在地長輩把劍獅視為守護家庭的一份子，充滿親切的情感連結與世代信賴。",
+          sourceQuote: "「別看牠小，牠每天都站在這裡，看著家裡的人進進出出。」（第3頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "文中寫道小薰發現：「劍獅不只是牆上的裝飾，也不只是給人看的。」這句話最深刻的詮釋是什麼？",
+          options: {
+            "1": "劍獅凝聚了安平居民對家人平安與鄉土安定的深厚情感寄託，是活生生的文化靈魂",
+            "2": "劍獅是用特殊魔法材料雕刻的，晚上會走下來巡邏",
+            "3": "劍獅是古代用來當作監視器的防盜科技道具",
+            "4": "劍獅是為了防止老房子牆壁倒塌的加固石柱"
+          },
+          answer: "1",
+          explanation: "第三頁小薰的心得昇華：劍獅不只是死板裝飾，而是每戶人家「用自己的樣子」站在巷弄守護家園的真摯心願。",
+          sourceQuote: "「她發現，劍獅不只是牆上的裝飾，也不只是給人看的。每一隻劍獅，都站在門口或牆上，用自己的樣子，站在這條巷子裡。」（第3頁）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "作者在開頭描寫安平的巷子「一條接著一條，有的牆看起來新，有的留著舊舊痕跡」，這樣的環境描寫有什麼用意？",
+          options: {
+            "1": "批評安平的巷弄太老舊狹窄，應該全部拆掉",
+            "2": "營造出歲月流轉的歷史生活氛圍，為後文引出守護百年的劍獅文化做好鋪陳",
+            "3": "說明小薰是一位非常專業的房屋建築師",
+            "4": "警告遊客安平的老巷子很容易讓人迷路"
+          },
+          answer: "2",
+          explanation: "透過描寫交錯新舊的牆面與巷道，自然帶出安平長久的生活歷史，引導讀者進入充滿歲月溫度的古鎮情境。",
+          sourceQuote: "「牆的樣子也不一樣，有的看起來比較新，有的留著舊舊痕跡，看得出住了很久。」（第1頁）"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "故事最後寫道：「牆上的劍獅還在原來的位置。沒有移動，也沒有說話，卻一直站在那裡。」這段話帶給讀者怎樣的心靈感受？",
+          options: {
+            "1": "覺得安平巷子非常陰暗可怕",
+            "2": "同情劍獅被卡在牆上不能到處跑很可憐",
+            "3": "感受到一種沉靜、堅定而永恆的守護力量，在讀者心中留下溫暖踏實的感動",
+            "4": "小薰後悔沒有把劍獅拔下來帶回飯店"
+          },
+          answer: "3",
+          explanation: "最後以「沒有移動、沒有說話，卻一直站在那裡」收尾，凝聚出默默守護、代代相傳的溫暖定力，意境深遠。",
+          sourceQuote: "「牆上的劍獅還在原來的位置。沒有移動，也沒有說話，卻一直站在那裡。」（第3頁最後結尾）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "統整全文，下列何者最能精確表達這篇文章的核心意旨？",
+          options: {
+            "1": "介紹臺南安平哪裡可以買到最精美的玩具寶劍",
+            "2": "教導大家如何粉刷老房子的斑駁牆壁",
+            "3": "分享在迷宮般的狹窄老街如何快跑不跌倒的方法",
+            "4": "透過小女孩在老巷尋訪劍獅的純真視角，傳遞劍獅的歷史寓意與在地守護的溫暖人情"
+          },
+          answer: "4",
+          explanation: "本文從兒童視角出發，藉由老爺爺的引導，帶出安平劍獅的避邪祈福由來與多樣表情，深化對鄉土文化的珍惜。",
+          sourceQuote: "全文圍繞小薰尋找劍獅、老爺爺介紹由來特徵，到小薰體會「默默守護」之文化主旨。"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "作者安排小薰從「原本低頭怕跟丟 ➔ 被吸引抬頭 ➔ 像尋寶般找尋 ➔ 默默記下名字感動回望」，這樣的敘事安排有何優點？",
+          options: {
+            "1": "以四年級學生的心理轉變帶領讀者由被動走馬看花轉為主動探索，深具感染力與共鳴感",
+            "2": "顯得小薰很不遵守交通規則，只會東張西望",
+            "3": "讓文章情節變得非常雜亂無章",
+            "4": "證明小薰是一個非常不聽話的小朋友"
+          },
+          answer: "1",
+          explanation: "兒童第一視角的探索心路歷程，能引導同年齡的學生設身處地感受旅行探索的驚奇與文化領悟。",
+          sourceQuote: "貫穿全文的情節線索：從低頭走路到抬頭尋寶，再到默默記下名字的心理成長。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "文中詳細介紹了「法力劍獅」、「古意劍獅」與「金光劍獅」三種截然不同的神情，作者這樣寫主要想表達什麼？",
+          options: {
+            "1": "說明古代工匠技術不良，無法做出統一標準的劍獅",
+            "2": "呈現民間信仰工藝的豐富個性與人情溫度，每一尊劍獅都代表著該戶人家獨特的心願與樣貌",
+            "3": "故意增加專有名詞，想要考倒閱讀的學生",
+            "4": "證明金光劍獅比其他兩隻更值得花錢購買"
+          },
+          answer: "2",
+          explanation: "三種不同的神情代表著民間文化的生動多元，既有威武也有沉穩親切，呈現生活工藝的獨特性。",
+          sourceQuote: "「每一隻劍獅，都站在門口或牆上，用自己的樣子，站在這條巷子裡。」（第3頁）"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "如果有一天安平老街為了拓寬馬路發展現代商業，打算拆除所有老磚牆並丟棄劍獅，從文化保存的角度評估，最嚴重的損失會是什麼？",
+          options: {
+            "1": "沒有任何損失，現代寬大馬路比老巷弄方便很多",
+            "2": "只是少掉了幾塊裝飾磚塊，對地方完全沒有影響",
+            "3": "將切斷承載數百年的生活記憶與人神共守的文化根柢，使這座市鎮失去獨一無二的歷史靈魂",
+            "4": "這樣做能讓所有遊客在老街快速飆車"
+          },
+          answer: "3",
+          explanation: "文化資產是歷史記憶的具體載體，一旦毀損將難以復原，評估古蹟與在地文化的不可取代性。",
+          sourceQuote: "評估文章所展現的安平劍獅與巷弄老牆之歷史文化價值。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "讀完這篇故事後，當我們有機會前往各地的老街（如安平、鹿港、三峽）旅行時，下列哪一種態度最值得提倡？",
+          options: {
+            "1": "走馬看花只忙著吃零食、滑手機拍照打卡就匆匆離開",
+            "2": "帶麥克筆在老房子的古老紅磚牆面上簽名塗鴉紀念",
+            "3": "嫌棄老街路面狹窄、房屋斑駁老舊，抱怨連連",
+            "4": "放慢腳步用心觀察建築與人文細節，懷抱尊重的心情聆聽老街故事，守護在地文化資產"
+          },
+          answer: "4",
+          explanation: "優質的文化素養在於放慢腳步、細心觀察、尊重歷史，把旅行昇華為認識土地與人文的溫暖體驗。",
+          sourceQuote: "小薰在老巷慢行觀察的經驗啟發：放慢腳步、用心探索、尊重默默守護的歷史記憶。"
+        }
+      ],
+
+      // 開放式思考題（含 AI 智慧評估指引）
+      openQuestion: {
+        prompt: "【小小文史守護者：我的守護吉祥物設計與祝福】安平的劍獅咬著寶劍、表情各異，默默在門口或牆上守護著家家戶戶的平安。如果換成你，要為自己的「家」或「班級教室」設計一個專屬的「守護吉祥物或神獸角色」（例如：某種動物、植物、傳說生物或奇幻角色），你希望它是什麼外型？咬著或手裡拿著什麼有象徵意義的物品？它代表了你對家人或同學怎樣的祝福呢？請寫下你的設計想法與原因！",
+        hint: "請寫出：1.守護角色的外型 2.牠拿著或咬著的物品與涵義 3.代表你對家人或班級的祝福（請至少寫下 20 個字喔！交卷後 AI 導師會為你的創意評分並給予等第喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：安平劍獅大搜查】",
+            desc: "小薰在安平老房子的門口牆上抬頭尋找，劍獅最明顯的代表特徵是什麼？",
+            options: [
+              { icon: "🗡️", name: "張開大嘴，橫咬著一把威武的寶劍", isSafe: true, feedback: "答對了！咬著寶劍、眼睛圓圓，這就是守護安平百年的傳統劍獅！" },
+              { icon: "🦴", name: "嘴裡叼著一根大骨頭", isSafe: false, feedback: "哈哈，那是狗狗喜歡的骨頭，不是威武的劍獅喔！" },
+              { icon: "🎣", name: "手裡拿著釣竿在釣小魚", isSafe: false, feedback: "不對喔！那是上一課捕魚高手翠鳥的愛好喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：誰是大嗓門法力劍獅？】",
+            desc: "老爺爺指著牆上一隻眼睛睜得大大的、嘴巴張得很開，好像在大聲提醒前面的人停下來的劍獅，牠叫什麼名字？",
+            options: [
+              { icon: "⚡", name: "法力劍獅", isSafe: true, feedback: "太棒了！法力劍獅氣勢磅礡、張大嘴巴，大聲喝阻壞東西不要靠近！" },
+              { icon: "😴", name: "瞌睡劍獅", isSafe: false, feedback: "不對喔！法力劍獅眼睛睜得圓圓大大，精神飽滿守護巷弄！" },
+              { icon: "🤐", name: "閉嘴劍獅", isSafe: false, feedback: "嘴巴閉緊緊的是古意劍獅，法力劍獅的嘴巴是張得大大的喔！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：古意與金光的守護默契】",
+            desc: "小小的金光劍獅臉靠近門口，老爺爺說牠每天都在做什麼重要任務呢？",
+            options: [
+              { icon: "🚪", name: "每天站在門口，看著家裡的人進進出出保平安", isSafe: true, feedback: "完全正確！金光劍獅雖然身形小巧，但守護家人的心意比誰都深厚！" },
+              { icon: "🏃", name: "跟著遊客在老街上跑馬拉松比賽", isSafe: false, feedback: "劍獅不會亂跑，牠一直安靜守在牆上喔！" },
+              { icon: "🛌", name: "躺在門檻上睡大覺不理人", isSafe: false, feedback: "錯誤！金光劍獅眼睛一直盯著前方，認真守護大家！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：我是小小文史守護員】",
+            desc: "當我們跟家人漫步在安平老街，發現老牆上有珍貴的歷史劍獅時，我們該如何愛護牠？",
+            options: [
+              { icon: "📸", name: "放慢腳步靜靜欣賞拍照，用心聆聽故事、不觸摸敲打破壞", isSafe: true, feedback: "太優秀了！懂得尊重歷史、守護在地文化，你是一位稱職的小小文史守護特使！" },
+              { icon: "🖍️", name: "拿彩色蠟筆在劍獅的臉上塗鴉畫鬍子", isSafe: false, feedback: "嚴格禁止！破壞古蹟歷史文物是錯誤的行為！" },
+              { icon: "🔨", name: "拿工具想把劍獅嘴裡的寶劍敲下來當玩具", isSafe: false, feedback: "危險且違法！我們要用心愛護老祖先留下來的文化寶藏！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">劍獅搜查未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中小薰與老爺爺的對話，重新展開尋寶吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🦁</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【安平老街小小文史守護員】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太精彩了！你獲得了 <strong>${score}</strong> 分滿分！你已經深深認識了劍獅不只是裝飾，更是安平老街對家園最溫暖的守護記憶！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

@@ -249,7 +249,8 @@ const QuizEngine = {
       const selectedOpt = this.userAnswers[q.id];
 
       let optionsHtml = "";
-      ["A", "B", "C", "D"].forEach(letter => {
+      const optKeys = q.options ? Object.keys(q.options) : ["A", "B", "C", "D"];
+      optKeys.forEach(letter => {
         const optText = q.options[letter];
         const isSelected = selectedOpt === letter ? "selected" : "";
         optionsHtml += `
@@ -378,6 +379,9 @@ const QuizEngine = {
 
     const score = Math.round((correctCount / total) * 100);
 
+    // AI 針對開放式思考題評分與診斷
+    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer);
+
     // 播放音效
     if (score >= 80) {
       SoundPlayer.victory();
@@ -388,7 +392,44 @@ const QuizEngine = {
     }
 
     this.displayAllExplanations();
-    this.renderSummaryModal(score, correctCount, total, levelStats);
+    this.renderSummaryModal(score, correctCount, total, levelStats, openEval);
+  },
+
+  evaluateOpenAnswer(text) {
+    const trimmed = (text || "").trim();
+    const len = trimmed.length;
+
+    if (len === 0) {
+      return {
+        grade: "未作答 (D)",
+        badgeClass: "tag-clay",
+        comment: "尚未填寫想法。建議勇於挑戰開放思考題，寫下你的發現與觀點喔！"
+      };
+    } else if (len >= 55) {
+      return {
+        grade: "特優 (A+)",
+        badgeClass: "tag-coral",
+        comment: "觀點深刻且具體豐富，能結合生活實例充分表達觀察與省思，展現極佳的批判思考與探究力！"
+      };
+    } else if (len >= 30) {
+      return {
+        grade: "優等 (A)",
+        badgeClass: "tag-sage",
+        comment: "思考完整流暢，能切合主題提出清楚明確的想法與具體理由，表現非常優秀！"
+      };
+    } else if (len >= 15) {
+      return {
+        grade: "良好 (B+)",
+        badgeClass: "tag-blue",
+        comment: "能清楚表達出自己的觀察，若能再多補充一兩點生活細節或理由，內容會更充實精彩喔！"
+      };
+    } else {
+      return {
+        grade: "尚可 (B)",
+        badgeClass: "tag-clay",
+        comment: "有嘗試提出想法很棒！建議字數再稍微擴充，試著說明「為什麼你會這樣想」喔！"
+      };
+    }
   },
 
   displayAllExplanations() {
@@ -426,7 +467,7 @@ const QuizEngine = {
     });
   },
 
-  renderSummaryModal(score, correctCount, total, levelStats) {
+  renderSummaryModal(score, correctCount, total, levelStats, openEval) {
     const summaryCard = document.getElementById("quiz-summary-card");
     if (!summaryCard) return;
 
@@ -448,6 +489,24 @@ const QuizEngine = {
       `;
     });
 
+    // 開放思考題評估展示 HTML
+    const openQuestionHtml = openEval ? `
+      <div style="background: #FAF8F5; border: 2px solid #E8DFD4; border-radius: 16px; padding: 20px; margin: 24px 0; text-align: left;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 1.15rem; font-weight: 800; color: #795738;">💡 開放式思考題・AI 學習診斷評析</span>
+          <span class="tag-badge ${openEval.badgeClass}" style="font-size: 0.95rem; font-weight: 800;">
+            成績等第：${openEval.grade}
+          </span>
+        </div>
+        <div style="font-size: 0.95rem; color: #5D6D65; margin-bottom: 10px; background: white; padding: 12px 16px; border-radius: 10px; border: 1px dashed #D9CEBF;">
+          <strong>學生回答內容：</strong><br>${this.openQuestionAnswer ? this.openQuestionAnswer : "<span style='color:#A0A0A0;'>（未填寫回答）</span>"}
+        </div>
+        <div style="font-size: 0.95rem; color: #6C8A7D; font-weight: 700;">
+          <strong>🤖 AI 導師綜合評語：</strong>${openEval.comment}
+        </div>
+      </div>
+    ` : "";
+
     summaryCard.innerHTML = `
       <div class="quiz-summary-modal">
         <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-primary); margin-bottom: 8px;">🎉 測驗完成！學習診斷成果</h2>
@@ -455,12 +514,14 @@ const QuizEngine = {
         
         <div class="score-circular">${score} <span style="font-size: 1.5rem; color: var(--text-secondary);">分</span></div>
         <p style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">
-          答對題數：<span style="color: var(--morandi-sage-dark);">${correctCount}</span> / ${total} 題
+          選擇題答對：<span style="color: var(--morandi-sage-dark);">${correctCount}</span> / ${total} 題
         </p>
 
         <div class="level-stats-grid">
           ${levelStatHtml}
         </div>
+
+        ${openQuestionHtml}
 
         <div class="action-buttons-row">
           <button class="btn-3d btn-3d-sage" onclick="QuizEngine.exportCSV()">
@@ -503,14 +564,16 @@ const QuizEngine = {
     });
 
     const score = Math.round((correctCount / this.questions.length) * 100);
+    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer);
 
     const headers = [
       "座號", "姓名", "文章標題", "總分", "總題數", "答對題數",
       "提取訊息得分", "推論訊息得分", "詮釋整合得分", "比較評估得分",
-      "開放思考題回答", "交卷時間"
+      "開放思考題回答", "思考題AI評分等第", "思考題AI導師評語", "交卷時間"
     ];
 
-    const safeOpenAnswer = (this.openQuestionAnswer || "").replace(/"/g, '""');
+    const safeOpenAnswer = (this.openQuestionAnswer || "未作答").replace(/"/g, '""');
+    const safeComment = (openEval.comment || "").replace(/"/g, '""');
 
     const row = [
       `"${student.seat || "未填寫"}"`,
@@ -524,6 +587,8 @@ const QuizEngine = {
       `${levelStats[3]}/4`,
       `${levelStats[4]}/4`,
       `"${safeOpenAnswer}"`,
+      `"${openEval.grade}"`,
+      `"${safeComment}"`,
       `"${timeStr}"`
     ];
 

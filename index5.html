@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>石頭堆成的捕魚陷阱——雙心石滬！ - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">海洋文化・先民智慧</span>
+        <span class="tag-badge tag-clay">★ 難度</span>
+        <span class="tag-badge tag-blue">第 91 期【圖表】專欄</span>
+      </div>
+      <h1 class="article-main-title">石頭堆成的捕魚陷阱——雙心石滬！</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：小烏龜（小貓頭鷹智慧聯盟校教師）</span>
+        <span>📖 出處：【得報】第91期「圖表」專欄 (2026年11月6日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與朗讀
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：潮汐捕魚大師
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、澎湖海邊的神奇愛心</h2>
+          <p class="reading-paragraph">
+            在澎湖的海邊，有一種用石頭堆成的神奇捕魚工具，叫作「<span class="vocab-bubble" title="利用玄武岩與珊瑚礁石堆砌在潮間帶的捕魚陷阱">石滬</span>」。從空中往下看，它的形狀就像兩顆愛心連在一起，所以大家叫它「雙心石滬」，是澎湖最有名的景點之一！
+          </p>
+          <p class="reading-paragraph">
+            石滬是古時候的漁民用石頭一顆一顆慢慢堆出來的，不需要漁網、不需要漁船，靠的是對海洋潮水的瞭解。石滬分成兩個部分：外面的「外堤」負責引導魚群游進來，裡面彎彎的「內堤」則讓魚群聚集在中間，不容易跑掉。
+          </p>
+
+          <h2 class="article-section-title">二、聰明的捕魚四步驟</h2>
+          <p class="reading-paragraph">
+            雙心石滬的捕魚方法很聰明，分成四個步驟：
+          </p>
+          <p class="reading-paragraph">
+            <strong>第一步【漲潮時】：</strong>海水從外海流入石滬，魚群跟著水流一起游進來。
+          </p>
+          <p class="reading-paragraph">
+            <strong>第二步【魚群被困】：</strong>隨著海水繼續進入，魚群會慢慢游到比較淺的內部，越聚越多，形成集中。
+          </p>
+          <p class="reading-paragraph">
+            <strong>第三步【退潮時】：</strong>海水退去，外海與石滬的水位不同，石滬裡面的水位比外面低，魚群留在裡面就很難逃出去了。
+          </p>
+          <p class="reading-paragraph">
+            <strong>第四步【開始捕魚】：</strong>這時候，漁人就趁機走進石滬，用漁網把魚兒通通抓起來。
+          </p>
+
+          <h2 class="article-section-title">三、大海有方法，石頭也有智慧！</h2>
+          <p class="reading-paragraph">
+            不用消耗任何燃油動力，也沒有機器噪音，澎湖先民只靠著雙手搬運石頭，以及對潮汐變化的深刻觀察，就與大自然合作完成了這座既實用又美麗的捕魚陷阱。大海有方法，石頭也有智慧！這就是臺灣海島最動人的生活美學與生態智慧！
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認識了先民驚人的海洋智慧！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放式生活思考題
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績與詳解
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-4",
+      pageFile: "index5.html",
+      title: "石頭堆成的捕魚陷阱——雙心石滬！",
+      subtitle: "第91期【圖表】專欄 / 作者：小烏龜",
+      meta: {
+        grade: "國小四年級",
+        category: "海洋文化・先民智慧",
+        level: "★ 難度",
+        issue: "第 91 期"
+      },
+      // 16 題四層次題庫（選項為 1, 2, 3, 4，答案輪流循環且完全不同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "「雙心石滬」是臺灣哪一個離島縣市海邊最具代表性的捕魚陷阱與知名景點？",
+          options: {
+            "1": "澎湖",
+            "2": "金門",
+            "3": "馬祖",
+            "4": "蘭嶼"
+          },
+          answer: "1",
+          explanation: "文中第一頁開頭明確指出：「在澎湖的海邊，有一種用石頭堆成的神奇捕魚工具……是澎湖最有名的景點之一！」",
+          sourceQuote: "「在澎湖的海邊，有一種用石頭堆成的神奇捕魚工具……是澎湖最有名的景點之一！」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "從空中往下俯瞰，這座石滬的外形長得像什麼，因此被大家稱為「雙心石滬」？",
+          options: {
+            "1": "兩隻牽手跳舞的海龜",
+            "2": "兩顆相連在一起的愛心",
+            "3": "兩個圓滾滾的甜甜圈",
+            "4": "兩把交叉擺放的長劍"
+          },
+          answer: "2",
+          explanation: "第一頁清楚寫道：「從空中往下看，它的形狀就像兩顆愛心連在一起，所以大家叫它『雙心石滬』。」",
+          sourceQuote: "「從空中往下看，它的形狀就像兩顆愛心連在一起，所以大家叫它『雙心石滬』」（第1頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "在雙心石滬的構造中，專門負責「引導魚群游進石滬」的是哪一個部分？",
+          options: {
+            "1": "海邊燈塔",
+            "2": "彎曲內堤",
+            "3": "外面的「外堤」",
+            "4": "海底大魚網"
+          },
+          answer: "3",
+          explanation: "第一頁提及：「外面的『外堤』負責引導魚群游進來，裡面彎彎的『內堤』則讓魚群聚集在中間，不容易跑掉。」",
+          sourceQuote: "「外面的『外堤』負責引導魚群游進來，裡面彎彎的『內堤』則讓魚群聚集在中間，不容易跑掉。」（第1頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "根據文章說明與圖表步驟，漁民走進石滬裡把受困的魚兒通通抓起來，是在哪一個關鍵時機？",
+          options: {
+            "1": "太陽剛升起狂風大作時",
+            "2": "海水洶湧漲潮漲到最高點時",
+            "3": "半夜完全沒有月光的時刻",
+            "4": "退潮海水退去後的適當時機"
+          },
+          answer: "4",
+          explanation: "第二頁第四步驟說明：「退潮海水退去……這時候，漁人就趁機走進石滬，用漁網把魚兒通通抓起來。」",
+          sourceQuote: "「等到了退潮，海水退去……這時候，漁人就趁機走進石滬，用漁網把魚兒通通抓起來。」（第2頁圖表步驟4）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "古代澎湖漁民建造石滬時，不需要用到昂貴的機動漁船與大量尼龍漁網，最主要是因為掌握了什麼自然法則？",
+          options: {
+            "1": "掌握了海洋潮汐漲退的自然規律與魚群隨水流游動的習性",
+            "2": "因為澎湖海底有天然的磁鐵會吸引魚群靠近",
+            "3": "因為石頭本身會散發食物香氣誘引魚類游過來",
+            "4": "因為澎湖的魚群都特別喜歡停在石頭上睡覺"
+          },
+          answer: "1",
+          explanation: "第一頁提到：「不需要漁網、不需要漁船，靠的是對海洋潮水的瞭解。」先民運用潮水進出與魚群習性達成天然捕魚。",
+          sourceQuote: "「不需要漁網、不需要漁船，靠的是對海洋潮水的瞭解。」（第1頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "在漲潮的時候，魚群為什麼會主動游進雙心石滬的範圍裡？",
+          options: {
+            "1": "漁民在石滬入口撒了大量人工香料飼料",
+            "2": "魚群順著湧入的外海水流游動，並被延伸的外堤順勢導引進入",
+            "3": "魚群在深海遭到鯊魚追趕而逃進來避難",
+            "4": "魚群想要跳上石頭曬日光浴吹海風"
+          },
+          answer: "2",
+          explanation: "第二頁第一步驟指出：「漲潮的時候，海水從外海流入石滬，魚群跟著水流一起游進來；外堤負責引導魚群進入。」",
+          sourceQuote: "「海水從外海流入石滬，魚群跟著水流一起游進來……外堤引導魚群進入。」（第2頁圖表步驟1）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "當海水退潮後，為什麼游進石滬的魚群會「留在裡面很難逃脫」？",
+          options: {
+            "1": "漁民在石滬四周安裝了堅固的鐵捲門",
+            "2": "石滬裡面的海水溫度突然變得非常燙",
+            "3": "石頭堤岸擋住去路，且內外水位產生落差，魚群找不到游回外海的出口",
+            "4": "魚群在石滬裡面玩得太開心捨不得離開"
+          },
+          answer: "3",
+          explanation: "第二頁步驟三解釋：「海水退去，外海與石滬的水位不同，魚群留在石滬內，不易逃脫。」",
+          sourceQuote: "「等到退潮，海水退去，石滬裡面的水位比外面低，魚群留在裡面就很難逃出去了。」（第2頁圖表步驟3）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "文中形容雙心石滬是古時候漁民「用石頭一顆一顆慢慢堆出來的」，這句話傳達了先民怎樣的精神？",
+          options: {
+            "1": "表現出古代漁民無所事事、動作非常緩慢",
+            "2": "說明建造石滬是一項完全沒有困難度的小遊戲",
+            "3": "暗示澎湖的石頭太重很難搬運",
+            "4": "展現先民就地取材、堅韌不拔與耗費歲月心血的驚人毅力"
+          },
+          answer: "4",
+          explanation: "「一顆一顆慢慢堆出來」生動描繪了先民在沒有現代起重機器的年代，徒手搬運礁石在海浪衝擊下築堤的無比毅力與智慧。",
+          sourceQuote: "「石滬是古時候的漁民用石頭一顆一顆慢慢堆出來的，不需要漁網、不需要漁船……」（第1頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "統整全文與圖表內容，下列哪一個流程圖最符合雙心石滬捕魚的「四步驟先後順序」？",
+          options: {
+            "1": "漲潮海水流入魚群跟進 ➔ 魚群游入內部被困聚集 ➔ 退潮海水退去魚難逃離 ➔ 漁人趁機進入石滬捕魚",
+            "2": "退潮捕魚 ➔ 漲潮建造石滬 ➔ 外堤崩塌 ➔ 漁民跳海游走",
+            "3": "魚群被困 ➔ 漁船包圍 ➔ 漲潮退潮 ➔ 丟石頭封門",
+            "4": "建造外堤 ➔ 魚網捕魚 ➔ 等待下雨 ➔ 魚群跳出石滬"
+          },
+          answer: "1",
+          explanation: "依據第二頁圖表之四大步驟：1.漲潮時 ➔ 2.魚群被困 ➔ 3.退潮時 ➔ 4.開始捕魚。",
+          sourceQuote: "第2頁圖表四步驟完整說明：1.漲潮時 ➔ 2.魚群被困 ➔ 3.退潮時 ➔ 4.開始捕魚。"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "雙心石滬的結構分成「外堤」與「內堤」，這兩部分在功能上的主要分工是什麼？",
+          options: {
+            "1": "外堤用來給遊客走動拍照，內堤用來種植海草做飼料",
+            "2": "外堤負責導引外海魚群順勢游入，內堤則以彎曲心形構造將魚群集中困住",
+            "3": "外堤阻擋狂風保護房屋，內堤用來停靠大型遠洋漁船",
+            "4": "外堤是給大魚吃的，內堤是給小魚睡覺的"
+          },
+          answer: "2",
+          explanation: "第一頁與第二頁圖示說明：外堤導引魚群進入，內堤形成愛心形狀構造，讓魚群聚集且不易游出。",
+          sourceQuote: "「外堤引導魚群進入……內堤形成愛心結構讓魚群聚集。」（第1-2頁）"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "文章結尾寫道「大海有方法，石頭也有智慧！」，這句話最核心的涵義是什麼？",
+          options: {
+            "1": "大海會自己製造捕魚工具，石頭會開口教人類抓魚",
+            "2": "只要把石頭丟進大海裡，魚就會自己跳上岸邊",
+            "3": "人類順應自然潮汐法則，就地取材以石頭打造精巧陷阱，體現人與自然和諧共生的智慧",
+            "4": "現代機械科技比不上石頭，應該把所有漁船全面拆毀"
+          },
+          answer: "3",
+          explanation: "這句話高度提煉了全文主旨：先民敬畏並順應自然規律（大海有方法），運用自然資源巧思築滬（石頭有智慧）。",
+          sourceQuote: "「大海有方法，石頭也有智慧！」（第2頁結尾）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "綜合全文，本文最主要的寫作目的為何？",
+          options: {
+            "1": "廣告促銷澎湖海產店的各種生鮮魚貨折扣活動",
+            "2": "教導四年級學生如何徒手搬動數百公斤的礁石",
+            "3": "批評傳統捕魚方式太落後，應該立刻全面淘汰",
+            "4": "介紹澎湖雙心石滬的建造工藝、結構特色與潮汐捕魚原理，傳承珍貴的海洋生態文化"
+          },
+          answer: "4",
+          explanation: "整篇文章以科普圖文方式，向學生介紹澎湖雙心石滬的歷史成因、結構與運作原理，傳承先民智慧與文化資產。",
+          sourceQuote: "全文聚焦雙心石滬之由來、外堤內堤結構、四步驟圖表與海洋智慧傳承。"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "比較現代大型機動拖網漁船的「全面撈捕」與澎湖古老「石滬捕魚」，石滬在生態永續上有什麼顯著優勢？",
+          options: {
+            "1": "就地取材、不消耗石化能源柴油，且受限潮汐與石滬容量，不會造成海洋資源被過度趕盡殺絕",
+            "2": "石滬每天能抓到幾百萬噸魚類，捕魚量比任何現代大漁船都多出許多倍",
+            "3": "石滬會把整個海洋的魚類全部引導進來，讓大海徹底乾淨",
+            "4": "石滬捕魚需要使用大量化學毒藥，對環境更具殺傷力"
+          },
+          answer: "1",
+          explanation: "批判思考：石滬是依賴潮汐與定點的傳統漁法，無碳排、不破壞海底珊瑚，且僅捕獲漲潮游入的魚群，具生態永續價值。",
+          sourceQuote: "從「不需要漁網、不需要漁船，靠的是對海洋潮水的瞭解」延伸思考傳統生態智慧之永續性。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "本文第二頁特別搭配了一張彩色四格步驟圖解（圖片繪製：小烏龜），這種「圖文對照」的方式對閱讀有什麼最大好處？",
+          options: {
+            "1": "只是為了填補版面空白，沒有任何實際幫助",
+            "2": "將抽象的潮汐水流與石滬構造轉換為具體視覺圖像，幫助四年級學生輕鬆理解捕魚原理",
+            "3": "故意增加干擾，讓讀者看題目時更容易選錯",
+            "4": "證明作者只喜歡畫圖而不擅長用文字表達"
+          },
+          answer: "2",
+          explanation: "多模態圖表能將動態的水位變化、魚群移動與空間結構以圖文合一呈現，大幅降低認知負荷，符合四年級理解需求。",
+          sourceQuote: "第2頁圖表「大海的智慧・捕魚的秘密」直觀展示外堤、內堤、水流與四步驟。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "如果我們前往澎湖七美參觀這座珍貴的雙心石滬，下列哪一種行為最符合現代優質公民的參訪態度？",
+          options: {
+            "1": "踩在脆弱的石滬石堤上用力踢石頭，甚至拆幾顆石頭帶回家做紀念",
+            "2": "在石滬中間傾倒吃剩下的塑膠便當盒與飲料罐",
+            "3": "在景觀台上靜靜欣賞拍照、聆聽導覽解說，遵守維護規範不踐踏破壞石滬結構",
+            "4": "租借大馬力水上摩托車直接衝進石滬內部快速飆船"
+          },
+          answer: "3",
+          explanation: "文化資產與環境素養評估：石滬是由石頭堆疊而成，容易受外力破壞，尊重古蹟、遠觀不破壞是負責任的參訪態度。",
+          sourceQuote: "評估珍貴文化地景的維護保存與公民守則。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "回顧我們學過的幾篇閱讀（鳳頭蒼鷹、龜山島、翠鳥）到本課的雙心石滬，這幾篇文章共同具備哪一項核心素養精神？",
+          options: {
+            "1": "鼓勵大家整天關在教室裡吹冷氣，不要接觸戶外大自然",
+            "2": "教導大家如何多使用塑膠袋讓生活更快速方便",
+            "3": "證明臺灣的所有自然風景都是人工刻意仿造出來的假景觀",
+            "4": "引導我們用心觀察臺灣土地的自然生態與先民文化，培養尊重自然、永續共好的在地情懷"
+          },
+          answer: "4",
+          explanation: "大單元整體思維評價：全系列文章貫穿生態觀察、多元視角與人與自然和諧共存的環境與人文素養。",
+          sourceQuote: "全系列核心理念：從都市猛禽、海島地景到先民漁法，皆傳遞永續與土地共好的價值觀。"
+        }
+      ],
+
+      // 開放式思考題
+      openQuestion: {
+        prompt: "【小小智慧發明家：就地取材的生活小提案】澎湖先民不靠現代機器，只靠海邊撿得到的石頭與對潮汐的瞭解，就創造出神奇又環保的「雙心石滬」。在我們日常生活中，如果面臨某個問題（例如：炎熱的夏天想讓教室自然降溫、下雨天防止鞋子弄濕、或是整理凌亂的書桌文具），請你想出一個「善用身邊現有材料或自然規律」的智慧小點子，說明你的方法與原因！",
+        hint: "請寫出：1.你想解決的生活問題 2.你善用的現成材料或自然現象 3.具體做法與好處（請至少寫下 20 個字喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：石滬構造大辨識】",
+            desc: "雙心石滬由外堤與內堤組成，請問負責引導魚群從外海游進石滬的是哪一部分？",
+            options: [
+              { icon: "🌊", name: "外面的「外堤」", isSafe: true, feedback: "答對了！外堤就像伸出的雙臂，負責引導魚群順著水流游入石滬！" },
+              { icon: "❤️", name: "裡面的愛心「內堤」", isSafe: false, feedback: "不對喔！裡面的內堤是負責把魚群聚集困住的喔！" },
+              { icon: "🏖️", name: "岸邊的沙灘涼亭", isSafe: false, feedback: "涼亭是給遊客休息的，不能引導魚群游進來喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：海水漲潮魚群來】",
+            desc: "當大海開始漲潮、海水湧入石滬時，這時候身為聰明漁人應該怎麼做？",
+            options: [
+              { icon: "👀", name: "在岸上耐心觀察，等待魚群跟著海水游入聚集", isSafe: true, feedback: "太棒了！漲潮時海水深且急，讓魚群游到較淺的內部集中才是智慧！" },
+              { icon: "🏃", name: "立刻跳下深水裡大呼小叫抓魚", isSafe: false, feedback: "危險！漲潮時水深浪大，跳下去會把魚群嚇跑而且容易溺水！" },
+              { icon: "🪨", name: "把石滬的石頭全部拆掉丟進海裡", isSafe: false, feedback: "錯誤！拆掉石頭陷阱就沒有用囉！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：潮水退去捕魚趣】",
+            desc: "潮水退去，石滬內外出現水位差，魚群被困在愛心內堤出不去，這時候該怎麼做？",
+            options: [
+              { icon: "🕸️", name: "趁著退潮走進石滬，用漁網把魚兒通通抓起來", isSafe: true, feedback: "完全正確！趁退潮走入石滬收穫魚群，這就是先民傳承百年的捕魚時機！" },
+              { icon: "😴", name: "轉身回家睡大覺，等明天漲潮再來", isSafe: false, feedback: "不行喔！明天漲潮魚群就又游回外海跑掉囉！" },
+              { icon: "🧨", name: "丟鞭炮炸水池抓魚", isSafe: false, feedback: "違法且危險！炸魚會嚴重破壞海洋生態！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：永續守護小傳人】",
+            desc: "來到澎湖參觀美麗又珍貴的雙心石滬，身為四年級小公民，我們該如何守護它？",
+            options: [
+              { icon: "📸", name: "在觀景台靜靜欣賞拍照，遵守保護規定不攀爬破壞石堤", isSafe: true, feedback: "太優秀了！用心珍惜先民智慧，共同守護臺灣珍貴的文化資產！" },
+              { icon: "⛏️", name: "拿鐵鎚敲下愛心形狀的石頭帶回家當紀念品", isSafe: false, feedback: "錯誤！敲毀石滬是破壞歷史古蹟的違法行為！" },
+              { icon: "🥤", name: "把喝完的飲料罐隨手扔進石滬海裡餵魚", isSafe: false, feedback: "錯誤！海洋垃圾會污染水質並殺死海洋生物！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">捕魚大師挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中的石滬四步驟，重新找回潮汐智慧吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🏆</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【澎湖石滬文化傳承小大師】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太精彩了！你獲得了 <strong>${score}</strong> 分滿分！你已經完整掌握了「大海有方法，石頭也有智慧」的先民哲理，未來到了海邊，你就是最棒的小小解說員！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+
