@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小熊的森林地圖 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 原始內容截圖展示區專用樣式 */
+    .original-docs-showcase {
+      background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+      border: 2px solid #D6E4DC;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 24px 0 32px;
+      box-shadow: 0 4px 14px rgba(78, 93, 85, 0.06);
+    }
+    .original-docs-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--morandi-sage-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .docs-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 14px;
+    }
+    .doc-preview-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 2px solid #E2EAE5;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .doc-preview-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--morandi-coral);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .doc-img-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #ECECEC;
+      margin-bottom: 10px;
+      background: #F9F9F9;
+      cursor: zoom-in;
+    }
+    .doc-img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .doc-img-frame:hover img {
+      transform: scale(1.02);
+    }
+    .doc-caption {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .doc-btn-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--morandi-sage-light);
+      color: var(--morandi-sage-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--morandi-sage);
+    }
+    .doc-btn-view:hover {
+      background: var(--morandi-sage);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">生態保育・環境倫理</span>
+        <span class="tag-badge tag-clay">★★ 難度</span>
+        <span class="tag-badge tag-blue">第 92 期【故事】專欄</span>
+      </div>
+      <h1 class="article-main-title">小熊的森林地圖</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：雅絲貓</span>
+        <span>📖 出處：【得報】第92期「故事」專欄 (2026年11月13日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與原始圖件
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：小熊森林大冒險
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 技巧性嵌入原始文章截圖（保留原始樣，支援高畫質檢視） -->
+        <div class="original-docs-showcase">
+          <div class="original-docs-title">
+            <span>🖼️ 課文原始內容截圖展示（保留原汁原味）</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+            點擊圖片可在新視窗查看高解析度原圖，仔細欣賞小熊、美麗森林與動人插畫喔！
+          </p>
+          <div class="docs-gallery-grid">
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson8_page1.png', '_blank')">
+                <img src="lesson8_page1.png" alt="小熊的森林地圖第1頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 1 頁：小熊的森林地圖（精彩插畫與故事開端）</div>
+              <a href="lesson8_page1.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson8_page2.png', '_blank')">
+                <img src="lesson8_page2.png" alt="小熊的森林地圖第2頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 2 頁：森林斷掉的危機與腳印的奧祕</div>
+              <a href="lesson8_page2.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、小熊胸前的白領巾與心中疑問</h2>
+          <p class="reading-paragraph">
+            在茂密深邃的臺灣高山森林裡，住著一隻充滿好奇心的小黑熊。小熊每天看著森林裡的小石虎、飛鼠和山羌在樹叢間穿梭跳躍，牠總覺得自己的家族很特別——每隻黑熊的胸前，都長著一道醒目又美麗的白色「<span class="vocab-bubble" title="臺灣黑熊獨特的外觀特徵，胸前呈現白色或乳黃色的V字斑紋">V 字型斑紋</span>」，就像大自然特地為牠們戴上了一條漂亮的小領巾。
+          </p>
+          <p class="reading-paragraph">
+            這一天，小熊跟在熊媽媽與長輩身後，已經在大山裡走了好長一段路。小熊忍不住停下腳步，擦了擦汗問：「媽媽，為什麼松鼠只要待在一棵大樹上就能過冬，我們卻要翻過一座又一座山頭，走這麼遠、這麼大一圈呢？」
+          </p>
+
+          <h2 class="article-section-title">二、腦海中的森林地圖：季節與食物的足跡</h2>
+          <p class="reading-paragraph">
+            熊媽媽停下腳步，轉過身溫柔地摸摸小熊的頭說：「孩子，因為山林裡的美味果實，不會天天長在同一棵樹上呀！春天我們要去山谷找鮮嫩的竹筍和嫩芽；夏天要到溪邊喝清涼的泉水、抓小魚；到了秋天，滿山坡的<span class="vocab-bubble" title="殼斗科櫟屬植物，其堅果是臺灣黑熊秋天儲存能量最關鍵的美味食物">青剛櫟</span>結出飽滿營養的堅果，我們更要爬上高處大快朵頤，為冬天儲存厚厚的能量。」
+          </p>
+          <p class="reading-paragraph">
+            原來，黑熊是雜食性動物，在大自然裡需要依循四季的變化四處覓食。黑熊走過的每一步，都在大腦裡深刻描繪出一張生動完整的「<span class="vocab-bubble" title="野生動物在大範圍棲地內覓食、飲水與繁衍所走過且熟記的生活空間網絡">森林地圖</span>」。唯有這片山林廣大、連續且不受破壞，牠們才能安心健康地生活繁衍。
+          </p>
+
+          <h2 class="article-section-title">三、斷掉的山路與受阻的腳步</h2>
+          <p class="reading-paragraph">
+            走著走著，小熊突然聽到了陣陣轟隆隆的奇怪聲響。撥開矮樹叢一看，原本連綿不絕的翠綠森林，竟然被一條寬闊冰冷的柏油馬路硬生生切成了兩半！一輛輛疾馳而過的砂石車和遊覽車呼嘯而過，揚起刺鼻的煙塵。
+          </p>
+          <p class="reading-paragraph">
+            小石虎和柚子望著馬路對面結滿紅色果實的樹林，害怕得發抖，根本不敢邁出腳步。這就是動物學家所說的「<span class="vocab-bubble" title="道路、水壩或人類開發建設將原本連續完整的自然棲息地切割成零碎孤立小島的現象">棲地破碎化</span>」。當山路切斷了森林，野生動物不僅失去了原有的回家通道，在冒險穿越時更可能面臨嚴重的路殺威脅，連喝一口水、見同伴一面都變得無比艱難。
+          </p>
+
+          <h2 class="article-section-title">四、森林的守護傘：腳印會說話</h2>
+          <p class="reading-paragraph">
+            「孩子，我們黑熊在大自然裡，其實就像是森林的一把『<span class="vocab-bubble" title="需要廣大生存空間與健全生態的物種，只要保護了牠，生活在同區域的所有動植物都能同時受到庇護">傘護種</span>（保護傘）』。」長輩語重心長地告訴小熊：「只要我們黑熊能健康自由地在這座森林裡奔跑，就代表這裡的水源乾淨、樹木茂密，其他小動物也都能安心被照顧。」
+          </p>
+          <p class="reading-paragraph">
+            森林地面上的松針與濕潤泥土上，清晰烙印著一串串寬大的黑熊腳印。那些深深淺淺的足跡，不是無聲的印記，而是大自然留給世界的珍貴訊息。只要我們願意放慢腳步去「查一查、看一看、想一想」，就會發現大自然裡的每一樣東西，其實都在用心對我們說話呢！
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你和小熊一起讀懂了森林的訊息！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放思考題（AI 呼應度深度評估等第）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-8",
+      pageFile: "index9.html",
+      title: "小熊的森林地圖",
+      subtitle: "第92期【故事】專欄 / 作者：雅絲貓",
+      meta: {
+        grade: "國小四年級",
+        category: "生態保育・環境倫理",
+        level: "★★ 難度",
+        issue: "第 92 期"
+      },
+      // 16 題四層次題庫（選項格式為 1, 2, 3, 4，答案循環輪流：1,2,3,4 互不相同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "課文中提到，臺灣黑熊胸前有什麼最明顯、像小領巾似的外觀特徵？",
+          options: {
+            "1": "美麗且醒目的白色 V 字型斑紋",
+            "2": "金黃色的圓形太陽圖案",
+            "3": "亮紅色的橫向閃電條紋",
+            "4": "黑色與粉紅色相間的圓點斑點"
+          },
+          answer: "1",
+          explanation: "文中第一頁開頭明確描述：「每隻黑熊的胸前，都長著一道醒目又美麗的白色『V 字型斑紋』，就像戴了一條漂亮的小領巾。」",
+          sourceQuote: "「每隻黑熊的胸前，都長著一道醒目又美麗的白色『V 字型斑紋』。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "為什麼臺灣黑熊需要在大山裡走那麼遠、走遍整座森林呢？",
+          options: {
+            "1": "為了尋找被偷走的藏寶箱",
+            "2": "因為不同季節的果實與水源分布在不同的地方",
+            "3": "因為害怕待在同一個地方會被獵豹抓走",
+            "4": "為了每天和海邊的鯨魚比賽跑步"
+          },
+          answer: "2",
+          explanation: "文中熊媽媽回答：「山林裡的美味果實，不會天天長在同一棵樹上呀！春天要找嫩芽，夏天要喝清泉，秋天要去吃青剛櫟堅果。」",
+          sourceQuote: "「山林裡的美味果實，不會天天長在同一棵樹上呀！」（第1頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "課文中提到，在森林泥土與松針上發現的「黑熊腳印」具有什麼重要意義？",
+          options: {
+            "1": "代表黑熊不小心踩到獵人的陷阱受傷了",
+            "2": "表示黑熊已經永遠搬家離開這座森林",
+            "3": "是大自然留下來的消息，說明大自然的東西都會說話",
+            "4": "代表這片森林已經枯萎死掉，沒有任何生命"
+          },
+          answer: "3",
+          explanation: "文中第二頁結尾總結：「那些深深淺淺的足跡，不是無聲的印記，而是大自然留給世界的珍貴訊息。只要願意查、看、想，大自然的東西都會說話。」",
+          sourceQuote: "「黑熊的腳印是森林留下來的消息，只要願意查、看、想，大自然的東西都會說話。」（第2頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "故事中，當人類開闢的馬路橫切過森林時，對野生動物造成了什麼最大的威脅？",
+          options: {
+            "1": "路上有太多小石子會刺傷黑熊的腳掌",
+            "2": "汽車產生的尾氣讓樹上的水果變甜了",
+            "3": "馬路太滑導致動物常常在路上摔倒",
+            "4": "完整的森林被切成兩半，阻斷動物覓食、飲水與同伴相聚的安全通路"
+          },
+          answer: "4",
+          explanation: "文中描寫原本連綿的森林被馬路硬生生切成兩半，動物害怕不敢通過，造成「棲地破碎化」並面臨嚴重的路殺威脅。",
+          sourceQuote: "「原本連綿不絕的翠綠森林，竟然被一條寬闊冰冷的柏油馬路硬生生切成了兩半！」（第2頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "生態學上將臺灣黑熊稱為森林的「傘護種（保護傘）」，課文中的主要涵義是什麼？",
+          options: {
+            "1": "黑熊生活得健康安心，如同撐開保護傘，代表整座山林健全、水源純淨，其他動植物也一同受到庇護",
+            "2": "黑熊下雨天會摘姑婆芋的大葉子當雨傘遮雨",
+            "3": "黑熊會把森林裡的小動物全部聚攏在肚子底下睡覺保護牠們",
+            "4": "黑熊的兩隻耳朵形狀長得非常像摺疊雨傘"
+          },
+          answer: "1",
+          explanation: "課文中長輩說明：「只要我們黑熊能健康自由地在這座森林裡奔跑，就代表這裡的水源乾淨、樹木茂密，其他小動物也都能安心被照顧。」",
+          sourceQuote: "「只要我們黑熊能健康自由地在這座森林裡奔跑，就代表這裡的水源乾淨、樹木茂密，其他小動物也都能安心被照顧。」（第2頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "小熊腦海中那張「森林地圖」是怎麼形成的？這反映了野生動物的什麼能力？",
+          options: {
+            "1": "是松鼠幫牠用彩色筆畫在紙上寄給牠的",
+            "2": "是依循季節覓食、找水與長輩經驗傳承所累積的生活智慧與環境認知",
+            "3": "是人類科學家在黑熊腦中植入的衛星導航晶片",
+            "4": "是小熊隨便亂晃、毫無目標地流浪走出來的"
+          },
+          answer: "2",
+          explanation: "黑熊依循四季果實成熟與水源位置四處覓食，走過的每一步都轉化為大腦中對環境的深刻記憶，這是長期適應自然的智慧。",
+          sourceQuote: "「黑熊走過的每一步，都在大腦裡深刻描繪出一張生動完整的森林地圖。」（第1頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "課文中提到「只要願意查、看、想，大自然的東西都會說話」，作者主要想傳達什麼學習態度？",
+          options: {
+            "1": "森林裡的每棵大樹都會開口說國語和英文",
+            "2": "動物會使用錄音機錄下聲音播放給人類聽",
+            "3": "只要我們細心觀察自然留下的線索並深入思考，就能讀懂生物的生活與生態需求",
+            "4": "只要對著森林大聲喊叫，山谷就會產生回音"
+          },
+          answer: "3",
+          explanation: "「大自然會說話」是象徵說法，指大自然的足跡、植物分布和環境變化都是知識的訊息，只要願意用心探究就能理解其中的奧祕。",
+          sourceQuote: "「只要我們願意放慢腳步去查一查、看一看、想一想，就會發現大自然裡的每一樣東西，其實都在用心對我們說話。」（第2頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "故事中小熊和動物同伴望著「斷掉的山路」時內心的害怕與猶豫，作者想要引導讀者體會什麼？",
+          options: {
+            "1": "嘲笑野生動物的膽子太小，連過馬路都不敢",
+            "2": "覺得動物應該永遠留在山洞裡不要出來活動",
+            "3": "期待人類能把整座森林全部推平鋪上柏油路",
+            "4": "站在野生動物的視角，同理人類道路開發對動物家園帶來的巨大衝擊與生存危機"
+          },
+          answer: "4",
+          explanation: "作者透過動物擬人化的視角，生動呈現野生動物面對道路切斷家園時的無助，引導讀者產生生態同理心。",
+          sourceQuote: "「望著馬路對面結滿紅色果實的樹林，害怕得發抖，根本不敢邁出腳步。」（第2頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "如果要評估一座高山森林的生態系是否健全，為什麼追蹤「臺灣黑熊」是極佳的指標？",
+          options: {
+            "1": "因為黑熊需要廣闊的活動空間與多樣食物，黑熊能良好繁衍代表整座森林生態系都維持在優良狀態",
+            "2": "因為黑熊身上有毛髮，掉落在地上方便巡山員打掃清潔",
+            "3": "因為黑熊每年都會寫信向林務單位報告森林生態狀況",
+            "4": "因為黑熊是森林裡唯一存在的哺乳動物"
+          },
+          answer: "1",
+          explanation: "黑熊屬於頂層大型哺乳動物與傘護種，需要極為豐富完整的食物網與廣闊棲地支持，黑熊族群健全即代表整體生態系統健康。",
+          sourceQuote: "「只要我們黑熊能健康自由地在這座森林裡奔跑，就代表這裡的水源乾淨、樹木茂密。」（第2頁）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "讀完這篇故事後，你認為人類在規劃山區交通開發時，最應秉持的環境倫理觀念是什麼？",
+          options: {
+            "1": "只求道路開得越寬越直越快，完全不需考慮野生動物的死活",
+            "2": "不能只顧人類單方面的便利，必須尊重野生動物生存權益，並兼顧生態通道的連貫性",
+            "3": "為了保護自然，人類應該全面禁止一切交通工具並離開地球",
+            "4": "只要在路旁多裝幾支測速照相機就能解決所有生態問題"
+          },
+          answer: "2",
+          explanation: "環境倫理強調人與自然的和諧共存，交通建設時應透過環境評估與生態工法，保留或重建動物安全遷徙的廊道。",
+          sourceQuote: "省思課文第二頁中人類馬路切斷森林所引發的「棲地破碎化」危機與共存之道。"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "課文中將大自然比喻為「留有許多消息、會說話的書」，這對小學生的學習方法有什麼啟發？",
+          options: {
+            "1": "課本上的知識都是假的，不用到學校上學了",
+            "2": "只有坐在教室盯著黑板抄筆記才是唯一正確的學習方式",
+            "3": "學習不應侷限在紙本，走入真實大自然、細心觀察並主動思考探究，能學到最深刻真實的智慧",
+            "4": "只要躺在森林草地上睡覺，考試就會自然考一百分"
+          },
+          answer: "3",
+          explanation: "文本啟發學生走出課本，在大自然與生活中運用「查、看、想」的探究精神，培養敏銳的觀察力與自主學習力。",
+          sourceQuote: "「只要我們願意放慢腳步去查一查、看一看、想一想，就會發現大自然裡的每一樣東西，其實都在用心對我們說話。」（第2頁）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "作者雅絲貓以「小熊的森林地圖」作為故事題材，下列哪一項寫作特色的分析最為恰當？",
+          options: {
+            "1": "通篇只有枯燥難懂的生物學術名詞，讓人讀了昏昏欲睡",
+            "2": "文章純粹批判人類的過錯，充滿絕望與負面情緒",
+            "3": "內容全部憑空捏造，沒有任何真實的野生動植物生態根據",
+            "4": "巧妙運用溫馨童趣的童話視角，將抽象的「領域範圍、棲地破碎化與傘護種」轉化為生動感人的故事"
+          },
+          answer: "4",
+          explanation: "作者運用小熊的視角、親切生動的語言與溫馨情節，深入淺出地傳遞深層的生態保育觀念，極富感染力與教育意涵。",
+          sourceQuote: "整篇故事融合小熊好奇心、森林地圖與母子對話，展現出高度的兒童文學感染力與生態教育價值。"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "當我們全家人開車經過國家公園或山區林道時，下列哪一項是真正友善野生動物的良好行為？",
+          options: {
+            "1": "放慢車速、提高警覺、留意「當心動物」警示牌，不隨意鳴按喇叭或向窗外亂扔垃圾",
+            "2": "大腳踩油門高速狂飆，挑戰山路過彎的極限速度",
+            "3": "看到路邊有野生小動物就搖下車窗丟麵包、薯條餵食牠們",
+            "4": "在深夜開著刺眼的遠光燈並大按喇叭，故意把路旁的動物嚇跑"
+          },
+          answer: "1",
+          explanation: "山區減速慢行能有效預防路殺悲劇；不餵食野生動物才能維持其自然覓食天性，不亂扔垃圾能避免動物誤食塑膠袋中毒。",
+          sourceQuote: "延伸課文生態倫理，落實於日常用路行為與野生動物共存守則。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "為了解決故事中「馬路切斷森林、造成棲地破碎」的嚴重問題，現代生態工程最推薦的做法是什麼？",
+          options: {
+            "1": "在馬路兩側築起三公尺高的高壓電鐵絲網，把動物徹底關在森林裡",
+            "2": "興建「生態廊道（動物通道）」，如跨越道路的綠色生態天橋或地下箱涵，並種植植被引導動物安全通行",
+            "3": "每天出動直升機把想過馬路的野生動物一隻隻抓到對面放生",
+            "4": "把馬路漆成閃亮的螢光粉紅色，讓動物晚上不敢靠近"
+          },
+          answer: "2",
+          explanation: "生態廊道（綠橋天橋、地下涵洞）能重新縫合被切斷的棲地，為野生動物提供安全無車輛威脅的天然通行路徑。",
+          sourceQuote: "呼應課文「棲地破碎化」危機，為現實中修復動物完整森林地圖的最佳工程解方。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "假如學校要舉辦「黑熊友善校園宣導週」，身為四年級學生的你可以採取什麼實際行動來支持黑熊保育？",
+          options: {
+            "1": "偷偷跑到深山捕捉一隻小熊幼崽帶回學校當班級寵物",
+            "2": "在網路上宣傳黑熊是兇猛可怕的怪獸，呼籲大家消滅牠們",
+            "3": "繪製宣導海報向同學家人介紹黑熊對森林的重要，並支持友善耕作（減少農藥捕獸夾）的農產品",
+            "4": "去五金行購買很多鐵製捕獸夾放在校園花圃裡測試威力"
+          },
+          answer: "3",
+          explanation: "小學生可以透過宣導正確保育知識、支持不使用劇毒農藥與捕獸夾的友善小農，從日常消費與理念傳播中實踐生態保育。",
+          sourceQuote: "從個人與校園行動出發，支持臺灣黑熊與野生動物保護政策。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "我們常在國家森林遊樂區看到「無痕山林（Leave No Trace）」標語，下列哪項做法最符合保護黑熊等野生動物的原則？",
+          options: {
+            "1": "在神木樹幹上用小刀刻下「某某某到此一遊」作為紀念",
+            "2": "把吃剩的便當盒、果皮和塑膠袋隨手扔進草叢當作肥料",
+            "3": "在森林深處架設大型音響播放重低音搖滾樂吸引動物共舞",
+            "4": "帶走所有自己產生的垃圾與廚餘果皮，保持安靜不干擾動物，維護大自然的原貌"
+          },
+          answer: "4",
+          explanation: "無痕山林原則要求帶走所有垃圾與廚餘，避免野生動物因取食人類殘渣改變覓食習性，甚至因誤食塑膠而致死。",
+          sourceQuote: "深化登山旅遊素養，維護森林純淨生態與野生動物棲地安全。"
+        }
+      ],
+
+      // 開放式思考題（深度探究：AI 將詳細評析學生的論述是否確實呼應文章核心並給予分數等第）
+      openQuestion: {
+        id: "open-1",
+        title: "深度探究：小小森林保育工程師——為野生動物連起完整的家",
+        desc: "在故事中，小熊站在被馬路切斷的山路前，看著對面結滿果實的樹林卻不敢跨越。如果森林被道路切割，野生動物就無法安全覓食、喝水或繁衍。<br><br>如果你是國家公園的森林生態工程師，請你提出你的<strong>「動物安全通行方案」或「生態廊道設計構想」</strong>：<br>1. 你會為動物建造什麼樣的通道（例如：鋪滿泥土植被的高架綠橋、地下箱涵涵洞、樹冠繩梯等）？<br>2. 通道周圍你會種植什麼、如何布置，讓黑熊與小石虎敢安心走上去？<br>3. 對於路上行駛的汽機車，你會設置什麼標誌或減速措施來保護動物？<br><br>請寫下你的設計想法（建議 50~150 字），AI 會針對你的內容是否確實呼應課文核心觀念進行評分，並給予成績等第喔！",
+        placeholder: "請在此寫下你的想法……例如：我想在馬路上方興建一座寬闊的「綠色生態天橋」，上面鋪上泥土並種滿黑熊喜歡吃的青剛櫟和野花灌木，讓動物感覺像走在森林裡。同時在公路兩側設置防護網引導動物上橋，並在路段前設置「當心黑熊出沒」警示牌與減速墊，提醒開車司機放慢車速……",
+        rubric: {
+          keywords: ["生態廊道", "動物通道", "綠橋", "涵洞", "天橋", "減速", "警示牌", "泥土", "植被", "青剛櫟", "路殺", "安全", "棲地", "保護傘", "引導"],
+          minWords: 30
+        }
+      },
+
+      // 互動小遊戲配置：【小熊森林大冒險：黑熊腳印尋寶記】
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "第一關：辨認森林好朋友",
+            desc: "小熊出門探險，長輩說黑熊胸前有特別的漂亮標誌，小熊要認對自己的黑熊同伴！",
+            options: [
+              { name: "胸前有白色醒目 V 字斑紋的黑熊", icon: "🐻", isSafe: true, feedback: "太棒了！胸前的白色 V 字型斑紋正是臺灣黑熊最獨特美麗的象徵！" },
+              { name: "身上長滿黑白條紋的斑馬", icon: "🦓", isSafe: false, feedback: "那是住在非洲大草原的斑馬，不是臺灣黑熊喔！" },
+              { name: "全身披滿銳利尖刺的豪豬", icon: "🦔", isSafe: false, feedback: "哎呀！那是豪豬，小心不要被尖刺扎到了！" },
+              { name: "泡在水裡張開大嘴的河馬", icon: "🦛", isSafe: false, feedback: "河馬住在熱帶水塘裡，不是高山森林的朋友喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "第二關：秋天森林的美味地圖",
+            desc: "時序進入秋天，小熊的森林地圖上標示著最美味營養的堅果，小熊該去哪裡採食呢？",
+            options: [
+              { name: "公路旁翻找人類丟棄的泡麵塑膠袋", icon: "🥡", isSafe: false, feedback: "不行！吃人類垃圾和塑膠袋會生重病甚至死掉！" },
+              { name: "青剛櫟結滿堅果的向陽山坡", icon: "🌰", isSafe: true, feedback: "太聰明了！秋天的青剛櫟果實富含營養，能幫助黑熊儲存過冬能量！" },
+              { name: "潛入三千公尺深海抓大白鯊", icon: "🦈", isSafe: false, feedback: "黑熊不會潛到深海捕魚啦！" },
+              { name: "爬到高壓電塔上啃咬電線", icon: "⚡", isSafe: false, feedback: "危險！觸電會危及生命！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "第三關：穿越危險大馬路",
+            desc: "小熊要到對面山谷喝清甜的山泉水，但前方有一條繁忙的公路，小熊該怎麼走？",
+            options: [
+              { name: "直接閉著眼睛衝過雙向四線快車道", icon: "💨", isSafe: false, feedback: "極度危險！高速行駛的車輛很容易造成路殺意外！" },
+              { name: "趴在柏油路中央睡大覺等車子停", icon: "😴", isSafe: false, feedback: "太危險了！司機在轉彎處很可能看不見！" },
+              { name: "走鋪滿泥土與植物的跨路生態綠橋", icon: "🌉", isSafe: true, feedback: "恭喜答對！生態綠橋讓野生動物不用冒著被車撞的危險，安全穿越馬路！" },
+              { name: "抓住疾駛而過的砂石車後照鏡搭便車", icon: "🚛", isSafe: false, feedback: "天啊！這絕對是不可嘗試的玩命行為！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "第四關：做個稱職的森林保護傘",
+            desc: "小熊長大了，要成為守護整座森林的「傘護種」，牠應該如何展現黑熊的價值？",
+            options: [
+              { name: "把森林的所有大樹全部拔光蓋遊樂場", icon: "🚜", isSafe: false, feedback: "這樣會摧毀整座森林的生態環境！" },
+              { name: "在健康完整的山林生活，守護水源與萬物", icon: "🌲", isSafe: true, feedback: "太讚了！黑熊安心繁衍，代表整座森林水源乾淨、萬物生生不息！" },
+              { name: "追趕並抓走森林裡所有的小動物朋友", icon: "🏹", isSafe: false, feedback: "黑熊主要吃植物與果實，是森林和諧大家庭的一份子！" },
+              { name: "搬到城市的水泥籠子裡天天吹冷氣", icon: "🏢", isSafe: false, feedback: "野生動物的家在大自然山林，而不是被關在狹窄水泥房！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">森林大冒險未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中黑熊的生活習性與生態廊道的妙用，重新出發吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🐻</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【黑熊好朋友・小小森林守護者】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太棒了！你獲得了 <strong>${score}</strong> 分滿分！你已經完整了解了臺灣黑熊的特徵、季節食性、棲地破碎化的危機與生態廊道的重要性，成為最優秀的森林保育小達人！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

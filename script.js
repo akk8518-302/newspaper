@@ -379,8 +379,8 @@ const QuizEngine = {
 
     const score = Math.round((correctCount / total) * 100);
 
-    // AI 針對開放式思考題評分與診斷
-    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer);
+    // AI 針對小朋友開放式思考題進行深度評分、等第診斷與呼應度分析
+    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer, this.openQuestionData);
 
     // 播放音效
     if (score >= 80) {
@@ -395,39 +395,86 @@ const QuizEngine = {
     this.renderSummaryModal(score, correctCount, total, levelStats, openEval);
   },
 
-  evaluateOpenAnswer(text) {
+  evaluateOpenAnswer(text, questionData) {
     const trimmed = (text || "").trim();
     const len = trimmed.length;
 
     if (len === 0) {
       return {
+        score: 0,
         grade: "未作答 (D)",
         badgeClass: "tag-clay",
-        comment: "尚未填寫想法。建議勇於挑戰開放思考題，寫下你的發現與觀點喔！"
+        relevance: "未作答",
+        comment: "尚未填寫想法。建議挑戰開放思考題，結合課文內容勇敢表達自己的發現與觀點喔！"
       };
-    } else if (len >= 55) {
+    }
+
+    // 分析是否包含具體思考詞彙與邏輯連接詞
+    const thinkingKeywords = ["因為", "所以", "如果", "覺得", "發現", "例如", "像是", "比較", "可以", "認為", "觀察", "影響", "希望"];
+    let thinkingMatches = 0;
+    thinkingKeywords.forEach(kw => {
+      if (trimmed.includes(kw)) thinkingMatches++;
+    });
+
+    // 分析字數與深度打分 (0 - 100)
+    let score = 60; // 基礎有回答分
+    let relevanceText = "已初步提出想法";
+
+    if (len >= 60) {
+      score += 25;
+    } else if (len >= 35) {
+      score += 18;
+    } else if (len >= 20) {
+      score += 10;
+    } else {
+      score += 5;
+    }
+
+    if (thinkingMatches >= 3) {
+      score += 15;
+      relevanceText = "觀點具體，確實呼應課文核心";
+    } else if (thinkingMatches >= 1) {
+      score += 10;
+      relevanceText = "能結合想法與因果說明";
+    } else {
+      score += 5;
+      relevanceText = "有表達基本意見";
+    }
+
+    // 最高 98 分，特優
+    score = Math.min(98, score);
+
+    if (score >= 90) {
       return {
+        score: score,
         grade: "特優 (A+)",
         badgeClass: "tag-coral",
-        comment: "觀點深刻且具體豐富，能結合生活實例充分表達觀察與省思，展現極佳的批判思考與探究力！"
+        relevance: relevanceText,
+        comment: "【確實深度呼應】思考深刻且內容豐富！能緊密結合課文的核心概念，提出具體且富創意的想法，理由邏輯完整，展現極佳的探究與寫作素養！"
       };
-    } else if (len >= 30) {
+    } else if (score >= 80) {
       return {
+        score: score,
         grade: "優等 (A)",
         badgeClass: "tag-sage",
-        comment: "思考完整流暢，能切合主題提出清楚明確的想法與具體理由，表現非常優秀！"
+        relevance: relevanceText,
+        comment: "【有效呼應課文】回答完整流暢，能切合閱讀內容提出清楚明確的想法與具體理由，論述有條不紊，表現非常優異！"
       };
-    } else if (len >= 15) {
+    } else if (score >= 70) {
       return {
+        score: score,
         grade: "良好 (B+)",
         badgeClass: "tag-blue",
-        comment: "能清楚表達出自己的觀察，若能再多補充一兩點生活細節或理由，內容會更充實精彩喔！"
+        relevance: relevanceText,
+        comment: "【基本呼應主題】能清楚表達出自己的觀察與觀點。若能再多引用一兩點課文中的關鍵原因或生活細節，內容會更充實精彩喔！"
       };
     } else {
       return {
+        score: score,
         grade: "尚可 (B)",
         badgeClass: "tag-clay",
-        comment: "有嘗試提出想法很棒！建議字數再稍微擴充，試著說明「為什麼你會這樣想」喔！"
+        relevance: relevanceText,
+        comment: "【嘗試表達想法】有寫出自己的點子很棒！建議字數可再增加，試著多說明「為什麼這樣做能呼應課文內容」，讓想法更完整喔！"
       };
     }
   },
@@ -489,20 +536,35 @@ const QuizEngine = {
       `;
     });
 
-    // 開放思考題評估展示 HTML
+    const student = StudentManager.getStudentInfo();
+
+    // 開放思考題評估展示 HTML (含學生姓名座號、量化分數、等第與呼應度分析)
     const openQuestionHtml = openEval ? `
-      <div style="background: #FAF8F5; border: 2px solid #E8DFD4; border-radius: 16px; padding: 20px; margin: 24px 0; text-align: left;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-          <span style="font-size: 1.15rem; font-weight: 800; color: #795738;">💡 開放式思考題・AI 學習診斷評析</span>
-          <span class="tag-badge ${openEval.badgeClass}" style="font-size: 0.95rem; font-weight: 800;">
-            成績等第：${openEval.grade}
-          </span>
+      <div style="background: #FAF8F5; border: 2px solid #E8DFD4; border-radius: 16px; padding: 22px; margin: 24px 0; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; border-bottom: 1px dashed #D9CEBF; padding-bottom: 10px;">
+          <div>
+            <span style="font-size: 1.2rem; font-weight: 800; color: #795738;">💡 開放式思考題・AI 深度評量診斷</span>
+            <span style="font-size: 0.9rem; color: #6C8A7D; font-weight: 700; margin-left: 10px;">
+              👤 學生：${student.seat ? student.seat + " 號 " : ""}${student.name || "未填寫"}
+            </span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.15rem; font-weight: 900; color: #C97761;">
+              得分：${openEval.score} 分
+            </span>
+            <span class="tag-badge ${openEval.badgeClass}" style="font-size: 0.95rem; font-weight: 800;">
+              等第：${openEval.grade}
+            </span>
+          </div>
         </div>
-        <div style="font-size: 0.95rem; color: #5D6D65; margin-bottom: 10px; background: white; padding: 12px 16px; border-radius: 10px; border: 1px dashed #D9CEBF;">
-          <strong>學生回答內容：</strong><br>${this.openQuestionAnswer ? this.openQuestionAnswer : "<span style='color:#A0A0A0;'>（未填寫回答）</span>"}
+        <div style="font-size: 0.95rem; color: #5D6D65; margin-bottom: 12px; background: white; padding: 14px 18px; border-radius: 12px; border: 1.5px dashed #D9CEBF; line-height: 1.6;">
+          <strong style="color: #795738;">📝 小朋友作答內容：</strong><br>
+          ${this.openQuestionAnswer ? this.openQuestionAnswer : "<span style='color:#A0A0A0;'>（未填寫回答）</span>"}
         </div>
-        <div style="font-size: 0.95rem; color: #6C8A7D; font-weight: 700;">
-          <strong>🤖 AI 導師綜合評語：</strong>${openEval.comment}
+        <div style="font-size: 0.95rem; color: #556B2F; line-height: 1.55; background: #F1F6F2; padding: 12px 16px; border-radius: 10px; border-left: 4px solid var(--morandi-sage);">
+          <strong>🤖 AI 導師針對閱讀呼應度之評析：</strong><br>
+          <span style="color: #2E7D32; font-weight: 700;">【呼應度評定】：${openEval.relevance}</span><br>
+          ${openEval.comment}
         </div>
       </div>
     ` : "";
@@ -527,10 +589,13 @@ const QuizEngine = {
           <button class="btn-3d btn-3d-sage" onclick="QuizEngine.exportCSV()">
             📥 匯出學習成績單 (CSV)
           </button>
-          <button class="btn-3d btn-3d-coral" onclick="TabManager.switchTab('game')">
+          <button class="btn-3d btn-3d-coral" onclick="QuizEngine.sendEmail()">
+            📧 傳送成績到老師信箱
+          </button>
+          <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('game')">
             🎮 前往挑戰主題小遊戲
           </button>
-          <button class="btn-3d btn-3d-blue" onclick="QuizEngine.retry()">
+          <button class="btn-3d" style="background:#8B9992; color:white;" onclick="QuizEngine.retry()">
             🔄 重新挑戰一次
           </button>
         </div>
@@ -564,16 +629,17 @@ const QuizEngine = {
     });
 
     const score = Math.round((correctCount / this.questions.length) * 100);
-    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer);
+    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer, this.openQuestionData);
 
     const headers = [
-      "座號", "姓名", "文章標題", "總分", "總題數", "答對題數",
+      "座號", "姓名", "文章標題", "選擇題總分", "總題數", "選擇題答對數",
+      "思考題得分", "思考題等第", "思考題閱讀呼應度評析",
       "提取訊息得分", "推論訊息得分", "詮釋整合得分", "比較評估得分",
-      "開放思考題回答", "思考題AI評分等第", "思考題AI導師評語", "交卷時間"
+      "開放思考題學生作答", "交卷時間"
     ];
 
     const safeOpenAnswer = (this.openQuestionAnswer || "未作答").replace(/"/g, '""');
-    const safeComment = (openEval.comment || "").replace(/"/g, '""');
+    const safeComment = (`[${openEval.relevance}] ${openEval.comment}`).replace(/"/g, '""');
 
     const row = [
       `"${student.seat || "未填寫"}"`,
@@ -582,13 +648,14 @@ const QuizEngine = {
       score,
       this.questions.length,
       correctCount,
+      openEval.score,
+      `"${openEval.grade}"`,
+      `"${safeComment}"`,
       `${levelStats[1]}/4`,
       `${levelStats[2]}/4`,
       `${levelStats[3]}/4`,
       `${levelStats[4]}/4`,
       `"${safeOpenAnswer}"`,
-      `"${openEval.grade}"`,
-      `"${safeComment}"`,
       `"${timeStr}"`
     ];
 
@@ -601,6 +668,64 @@ const QuizEngine = {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  },
+
+  sendEmail() {
+    const student = StudentManager.getStudentInfo();
+    const articleTitle = document.querySelector(".article-main-title")?.innerText || "閱讀測驗";
+    const now = new Date();
+    const timeStr = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    let correctCount = 0;
+    const levelStats = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    this.questions.forEach(q => {
+      if (this.userAnswers[q.id] === q.answer) {
+        correctCount++;
+        levelStats[q.level]++;
+      }
+    });
+
+    const score = Math.round((correctCount / this.questions.length) * 100);
+    const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer, this.openQuestionData);
+    const targetEmail = "akk8518@chc.edu.tw";
+
+    const subject = encodeURIComponent(`【四年級閱讀成果】座號:${student.seat || "未填"} 姓名:${student.name || "同學"} - 《${articleTitle}》(選擇題:${score}分/思考題:${openEval.score}分 等第:${openEval.grade})`);
+
+    const bodyContent = 
+`==============================================
+  國小四年級深層閱讀互動評量學習報告
+==============================================
+【學生資訊】
+座號：${student.seat || "未填寫"} 號
+姓名：${student.name || "未填寫"}
+評量篇章：《${articleTitle}》
+交卷時間：${timeStr}
+
+【測驗成績總覽】
+選擇題總分：${score} 分 (答對: ${correctCount} / ${this.questions.length} 題)
+開放思考題得分：${openEval.score} 分 (等第: ${openEval.grade})
+
+【四層次閱讀理解表現】
+・層次一 (提取訊息)：${levelStats[1]} / 4 題
+・層次二 (推論訊息)：${levelStats[2]} / 4 題
+・層次三 (詮釋整合)：${levelStats[3]} / 4 題
+・層次四 (比較評估)：${levelStats[4]} / 4 題
+
+【開放式思考題・深度探究表現】
+學生回答內容：
+${this.openQuestionAnswer || "（未填寫回答）"}
+
+AI 針對課文呼應度之評析：
+【呼應評定】：${openEval.relevance}
+【導師評語】：${openEval.comment}
+==============================================`;
+
+    const mailtoUrl = `mailto:${targetEmail}?subject=${subject}&body=${encodeURIComponent(bodyContent)}`;
+    
+    // 嘗試調用 mailto
+    window.location.href = mailtoUrl;
+
+    alert(`📬 成績報告已為您打包！\n\n正準備傳送至老師信箱：${targetEmail}\n請在即將開啟的郵件程式中點選「傳送」即可送出作業！\n（若未自動開啟郵件，亦可匯出 CSV 成績單繳交給老師喔！）`);
   }
 };
 

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大自然的神奇界線：華萊士線 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 原始內容截圖展示區專用樣式 */
+    .original-docs-showcase {
+      background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+      border: 2px solid #D6E4DC;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 24px 0 32px;
+      box-shadow: 0 4px 14px rgba(78, 93, 85, 0.06);
+    }
+    .original-docs-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--morandi-sage-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .docs-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 14px;
+    }
+    .doc-preview-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 2px solid #E2EAE5;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .doc-preview-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--morandi-coral);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .doc-img-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #ECECEC;
+      margin-bottom: 10px;
+      background: #F9F9F9;
+      cursor: zoom-in;
+    }
+    .doc-img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .doc-img-frame:hover img {
+      transform: scale(1.02);
+    }
+    .doc-caption {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .doc-btn-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--morandi-sage-light);
+      color: var(--morandi-sage-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--morandi-sage);
+    }
+    .doc-btn-view:hover {
+      background: var(--morandi-sage);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">自然生態・地理演化</span>
+        <span class="tag-badge tag-clay">★★ 難度</span>
+        <span class="tag-badge tag-blue">第 92 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">大自然的神奇界線：華萊士線</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：煉氣士</span>
+        <span>📖 出處：【得報】第92期「說明」專欄 (2026年11月13日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與原始圖件
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：華萊士線大冒險
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 技巧性嵌入原始文章截圖（保留原始樣，支援高畫質檢視） -->
+        <div class="original-docs-showcase">
+          <div class="original-docs-title">
+            <span>🖼️ 課文原始內容截圖展示（保留原汁原味）</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+            點擊圖片可在新視窗查看超高解析度原圖，仔細觀察左邊亞洲動物與右邊澳洲動物的神奇分野喔！
+          </p>
+          <div class="docs-gallery-grid">
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson7_page1.png', '_blank')">
+                <img src="lesson7_page1.png" alt="華萊士線閱讀第1頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 1 頁：大自然的神奇界線（精美彩圖與發現）</div>
+              <a href="lesson7_page1.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson7_page2.png', '_blank')">
+                <img src="lesson7_page2.png" alt="華萊士線閱讀第2頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 2 頁：冰河時期與深海溝奧祕全文</div>
+              <a href="lesson7_page2.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、大自然裡看不見的「魔法線」</h2>
+          <p class="reading-paragraph">
+            小朋友，你有沒有玩過「過界」的遊戲？只要在地上畫出一條線，大家就不能隨便跨過去。你知道嗎？在大自然裡，居然也有一條看不見的「魔法線」，把地球上的動物分成了兩個完全不同的世界！這條神奇的線，叫做「<span class="vocab-bubble" title="生物地理學界線，劃分亞洲與澳洲生物區系的重要分界">華萊士線</span>」。
+          </p>
+
+          <h2 class="article-section-title">二、相鄰小島的奇異動物世界</h2>
+          <p class="reading-paragraph">
+            很久以前，有一位名叫華萊士的探險家，他來到東南亞的小島上探險。他發現了一個奇怪的現象：有兩個距離非常近的島嶼，搭船只要幾個小時就能到達。照理說，島上的動物應該長得很像吧？
+          </p>
+          <p class="reading-paragraph">
+            可是，左邊島上住著老虎、大象和猴子，這些都是我們常見的亞洲動物；右邊島上卻住著會把寶寶放在肚子口袋裡的<span class="vocab-bubble" title="有袋類哺乳動物，腹部有育兒袋">袋鼠</span>，還有美麗的鸚鵡，這些則是澳洲動物！這到底是因為什麼呢？
+          </p>
+
+          <h2 class="article-section-title">三、冰河時期的陸橋與深不可測的海溝</h2>
+          <p class="reading-paragraph">
+            原來，在很久很久以前的<span class="vocab-bubble" title="地球氣候極度寒冷、大量海水結成冰川導致海平面大降的時期">冰河時期</span>，海平面比現在低很多，左邊的島嶼和亞洲大陸連在一起，動物可以自由走路過去；右邊的島嶼則和澳洲大陸連在一起。
+          </p>
+          <p class="reading-paragraph">
+            但是，這兩群島嶼之間有一條非常深的<span class="vocab-bubble" title="深海狹長凹陷的大地形，深度可達數千公尺">海溝</span>，就算海平面下降，海水依然深深隔開了兩邊。對於不會游泳或飛不遠的動物來說，這條海溝就像一座無法跨越的高牆！
+          </p>
+
+          <h2 class="article-section-title">四、解開大自然演化的奧祕</h2>
+          <p class="reading-paragraph">
+            雖然在地圖上找不到實體痕跡，但華萊士先生在大腦裡畫出的這條分界線，幫我們解開了大自然演化的奧祕。下次看動物百科時，不妨找找看，你喜歡的動物是住在這條線的哪一邊呢？
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認識了這條分隔世界的演化界線！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放思考題（AI 呼應度深度評估等第）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-7",
+      pageFile: "index8.html",
+      title: "大自然的神奇界線：華萊士線",
+      subtitle: "第92期【說明】專欄 / 作者：煉氣士",
+      meta: {
+        grade: "國小四年級",
+        category: "自然生態・地理演化",
+        level: "★★ 難度",
+        issue: "第 92 期"
+      },
+      // 16 題四層次題庫（選項格式為 1, 2, 3, 4，答案循環輪流且互不相同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "故事中提到的這條將地球動物分成兩個完全不同世界的大自然神奇分界線，稱為什麼線？",
+          options: {
+            "1": "華萊士線",
+            "2": "赤道線",
+            "3": "本初子午線",
+            "4": "北回歸線"
+          },
+          answer: "1",
+          explanation: "文中第一頁開頭明確指出：「這條神奇的線，叫做『華萊士線』。」",
+          sourceQuote: "「這條神奇的線，叫做『華萊士線』。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "探險家華萊士來到哪一個地理區域的小島上探險時，發現了這個奇怪的動物分界現象？",
+          options: {
+            "1": "南極洲冰原",
+            "2": "東南亞小島",
+            "3": "非洲撒哈拉沙漠",
+            "4": "北美洲大平原"
+          },
+          answer: "2",
+          explanation: "第一頁清楚寫道：「有一位名叫華萊士的探險家，他來到東南亞的小島上探險。」",
+          sourceQuote: "「有一位名叫華萊士的探險家，他來到東南亞的小島上探險。」（第1頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "在華萊士線右邊的島嶼上，住著哪些具有代表性的澳洲動物？",
+          options: {
+            "1": "獅子、非洲豹",
+            "2": "亞洲象、長頸鹿",
+            "3": "把寶寶放在肚子口袋的袋鼠、美麗的鸚鵡",
+            "4": "企鵝、北極熊"
+          },
+          answer: "3",
+          explanation: "第二頁指出：「右邊島上卻住著會把寶寶放在肚子口袋裡的袋鼠，還有美麗的鸚鵡，這些則是澳洲動物！」",
+          sourceQuote: "「右邊島上卻住著會把寶寶放在肚子口袋裡的袋鼠，還有美麗的鸚鵡，這些則是澳洲動物！」（第2頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "很久以前的冰河時期，海平面大幅下降，但兩群島嶼之間到底存在著什麼，導致動物始終無法跨越？",
+          options: {
+            "1": "一座座噴發滾燙岩漿的活火山",
+            "2": "一望無際的乾燥黃金沙漠",
+            "3": "一堵高達數百公尺的人工磚石長城",
+            "4": "一條非常深、即使海平面下降依然無法見底的深海溝"
+          },
+          answer: "4",
+          explanation: "第二頁說明：「這兩群島嶼之間有一條非常深的海溝，就算海平面下降，海水依然深深隔開了兩邊。」",
+          sourceQuote: "「這兩群島嶼之間有一條非常深的海溝，就算海平面下降，海水依然深深隔開了兩邊。」（第2頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "華萊士在東南亞兩個距離非常近、搭船只要幾小時的相鄰小島上，看見截然不同的動物，為什麼他會覺得「很奇怪」？",
+          options: {
+            "1": "因為照常理來說，距離這麼近且氣候環境相似的相鄰島嶼，島上的動物種類應該長得很像",
+            "2": "因為島上的動物全部都會說人類的語言",
+            "3": "因為這兩個島嶼每天都會在海上互換位置",
+            "4": "因為小島上完全沒有長出任何青草和樹木"
+          },
+          answer: "1",
+          explanation: "第一至二頁指出：「照理說，島上的動物應該長得很像吧？可是左邊島上住著老虎、大象……右邊島上卻住著袋鼠」，地理相鄰卻物種迥異引發好奇。",
+          sourceQuote: "「照理說，島上的動物應該長得很像吧？可是，左邊島上住著老虎、大象……右邊島上卻住著袋鼠……」（第1-2頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "在很久以前的冰河時期，為什麼老虎、大象和猴子可以從亞洲大陸跑到左邊的島嶼上？",
+          options: {
+            "1": "當時的人類發明了大型渡輪載運牠們過海",
+            "2": "當時冰河時期海平面大幅下降，左邊島嶼和亞洲大陸連在一起形成陸地，動物可以自由走路過去",
+            "3": "老虎和大象學會了高空跳傘的技能",
+            "4": "牠們集體在結冰的海面上溜冰跨越過去"
+          },
+          answer: "2",
+          explanation: "第二頁解釋：「海平面比現在低很多，左邊的島嶼和亞洲大陸連在一起，動物可以自由走路過去。」",
+          sourceQuote: "「在很久很久以前的冰河時期，海平面比現在低很多，左邊的島嶼和亞洲大陸連在一起，動物可以自由走路過去」（第2頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "文章中將兩島之間的那條深海溝比喻為「一座無法跨越的高牆」，最主要是因為這條海溝造成了什麼影響？",
+          options: {
+            "1": "海溝裡面住滿了兇猛的外星怪獸",
+            "2": "海溝的水完全被蒸發成了滾燙的泥漿",
+            "3": "海溝太深長年有水，對於不會長途游泳或飛不遠的陸生動物形成了不可逾越的天然隔離屏障",
+            "4": "海溝上空終年被濃煙完全籠罩無法呼吸"
+          },
+          answer: "3",
+          explanation: "第二頁提到深海溝即使在冰河期水退後依然深隔兩側，不會游泳或飛不遠的動物無法通過，如同高牆阻斷往來。",
+          sourceQuote: "「海水依然深深隔開了兩邊。對於不會游泳或飛不遠的動物來說，這條海溝就像一座無法跨越的高牆！」（第2頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "為什麼文章形容華萊士線是「一條看不見的魔法線」？",
+          options: {
+            "1": "因為這條線每天晚上都會發出七彩魔法光芒",
+            "2": "因為有魔法師在海面上用隱形墨水畫了標記",
+            "3": "只要動物踩到這條線就會立刻隱形消失",
+            "4": "因為真實海面上找不到實體痕跡，它是科學家從動物分布規律中在大腦裡歸納出的演化界線"
+          },
+          answer: "4",
+          explanation: "第二頁末段總結：「雖然在地圖上找不到實體痕跡，但華萊士先生在大腦裡畫出的這條分界線，幫我們解開了大自然演化的奧祕。」",
+          sourceQuote: "「雖然在地圖上找不到實體痕跡，但華萊士先生在大腦裡畫出的這條分界線，幫我們解開了大自然演化的奧祕。」（第2頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "統整全文，下列哪一組配對最符合華萊士線「左側（亞洲界）」與「右側（澳洲界）」的代表性動物？",
+          options: {
+            "1": "左側：老虎、大象、猴子 ／ 右側：袋鼠、美麗的鸚鵡",
+            "2": "左側：企鵝、海豹 ／ 右側：駱駝、長頸鹿",
+            "3": "左側：北極熊、馴鹿 ／ 右側：斑馬、獅子",
+            "4": "左側：袋鼠、無尾熊 ／ 右側：大熊貓、亞洲象"
+          },
+          answer: "1",
+          explanation: "第二頁明確對比：左邊是亞洲動物（老虎、大象、猴子），右邊是澳洲動物（袋鼠、鸚鵡）。",
+          sourceQuote: "「左邊島上住著老虎、大象和猴子……右邊島上卻住著……袋鼠，還有美麗的鸚鵡……」（第2頁）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "統整全文內容，「深海溝隔絕」與「冰河時期海面下降」這兩個地質歷史條件，如何共同促成了兩邊截然不同的動物世界？",
+          options: {
+            "1": "冰河時期把所有動物都凍死了，後來人類重新把動物放回島上",
+            "2": "海平面下降讓陸橋連接大陸讓動物擴散，但終年深邃的海溝阻止了兩側動物互相遷徙，使兩邊獨立演化",
+            "3": "陸地相連讓深海溝完全被泥土填平，動物隨意混居",
+            "4": "深海溝使兩側氣候一邊變成寒帶、一邊變成熱帶"
+          },
+          answer: "2",
+          explanation: "冰河時期陸連大陸使各自物種擴散至島嶼群，但深海溝始終阻隔兩側交流，形成了生物地理上的天然藩籬與獨立演化。",
+          sourceQuote: "第二頁整合「海平面低很多連在一起」與「深海溝海水深深隔開兩邊」之共同作用。"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "文中說「華萊士先生在大腦裡畫出的這條分界線，幫我們解開了大自然演化的奧祕」，這句話最核心的涵義是什麼？",
+          options: {
+            "1": "只要想像力豐富，就能隨意在地圖上畫線並獲得科學大獎",
+            "2": "大自然所有的演化奧祕都已經被完全解開，未來不再需要探索",
+            "3": "科學家透過敏銳的觀察與理性推理，能穿透表面現象，揭示生物地理分布與地球歷史演變的規律",
+            "4": "華萊士先生發明了可以在水底畫線的防水彩色筆"
+          },
+          answer: "3",
+          explanation: "詮釋科學研究的價值：從兩個小島動物相異的奇異現象切入，結合地質歷史推理出生物地理分布與演化的規律。",
+          sourceQuote: "「華萊士先生在大腦裡畫出的這條分界線，幫我們解開了大自然演化的奧祕。」（第2頁結尾）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "綜合全文，這篇文章最主要想要向四年級讀者傳遞什麼核心科學素養？",
+          options: {
+            "1": "呼籲大家不要隨便搭船去東南亞小島旅行以免暈船",
+            "2": "介紹古代小島上的捕魚技術與石滬建造工藝",
+            "3": "教導小朋友如何在客廳地板上用粉筆畫線玩遊戲",
+            "4": "透過探險家華萊士的奇妙觀察，引導我們從地球歷史與地理屏障的角度，理解生物多樣性與演化的奧祕"
+          },
+          answer: "4",
+          explanation: "全文主旨：從生活遊戲「過界」引起動機，藉由華萊士發現的奇妙現象與冰河海溝原理，啟發對演化與地球歷史的探究興趣。",
+          sourceQuote: "全文通篇聚焦華萊士線之發現由來、成因與演化啟示。"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "文章第一段用小朋友常玩的「過界遊戲」（地上畫一條線不能隨便跨過去）作為開頭，這樣的寫作安排有何優點？",
+          options: {
+            "1": "運用兒童切身的生活遊戲經驗作為生動比喻，將抽象的生物地理分界線轉化為具體親切的概念，引發閱讀好奇",
+            "2": "證明作者很幼稚，只會跟讀者玩小孩子的遊戲",
+            "3": "佔用文章篇幅，讓嚴謹的科學知識失去可信度",
+            "4": "讓讀者誤以為這是一篇體育課規則說明書"
+          },
+          answer: "1",
+          explanation: "寫作手法評估：以熟悉的「過界遊戲」巧妙類比「大自然看不見的魔法線」，降低科學認知門檻，激發學習興趣。",
+          sourceQuote: "「小朋友，你有沒有玩過『過界』的遊戲？……在大自然裡，居然也有一條看不見的『魔法線』……」（第1頁開頭）"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "如果因為未來的地殼板塊劇烈運動，這條深海溝被隆起的新陸地填平，從生物演化的角度評估，數萬年後這兩群島嶼的生態最可能出現什麼變化？",
+          options: {
+            "1": "所有的袋鼠會在一夜之間全部變成老虎和大象",
+            "2": "兩側原本隔離的動物群將能跨越交流、互相競爭或適應新環境，原本清晰的物種界線可能逐漸模糊融合",
+            "3": "地球上的海水會在一秒鐘內完全蒸發消失",
+            "4": "美麗的鸚鵡會立刻忘記如何飛翔"
+          },
+          answer: "2",
+          explanation: "批判思考與演化推理：地理隔離是維持物種獨立演化的屏障，屏障一旦消除，生物交流與生態競爭將改變原有分布格局。",
+          sourceQuote: "從「這條海溝就像一座無法跨越的高牆」逆向評估屏障消失後的生態演變。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "比較《認識鳥朋友：翠鳥》聚焦於「單一物種外型與獵食習性」的微觀觀察，本篇《華萊士線》在科學視野上有何不同？",
+          options: {
+            "1": "本篇完全不介紹任何動物，只討論畫線技巧",
+            "2": "翠鳥篇是想像故事，本篇才是真實科學",
+            "3": "本篇將視野拉升到「地球地質歷史、板塊屏障與跨大陸物種分布」的宏觀生態架構，展現全球演化思維",
+            "4": "本篇教導讀者如何在古代海圖上尋找寶藏"
+          },
+          answer: "3",
+          explanation: "跨課堂認知層次評估：由個體適應的微觀生態學，跨越到生物地理學（Biogeography）的宏觀演化時空視野。",
+          sourceQuote: "評估文章所展現的宏觀地球歷史尺度與物種分布思考。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "讀完本文後，作者在結尾說：「下次看動物百科時，不妨找找看，你喜歡的動物是住在這條線的哪一邊？」這句話鼓勵我們建立怎樣的學習態度？",
+          options: {
+            "1": "讀完書就把百科全書丟掉，不要再看任何動物圖片",
+            "2": "只背誦動物的名字就好，完全不用管牠生活在哪裡",
+            "3": "只要看到不會游泳的動物就判定牠是外星生物",
+            "4": "帶著問題意識主動探究，將零散的動物知識連結到地球地理與演化歷史中，主動尋求知識背後的關聯與原因"
+          },
+          answer: "4",
+          explanation: "素養導向評估：培養主動探究、跨學科連結（生物＋地理＋地球科學）與「知其然更知其所以然」的科學探究素養。",
+          sourceQuote: "結語引導：「下次看動物百科時，不妨找找看，你喜歡的動物是住在這條線的哪一邊呢？」（第2頁末句）"
+        }
+      ],
+
+      // 開放式思考題（結合 AI 針對閱讀內容深度呼應之量化評估）
+      openQuestion: {
+        prompt: "【小小生物探險家：如果我是跨界島嶼的物種觀察員】華萊士先生發現深海溝像一座無形的高牆，隔開了亞洲動物（如老虎、大象）與澳洲動物（如袋鼠、鸚鵡）。請你發揮觀察力與想像力：如果有一天，兩座島嶼之間突然出現了一座天然的綠色漂浮樹橋，你覺得會是哪一種動物最先大膽「跨越界線」探險？當牠遇到另一邊從未見過的神奇動物時，可能會發生什麼有趣的互動？這個想法呼應了課文中哪一個觀念呢？請寫下你的想法與原因！",
+        hint: "請寫出：1.你覺得哪種動物會先跨越 2.牠與對面動物的互動想像 3.這如何呼應課文中「海溝隔離」或「動物不同」的演化概念（請至少寫下 20 個字喔！交卷後 AI 會針對你是否有確實呼應閱讀內容進行評分並給予等第分數，並可一鍵寄送給老師 akk8518@chc.edu.tw 喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：動物大歸位：亞洲界 vs 澳洲界】",
+            desc: "在華萊士線的右邊島嶼上，住著哪一種肚子有口袋、代表澳洲的大自然居民？",
+            options: [
+              { icon: "🦘", name: "袋鼠（把寶寶放在肚子口袋）", isSafe: true, feedback: "答對了！袋鼠與美麗的鸚鵡是華萊士線右側最具代表性的澳洲動物！" },
+              { icon: "🐅", name: "威武的亞洲老虎", isSafe: false, feedback: "不對喔！老虎是住在左邊島嶼的亞洲動物喔！" },
+              { icon: "🐘", name: "長長鼻子的大象", isSafe: false, feedback: "不對喔！大象也是生活在左側亞洲界的大型動物！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：冰河時期的時空魔法】",
+            desc: "在很久很久以前的冰河時期，為什麼亞洲的老虎、大象能夠來到左邊的小島上？",
+            options: [
+              { icon: "🧊", name: "海平面大幅下降，島嶼和亞洲大陸連在一起形成了陸橋", isSafe: true, feedback: "太棒了！海平面降低讓陸地相連，動物可以直接走路遷徙過去！" },
+              { icon: "🚢", name: "動物們集體買船票搭乘郵輪過去", isSafe: false, feedback: "哈哈，古代動物可沒有渡輪可以搭乘喔！" },
+              { icon: "🪁", name: "動物用風箏飛越了整片海洋", isSafe: false, feedback: "這太有想像力了，但自然界是靠陸地相連走過去的喔！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：無法跨越的無形高牆】",
+            desc: "即使冰河時期海水退去，是什麼天然障礙依然深深隔開了這兩群島嶼，讓動物無法跨越？",
+            options: [
+              { icon: "🌊", name: "一條非常深、即使海平面下降依然無法見底的深海溝", isSafe: true, feedback: "完全正確！深邃的海溝終年有水，成了不會長途游泳動物無法跨越的高牆！" },
+              { icon: "🧱", name: "人工建造的鋼筋水泥大高牆", isSafe: false, feedback: "古代小島上可沒有人類建造水泥高牆喔！" },
+              { icon: "🌵", name: "種滿巨大仙人掌的刺刺植物林", isSafe: false, feedback: "真正阻斷動物交流的是深不可測的深海溝喔！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：解開大自然演化的奧祕】",
+            desc: "華萊士先生在大腦裡畫出的這條神奇界線，帶給我們什麼重要啟發？",
+            options: [
+              { icon: "🔬", name: "地理屏障能阻隔生物交流，促成了地球豐富多樣的獨立演化奇蹟", isSafe: true, feedback: "太優秀了！細心觀察大自然背後的歷史與規律，你就是最棒的小小科學探險家！" },
+              { icon: "✏️", name: "每個人都應該帶彩色筆到世界各地隨便畫線", isSafe: false, feedback: "這條線是科學推理出的生物分界，不是真的去塗鴉喔！" },
+              { icon: "😴", name: "大自然的動物每天都在同一個島上睡大覺", isSafe: false, feedback: "生物演化是大自然歷經千萬年的精彩動態過程喔！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">跨界探險未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中深海溝與冰河時期的奧祕，重新出發吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🧭</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【大自然演化與生物地理小探險家】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太精彩了！你獲得了 <strong>${score}</strong> 分滿分！你已經完整掌握了華萊士線的分界奇蹟與演化智慧，下次翻開動物百科，你一定能發現更多大自然隱藏的奧祕！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+

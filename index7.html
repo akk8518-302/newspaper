@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code來支援，輕鬆前往阿里山 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 原始內容截圖展示區專用樣式 */
+    .original-docs-showcase {
+      background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+      border: 2px solid #D6E4DC;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 24px 0 32px;
+      box-shadow: 0 4px 14px rgba(78, 93, 85, 0.06);
+    }
+    .original-docs-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--morandi-sage-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .docs-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 14px;
+    }
+    .doc-preview-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 2px solid #E2EAE5;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .doc-preview-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--morandi-coral);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .doc-img-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #ECECEC;
+      margin-bottom: 10px;
+      background: #F9F9F9;
+      cursor: zoom-in;
+    }
+    .doc-img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .doc-img-frame:hover img {
+      transform: scale(1.02);
+    }
+    .doc-caption {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .doc-btn-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--morandi-sage-light);
+      color: var(--morandi-sage-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--morandi-sage);
+    }
+    .doc-btn-view:hover {
+      background: var(--morandi-sage);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">生活素養・交通圖表</span>
+        <span class="tag-badge tag-clay">★★★ 難度</span>
+        <span class="tag-badge tag-blue">第 77 期【圖表】專欄</span>
+      </div>
+      <h1 class="article-main-title">QR Code來支援，輕鬆前往阿里山</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：阿淨（喜歡自己工作的二寶媽）</span>
+        <span>📖 出處：【得報】第77期「圖表」專欄 (2026年7月31日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與原始圖表
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 互動小遊戲：阿里山鐵道小達人
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 技巧性嵌入原始文章截圖（保留原始樣，支援高畫質檢視） -->
+        <div class="original-docs-showcase">
+          <div class="original-docs-title">
+            <span>🖼️ 課文原始內容截圖展示（保留原汁原味）</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+            點擊圖片可在新視窗查看超高解析度原圖，仔細核對火車時刻表與路線圖標喔！
+          </p>
+          <div class="docs-gallery-grid">
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson6_page1.png', '_blank')">
+                <img src="lesson6_page1.png" alt="阿里山交通閱讀第1頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 1 頁：出發前往阿里山（封面與導引）</div>
+              <a href="lesson6_page1.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson6_page2.png', '_blank')">
+                <img src="lesson6_page2.png" alt="阿里山火車與公車交通圖表第2頁原件截圖" loading="lazy">
+              </div>
+              <div class="doc-caption">📊 第 2 頁：林鐵時刻・公車路線與 QR Code 全圖</div>
+              <a href="lesson6_page2.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、出發前的第一步：看懂交通地圖</h2>
+          <p class="reading-paragraph">
+            阿里山是嘉義縣著名的一個觀光景點，也是國內外遊客必訪之處。想順利抵達阿里山欣賞美景，更要先看懂交通資訊！要怎麼規劃比較方便呢？別擔心，這張資訊圖除了列出交通方式，還提供許多圖示與 <span class="vocab-bubble" title="快速響應二維條碼，可用手機鏡頭快速掃描讀取網路資訊">QR Code</span> 等相關資料。只要學會閱讀這些資訊，就能快速找到需要且適合的交通路線與搭車方法。
+          </p>
+
+          <h2 class="article-section-title">二、阿里山林業鐵路全線魅力</h2>
+          <p class="reading-paragraph">
+            阿里山林業鐵路擁有超過百年歷史，是珍貴的世界級遺產。路線主要分為<strong>主線</strong>（從嘉義車站出發，串連北門、竹崎、交力坪、奮起湖、十字路直達阿里山）以及高山<strong>支線</strong>（祝山線觀日出、神木線賞巨木、沼平線漫遊公園）。透過掃描時刻表 QR Code，就能即時掌握每一班火車的開車時間！
+          </p>
+          <p class="reading-paragraph">
+            為了讓旅客深入體驗沿線小站風景及社區特色，林鐵還會不定期開行<strong>主題列車</strong>（如：春季花季列車、秋冬楓紅列車），使用傳統蒸汽機車或散發原木香氣的檜木車廂，提供乘車之外的加值導覽行程！
+          </p>
+
+          <h2 class="article-section-title">三、林鐵行駛時間一覽表</h2>
+          <p class="reading-paragraph">
+            搭乘林鐵從嘉義出發，沿途各站的約略行駛時間（分鐘）如下：<br>
+            <strong>嘉義 (0分)</strong> ➔ 13分 ➔ <strong>北門</strong> ➔ 22分 ➔ <strong>鹿麻產</strong> ➔ 8分 ➔ <strong>竹崎 (43分)</strong> ➔ 27分 ➔ <strong>樟腦寮</strong> ➔ 13分 ➔ <strong>獨立山</strong> ➔ 13分 ➔ <strong>梨園寮</strong> ➔ 12分 ➔ <strong>交力坪</strong> ➔ 17分 ➔ <strong>水社寮</strong> ➔ 25分 ➔ <strong>奮起湖 (150分)</strong> ➔ 15分 ➔ <strong>多林</strong> ➔ 15分 ➔ <strong>十字路 (180分)</strong> ➔ 47分 ➔ <strong>二萬平</strong> ➔ 18分 ➔ <strong>阿里山終點站 (245分，約4小時5分)</strong>。
+          </p>
+
+          <h2 class="article-section-title">四、台灣好行公路客運快速直達</h2>
+          <p class="reading-paragraph">
+            除了鐵路，公路客運也是快速上山的好選擇！從高鐵嘉義站出發，可搭乘<strong>免費 BRT 公車</strong>前往嘉義台鐵站轉乘。公路路線包括：<br>
+            ・<strong>7329 台灣好行：</strong>高鐵嘉義站直達阿里山（全程僅需約 2.5 小時）。<br>
+            ・<strong>7329A 台灣好行：</strong>高鐵嘉義站出發，經奮起湖、十字路到阿里山（全程約 3 小時）。<br>
+            ・<strong>7322C 台灣好行：</strong>嘉義台鐵站直達阿里山（全程約 2.5 小時）。<br>
+            ・<strong>7322D 台灣好行：</strong>嘉義台鐵站出發，繞經奮起湖到阿里山（全程約 3 小時）。
+          </p>
+
+          <h2 class="article-section-title">五、善用科技工具，聰明旅行</h2>
+          <p class="reading-paragraph">
+            出門旅行前，善用手機掃描 QR Code 取得「電子版摺頁」、查詢「網路訂票」或是關注「Facebook 官方粉絲專頁」，能第一時間知道山區最新天候與道路即時狀況。學會圖表閱讀與數位工具整合，你也能成為全家人的專業旅行規劃師！
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你掌握了阿里山的交通導覽圖表！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放式思考題（支援 AI 評等與一鍵寄送老師信箱）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-6",
+      pageFile: "index7.html",
+      title: "QR Code來支援，輕鬆前往阿里山",
+      subtitle: "第77期【圖表】專欄 / 作者：阿淨",
+      meta: {
+        grade: "國小四年級",
+        category: "生活素養・交通圖表",
+        level: "★★★ 難度",
+        issue: "第 77 期"
+      },
+      // 16 題四層次題庫（選項格式為 1, 2, 3, 4，答案循環輪流且互不相同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "阿里山是臺灣哪一個縣市著名且國內外遊客必訪的觀光風景名勝？",
+          options: {
+            "1": "嘉義縣",
+            "2": "屏東縣",
+            "3": "花蓮縣",
+            "4": "宜蘭縣"
+          },
+          answer: "1",
+          explanation: "文中第一頁開頭明確指出：「阿里山是嘉義縣著名的一個觀光景點，也是國內外遊客必訪之處。」",
+          sourceQuote: "「阿里山是嘉義縣著名的一個觀光景點，也是國內外遊客必訪之處。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "根據圖表資訊，如果旅客想在「車站現場購票」，除了阿里山站（08:30~16:30）之外，其他各車站的服務時間是幾點到幾點？",
+          options: {
+            "1": "06:00~15:00",
+            "2": "08:00~17:00",
+            "3": "09:00~18:00",
+            "4": "10:00~20:00"
+          },
+          answer: "2",
+          explanation: "第二頁購票資訊 A 明確列出：「服務時間：各車站 08:00~17:00；阿里山站 08:30~16:30。」",
+          sourceQuote: "「服務時間｜各車站 08:00~17:00，阿里山站 08:30~16:30」（第2頁購票資訊）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "在林鐵各站行駛時間圖中，搭乘林業鐵路從小火車起點「嘉義火車站」出發，抵達著名的「奮起湖」，約略需要行駛多少分鐘？",
+          options: {
+            "1": "43 分鐘",
+            "2": "83 分鐘",
+            "3": "150 分鐘",
+            "4": "245 分鐘"
+          },
+          answer: "3",
+          explanation: "第二頁交通資訊圖下方累計時間顯示：嘉義為 0 分鐘，竹崎為 43 分鐘，到達奮起湖為 150 分鐘（即 2.5 小時）。",
+          sourceQuote: "「交通資訊：嘉義 0 ➔ 竹崎 43 ➔ 奮起湖 150 ➔ 十字路 180 ➔ 阿里山 245」（第2頁交通圖表）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "如果遊客想搭乘「台灣好行公車」從「高鐵嘉義站」直達阿里山，而且希望中途不繞經奮起湖、車程約 2.5 小時，應搭乘哪一路線？",
+          options: {
+            "1": "7329A 台灣好行",
+            "2": "7322D 台灣好行",
+            "3": "7322C 台灣好行",
+            "4": "7329 台灣好行"
+          },
+          answer: "4",
+          explanation: "第二頁公車路線圖清楚標示：7329 台灣好行全程 2.5 小時，從高鐵嘉義站發車直達阿里山終點。",
+          sourceQuote: "「7329 台灣好行 全程 2.5 小時（高鐵嘉義站直達阿里山）」（第2頁公車資訊）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "圖表中提到林鐵「不定期開行主題列車」，使用蒸汽機車或檜木車廂並提供加值行程。推論開行主題列車的主要目的是什麼？",
+          options: {
+            "1": "讓旅客深度體驗沿線小站的自然風景與山林社區特色，提升鐵道文化觀光價值",
+            "2": "因為一般的普通車廂全部故障無法出勤",
+            "3": "為了測試老舊蒸汽火車是否還能跑得動",
+            "4": "只為了讓司機練習駕駛蒸汽火車的技術"
+          },
+          answer: "1",
+          explanation: "第二頁主題列車說明：「為了讓旅客深入體驗沿線小站風景及社區特色，林鐵不定期開行主題列車，提供乘車之外的加值行程。」",
+          sourceQuote: "「為了讓旅客深入體驗沿線小站風景及社區特色，林鐵不定期開行主題列車……提供乘車之外的加值行程」（第2頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "比較「7322D」與「7322C」兩條台灣好行路線，7322D 全程需要 3 小時，而 7322C 只要 2.5 小時。造成這半小時差距最合理的推論是？",
+          options: {
+            "1": "7322C 司機在山路上超速駕駛",
+            "2": "7322D 中途特別繞進「奮起湖」停靠讓旅客上下車，增加了行駛路線與停留時間",
+            "3": "7322C 車型比較小，爬坡速度較快",
+            "4": "7322D 中途會停車讓遊客吃便當休息"
+          },
+          answer: "2",
+          explanation: "從路線圖可以看出，7322D 與 7329A 均有停靠「奮起湖」節點，需繞行山路進出奮起湖老街，因而耗時約 3 小時；直達車則省去 30 分鐘。",
+          sourceQuote: "路線圖比對：7322D 路線標註行經奮起湖全程 3 小時，7322C 路線避開奮起湖全程 2.5 小時。"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "在現代觀光文宣與圖表中大量搭配「QR Code」，對前往阿里山自由行的遊客帶來什麼最大好處？",
+          options: {
+            "1": "可以不用帶手機出門，直接用眼睛掃描",
+            "2": "能讓印刷摺頁變得更厚更有份量",
+            "3": "只要用手機鏡頭掃描，就能隨時取得最新動態時刻表、即時票況與線上訂票服務，靈活又省時",
+            "4": "強迫所有遊客必須付費下載手機線上遊戲"
+          },
+          answer: "3",
+          explanation: "第一頁與第二頁指出：掃描 QR Code 能快速找到需要且適合的最新路線、連結官方網站、電子摺頁與線上訂票，掌握第一手即時動態。",
+          sourceQuote: "「只要學會閱讀這些資訊……掃描 QR Code 就能快速找到需要且適合的交通路線與搭車方法。」（第1-2頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "從行駛時間圖中觀察，林鐵從「十字路 (180分)」開到「二萬平」，短短一站的區間時間居然高達 47 分鐘，遠高於平地站距。最合理的地理原因是？",
+          options: {
+            "1": "火車在這一站故意熄火休息不開",
+            "2": "司機下車去採茶葉耽誤了行車時間",
+            "3": "鐵軌中途被外星人擋住無法前進",
+            "4": "鐵路進入高山險峻路段，需要透過之字形折返（碰壁）或盤旋爬升，車速減緩以確保安全"
+          },
+          answer: "4",
+          explanation: "高山森林鐵路隨海拔急遽攀升，坡度陡峭，十字路至二萬平為高海拔盤山與之字形鐵道工程區，行駛耗時大增以維安全。",
+          sourceQuote: "從行駛時間表十字路到二萬平標示「47分鐘」之陡升段推論高山鐵路特性。"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "如果遊客搭乘高鐵抵達「高鐵嘉義站」，打算前往嘉義市區住宿一晚，再搭乘林鐵上山，他們從高鐵站前往「嘉義台鐵站」最划算的接駁方式是什麼？",
+          options: {
+            "1": "搭乘高鐵憑車票享有的「免費 BRT」公車接駁",
+            "2": "搭乘 7329A 台灣好行直奔阿里山",
+            "3": "搭乘林鐵蒸汽主題列車",
+            "4": "徒步走十幾公里穿越嘉義市區"
+          },
+          answer: "1",
+          explanation: "第二頁左下角圖表清楚標註：「高鐵嘉義站 ➔ 免費 BRT ➔ 嘉義台鐵站」。",
+          sourceQuote: "「高鐵嘉義站 ➔ 免費 BRT ➔ 嘉義台鐵站」（第2頁圖表左下方）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "統整圖表中的「支線」資訊，阿里山林業鐵路的高山支線包含祝山線、神木線、沼平線，這三條支線主要服務於哪裡的觀光接駁？",
+          options: {
+            "1": "嘉義市區的文化夜市商圈",
+            "2": "阿里山國家森林遊樂區園區內部的景點接駁（如觀日出、神木群、賞花步道）",
+            "3": "澎湖海邊雙心石滬的環島交通",
+            "4": "臺南安平老街尋找劍獅的交通接駁"
+          },
+          answer: "2",
+          explanation: "祝山線專供祝山觀日出、神木線連接巨木群棧道、沼平線通往沼平櫻花公園，皆位於阿里山森林遊樂區園區核心景致範圍。",
+          sourceQuote: "圖表「支線：祝山線、神木線、沼平線」與阿里山高山遊程功能整合。"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "統整全文，如果一位遊客打算規劃一趟「當日直達阿里山、花費時間最短」的行程，搭乘哪一種交通工具抵達山頂最快速？",
+          options: {
+            "1": "搭乘林鐵主線火車（嘉義到阿里山全程約 245 分鐘，即 4 小時 5 分）",
+            "2": "徒步沿著鐵軌走路上山",
+            "3": "搭乘直達的台灣好行公車（7329 或 7322C，全程僅約 2.5 小時）",
+            "4": "先搭火車到奮起湖，再租馬車上山"
+          },
+          answer: "3",
+          explanation: "數據比較整合：林鐵小火車全程約需 245 分鐘（超過 4 小時），而 7329 或 7322C 直達台灣好行公車僅需 2.5 小時（150 分鐘），速度最快。",
+          sourceQuote: "比對林鐵全程 245 分鐘與直達台灣好行全程 2.5 小時之數據。"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "綜合全文，這張資訊圖表的最主要寫作目的為何？",
+          options: {
+            "1": "宣傳阿里山高山茶葉的批發價格",
+            "2": "教導大家如何自行維修蒸汽火車的引擎零件",
+            "3": "警告大家不要去阿里山旅遊以免塞車",
+            "4": "整合阿里山鐵路時刻、車程時間、公車路線與數位 QR Code，提供遊客一目瞭然的自主交通指南"
+          },
+          answer: "4",
+          explanation: "這是一篇實用的圖表資訊應用說明文，目的在於透過圖像化與數位條碼，協助旅客高效率規劃阿里山行程。",
+          sourceQuote: "「只要學會閱讀這些資訊，就能快速找到需要且適合的交通路線與搭車方法。」（第1頁主旨）"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "比較「傳統純文字條列時刻表」與本課「整合了站距時間軸、公車網絡圖與 QR Code 的多模態圖表」，後者最大的優點是什麼？",
+          options: {
+            "1": "視覺動線清晰、資訊圖像化，能讓四年級學生與遊客在短時間內快速檢索出轉乘路線與關鍵旅行時間",
+            "2": "浪費彩色印刷墨水，沒有實用價值",
+            "3": "只是讓版面看起來花俏，反而容易誤導讀者",
+            "4": "要求讀者必須精通電腦繪圖才看得懂"
+          },
+          answer: "1",
+          explanation: "多模態圖表將複雜的空間路線與時間節點視覺化，大幅降低閱讀與規劃旅行的認知負荷，提高閱讀素養效益。",
+          sourceQuote: "評估圖表整合視覺地圖、時間軸與數位 QR Code 帶來的閱讀效能。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "如果學校要在阿里山花季舉辦四年級校外教學，想讓全班體驗搭乘「檜木主題列車」，在行前規劃時，老師最應該注意圖表中的哪一項關鍵提醒？",
+          options: {
+            "1": "火車站只能用銅板買票，不接受紙鈔",
+            "2": "主題列車是「不定期開行」且依企劃另行售價，必須事先查詢官方動態公告或電話預約導覽",
+            "3": "主題列車每天每隔 10 分鐘就會固定發出一班",
+            "4": "阿里山山上只有冬天有火車行駛"
+          },
+          answer: "2",
+          explanation: "第二頁主題列車明確標註「不定期開行，並依列車企劃訂定售價」，需提前查證確認，體現批判思考與實務規劃能力。",
+          sourceQuote: "「林鐵不定期開行主題列車……並依列車企劃訂定售價。」（第2頁主題列車注意事項）"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "文中特別提供「電子版摺頁」與「Facebook 粉絲專頁」的 QR Code，從高山旅遊安全的角度評估，這有什麼重要價值？",
+          options: {
+            "1": "只是為了讓粉絲專頁按讚人數增加",
+            "2": "讓遊客在車上打電動打發時間",
+            "3": "高山氣候與地質多變，若遇豪雨、落石或鐵道施工等突發狀況，遊客能隨時連線取得最新的改道與停駛公告以維安全",
+            "4": "讓遊客在手機上免費看電影"
+          },
+          answer: "3",
+          explanation: "高山旅遊最重視安全與應變，數位即時平台能隨時同步官方營運與災情通報，是智慧旅遊的安全後盾。",
+          sourceQuote: "評估數位平台在山區旅遊即時動態與安全通報上的實用價值。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "讀完這篇圖表文章後，如果要為全家人規劃一趟阿里山一日遊，下列哪一種行程安排最能體現「自主解決問題與良好公民素養」？",
+          options: {
+            "1": "當天睡到中午才出發，到了現場再碰運氣看有沒有車次",
+            "2": "不看時間表與接駁資訊，在公車站牌盲目苦等",
+            "3": "只顧著在車上滑手機，完全不看窗外的林相與風景",
+            "4": "出發前先掃描 QR Code 確認最新班次、預先完成網路訂票，並精算高鐵與公車轉乘接駁時間，預留氣候彈性緩衝"
+          },
+          answer: "4",
+          explanation: "成熟的生活實踐素養：善用圖表與數位資訊、提前預約、預留緩衝並注重旅行安全。",
+          sourceQuote: "全文核心價值：運用生活圖表、數位科技與時間規劃解決實際旅遊問題。"
+        }
+      ],
+
+      // 開放式思考題
+      openQuestion: {
+        prompt: "【小小旅遊規劃師：我的阿里山智慧綠色低碳行程】閱讀完阿里山的交通資訊圖表後，我們發現前往阿里山可以搭乘高鐵、免費 BRT、台灣好行公車，或是體驗世界級的林業鐵路小火車。如果請你當家庭導遊，為家人規劃一趟「低碳、環保又好玩的阿里山一日遊」，你會選擇哪兩種交通工具搭配？你想安排在哪一個站（例如：奮起湖老街、水社寮、或阿里山森林遊樂區）停留最久，為什麼？請寫下你的行程規劃與理由！",
+        hint: "請寫出：1.選擇的交通工具搭配 2.最想停留的車站與景點 3.選擇的原因與環保好處（請至少寫下 20 個字喔！交卷後 AI 導師會為你的規劃評分給予等第，並可一鍵寄送給老師 akk8518@chc.edu.tw 喔！）"
+      },
+
+      // 互動小遊戲（關卡邏輯）
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "【第一關：林鐵時刻大考驗】",
+            desc: "小明想搭乘阿里山林鐵小火車去吃奮起湖便當，從嘉義火車站搭車大約需要行駛多少時間？",
+            options: [
+              { icon: "🍱", name: "約 150 分鐘（2.5 小時）", isSafe: true, feedback: "答對了！嘉義到奮起湖約 150 分鐘，沿途還能欣賞海拔林相變化！" },
+              { icon: "⚡", name: "只要 5 分鐘", isSafe: false, feedback: "太誇張了！小火車爬高山可不是火箭喔！" },
+              { icon: "🐢", name: "需要整整 3 天 3 夜", isSafe: false, feedback: "不對喔！仔細看一下圖表上的時間標示是 150 分鐘喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "【第二關：高鐵轉乘好幫手】",
+            desc: "如果是搭高鐵到「高鐵嘉義站」，要怎麼前往嘉義台鐵火車站轉乘小火車最划算？",
+            options: [
+              { icon: "🚌", name: "搭乘憑高鐵票享有的「免費 BRT」公車接駁", isSafe: true, feedback: "太聰明了！免費 BRT 是最省錢又快速的轉乘好夥伴！" },
+              { icon: "🚁", name: "租一台豪華私人直升機", isSafe: false, feedback: "這太昂貴又不環保了啦！" },
+              { icon: "🛼", name: "穿溜冰鞋在馬路上溜過去", isSafe: false, feedback: "在省道上溜冰太危險了，請搭乘安全的接駁車！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "【第三關：最速公路直達車】",
+            desc: "如果希望能以最快的時間直達阿里山（只要 2.5 小時），應該搭乘哪一種台灣好行公車？",
+            options: [
+              { icon: "🚀", name: "7329 或 7322C 直達車（中途不繞經奮起湖）", isSafe: true, feedback: "完全正確！直達公車不繞進奮起湖，足足省下 30 分鐘車程！" },
+              { icon: "🚲", name: "騎乘幼兒三輪腳踏車上山", isSafe: false, feedback: "三輪車可爬不上陡峭的阿里山公路喔！" },
+              { icon: "🛒", name: "推大賣場的購物手推車", isSafe: false, feedback: "購物推車不是交通工具喔！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "【第四關：QR Code 數位智慧法寶】",
+            desc: "出發前往高山前，善用圖表中的 QR Code 可以獲得哪些好處？",
+            options: [
+              { icon: "📱", name: "查詢即時動態時刻表、線上訂票，隨時掌握山區天候與路況", isSafe: true, feedback: "太棒了！善用數位科技讓旅行更安全、更有彈性，你是最稱職的旅遊小達人！" },
+              { icon: "🎮", name: "連線到手遊打怪練功一整天", isSafe: false, feedback: "到大自然旅行要多看美麗風景，不要一直玩手遊喔！" },
+              { icon: "💤", name: "讓手機自動關機睡大覺", isSafe: false, feedback: "手機關機就沒辦法查詢即時交通狀況囉！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">鐵道挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">再看一次圖表中的林鐵時間與公車路線，重新出發吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🚂</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【阿里山鐵道與綠色旅遊小達人】勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太厲害了！你獲得了 <strong>${score}</strong> 分滿分！你已經能靈活運用生活圖表、時間軸與 QR Code 規劃精彩旅行，快帶著家人一起搭小火車出發吧！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
+
