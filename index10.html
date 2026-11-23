@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>認識鳥朋友第九站：很會游泳的雞——紅冠水雞 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 原始內容截圖展示區專用樣式 */
+    .original-docs-showcase {
+      background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+      border: 2px solid #D6E4DC;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 24px 0 32px;
+      box-shadow: 0 4px 14px rgba(78, 93, 85, 0.06);
+    }
+    .original-docs-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--morandi-sage-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .docs-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+    .doc-preview-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 2px solid #E2EAE5;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .doc-preview-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--morandi-coral);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .doc-img-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #ECECEC;
+      margin-bottom: 10px;
+      background: #F9F9F9;
+      cursor: zoom-in;
+    }
+    .doc-img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .doc-img-frame:hover img {
+      transform: scale(1.02);
+    }
+    .doc-caption {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .doc-btn-view {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--morandi-sage-light);
+      color: var(--morandi-sage-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--morandi-sage);
+      transition: all 0.2s ease;
+    }
+    .doc-btn-view:hover {
+      background: var(--morandi-sage);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">自然生態・水鳥觀察</span>
+        <span class="tag-badge tag-clay">★ 難度</span>
+        <span class="tag-badge tag-blue">第 90 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">認識鳥朋友第九站：很會游泳的雞——紅冠水雞</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：塗振洋</span>
+        <span>📖 出處：【得報】第90期「說明」專欄 (2026年10月30日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與原始圖件
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 益智互動遊戲：水塘探險家
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 技巧性嵌入文章原始內容截圖（保留原始樣，支援高畫質檢視） -->
+        <div class="original-docs-showcase">
+          <div class="original-docs-title">
+            <span>🖼️ 課文原始內容截圖展示（保留原汁原味）</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+            點擊各頁縮圖可在新視窗查看高解析度原件，仔細欣賞塗振洋老師生動的生態攝影與文字排版喔！
+          </p>
+          <div class="docs-gallery-grid">
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page1.png', '_blank')">
+                <img src="lesson9_page1.png" alt="第1頁：很會游泳的雞——紅冠水雞" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 1 頁：封面插畫與紅冠水雞登場</div>
+              <a href="lesson9_page1.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page2.png', '_blank')">
+                <img src="lesson9_page2.png" alt="第2頁：很會游泳的紅冠水雞生態照" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 2 頁：秧雞科水鳥家族介紹</div>
+              <a href="lesson9_page2.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page3.png', '_blank')">
+                <img src="lesson9_page3.png" alt="第3頁：白腹秧雞" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 3 頁：臺灣常見秧雞——白腹秧雞</div>
+              <a href="lesson9_page3.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page4.png', '_blank')">
+                <img src="lesson9_page4.png" alt="第4頁：緋秧雞" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 4 頁：臺灣常見秧雞——緋秧雞</div>
+              <a href="lesson9_page4.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page5.png', '_blank')">
+                <img src="lesson9_page5.png" alt="第5頁：白冠雞與紅冠水雞特寫" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 5 頁：白冠雞與紅冠額板的秘密</div>
+              <a href="lesson9_page5.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page6.png', '_blank')">
+                <img src="lesson9_page6.png" alt="第6頁：驅趕領域與水雞食性" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 6 頁：翹尾警戒暗號與水塘覓食</div>
+              <a href="lesson9_page6.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page7.png', '_blank')">
+                <img src="lesson9_page7.png" alt="第7頁：水雞孵蛋與早熟寶寶" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 7 頁：乾燥築巢與黑毛球寶寶破殼</div>
+              <a href="lesson9_page7.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson9_page8.png', '_blank')">
+                <img src="lesson9_page8.png" alt="第8頁：自然觀察省思與作者介紹" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 8 頁：自然觀察啟發與專欄出處</div>
+              <a href="lesson9_page8.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、雞真的會游泳嗎？水邊的特別鳥朋友</h2>
+          <p class="reading-paragraph">
+            小朋友，你覺得雞會游泳嗎？在我們的印象中，鴨和鵝好像比雞更會游泳，因為牠們的腳掌上有一個特別的構造——「<span class="vocab-bubble" title="鴨、鵝等水鳥腳趾之間相連的皮膜，游動時像船槳能推動水流前進">蹼</span>」，讓牠們的腳就像船槳一樣，可以幫助牠們在水中划水前進。至於雞呢？牠好像不會游泳，也不太喜歡水。
+          </p>
+          <p class="reading-paragraph">
+            不過，在臺灣的野外，真的有一種「雞」不但很會游泳，還經常出現在有水的水田、泥灘地、水塘，甚至公園水池的地方。牠就是我們這一期要認識的鳥朋友——「<span class="vocab-bubble" title="秧雞科常見水鳥，善於游泳與潛水，嘴基部至額頭具有鮮豔的紅色額板">紅冠水雞</span>」。
+          </p>
+
+          <h2 class="article-section-title">二、秧雞科家族大集合：臺灣常見的秧雞夥伴</h2>
+          <p class="reading-paragraph">
+            紅冠水雞是臺灣野外很常見的一種鳥類，牠屬於「<span class="vocab-bubble" title="鶴形目下的一個鳥類科，多數種類生活在沼澤、水田與濕地環境，體型扁平適於在茂密草叢中穿梭">秧雞科</span>」的一種。在臺灣，常見的秧雞除了紅冠水雞以外，還有「<span class="vocab-bubble" title="臉部和腹部為純白色，常發出苦惡苦惡叫聲的秧雞科鳥類">白腹秧雞</span>」、「<span class="vocab-bubble" title="胸腹部呈現美麗赤栗色或磚紅色的秧雞科水鳥">緋秧雞</span>」和「<span class="vocab-bubble" title="額板與嘴巴均為純白色，常在深水湖泊大群聚集的秧雞科鳥類">白冠雞</span>」等。其中，紅冠水雞的數量最多，也最容易見到。
+          </p>
+
+          <h2 class="article-section-title">三、紅嘴紅額板與白尾羽：紅冠水雞的外型特徵</h2>
+          <p class="reading-paragraph">
+            紅冠水雞的身體幾乎都是黑褐色，身體兩側各有一條白色的紋路，尾巴下面還藏著一大塊白色羽毛。牠的腳偏黃綠色，嘴巴是紅色的，但嘴巴最前端卻是黃黃的。
+          </p>
+          <p class="reading-paragraph">
+            最特別的是，從嘴巴的根部一路到額頭，有一塊紅色的「<span class="vocab-bubble" title="鳥類嘴基向上延伸到額頭的一塊角質硬皮，紅冠水雞的額板在成熟時呈現亮紅色">額板</span>」，這也是牠名字裡「紅冠」的由來。而這塊紅色的額板，還代表著這隻紅冠水雞已經長大成熟、具有繁殖下一代的能力；若是還沒有長大成熟的年輕水雞，額板就還不會變紅喔！
+          </p>
+
+          <h2 class="article-section-title">四、游泳動作與尾巴暗號：保衛領地與求偶</h2>
+          <p class="reading-paragraph">
+            紅冠水雞不只會游泳，也會飛行，不過，牠們每次飛行的距離通常不長。牠們在水面上游泳時，模樣相當可愛。頭會隨著游泳的動作，一前一後地擺動，尾巴有時也會跟著上下動。
+          </p>
+          <p class="reading-paragraph">
+            當紅冠水雞覺得有危險，或是有其他鳥兒不小心闖進牠的活動範圍時，牠有時會把尾巴高高翹起，露出尾巴下面那一大塊白色羽毛，好像在對對方說：「這裡可是我的地方呵！」如果對方還不離開，牠甚至會發動攻擊，把對方趕走。到了求偶的時候，紅冠水雞也會不停地上下翹動尾巴，露出白色的尾下羽毛，來吸引另一半的注意。
+          </p>
+
+          <h2 class="article-section-title">五、水塘裡的美味大餐與乾燥築巢</h2>
+          <p class="reading-paragraph">
+            紅冠水雞主要生活在有水的地方，所以牠們吃的東西也和水邊的環境很有關係。水中的植物、昆蟲、小魚、貝類、<span class="vocab-bubble" title="外來種大型淡水螺類，繁殖迅速，常危害水稻，也是紅冠水雞喜愛的食物之一">福壽螺</span>等螺類，還有稻穀，都是牠們的食物。在人造的公園水池裡，牠們有時還會和池中的魚一起搶食人們丟到水裡的魚飼料和麵包屑。
+          </p>
+          <p class="reading-paragraph">
+            到了要生寶寶的時候，牠們會利用枯葉、枯枝和乾燥的稻草，在比較沒有水的地方築巢，準備產卵、孵蛋。
+          </p>
+
+          <h2 class="article-section-title">六、黑毛球寶寶破殼走路與多變叫聲</h2>
+          <p class="reading-paragraph">
+            剛從蛋裡破殼出生的小紅冠水雞寶寶，全身除了頭頂有一點禿禿的，身上幾乎都布滿了黑色的絨毛，加上此時牠的腳也是黑色的，讓牠看起來就像一顆小小的黑球一樣。
+          </p>
+          <p class="reading-paragraph">
+            紅冠水雞寶寶和白頭翁、麻雀、綠繡眼等鳥寶寶有些不同，因為牠們破殼出生沒多久，就可以自己站起來走路（屬於「<span class="vocab-bubble" title="出殼時眼睛已睜開、全身披絨毛，稍經親鳥照料就能自行行走或游泳的鳥類雛鳥">早熟型</span>」雛鳥）。所以這時候的小水雞就能跟著爸爸、媽媽一起游泳，到處走動，學著尋找食物。不過，牠們的嘴巴還沒有足夠的力氣，所以吃東西時，還是需要爸爸、媽媽幫忙餵食。
+          </p>
+          <p class="reading-paragraph">
+            紅冠水雞的叫聲短促又響亮，而且面對不同的情況，還會發出不一樣的聲音，非常特別。大自然無奇不有，在我們生活的周遭環境裡，就住著很多特別的動物。只要你願意去觀察、去欣賞，就會發現每種動物特別又可愛的地方。原來，看起來都是鳥類，卻每一種都大不相同呢！
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你認真讀完了紅冠水雞的精彩故事！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，每層次 4 題）＋ 1 題開放思考題（AI 呼應度深度評估等第）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-9",
+      pageFile: "index10.html",
+      title: "認識鳥朋友第九站：很會游泳的雞——紅冠水雞",
+      subtitle: "第90期【說明】專欄 / 作者：塗振洋",
+      meta: {
+        grade: "國小四年級",
+        category: "自然生態・水鳥觀察",
+        level: "★ 難度",
+        issue: "第 90 期"
+      },
+      // 16 題四層次題庫（選項格式為 1, 2, 3, 4，答案選項輪流循環：1, 2, 3, 4 互不相同）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "課文中提到，鴨子和鵝之所以比一般的雞更擅長游泳，是因為牠們的腳掌上有什麼特別的構造？",
+          options: {
+            "1": "腳趾之間長著像船槳一樣能划水前進的「蹼」",
+            "2": "腳底長著能牢牢吸住水中石頭的強力吸盤",
+            "3": "腳趾特別長能像竹竿一樣撐住水底爛泥",
+            "4": "腳踝裝有彈簧構造能直接把身體彈出水面"
+          },
+          answer: "1",
+          explanation: "文中第 1 頁明確指出：「鴨和鵝好像比雞更會游泳，因為牠們的腳掌上有一個特別的構造——蹼，讓牠們的腳就像船槳一樣，可以幫助牠們在水中划水前進。」",
+          sourceQuote: "「鴨和鵝好像比雞更會游泳，因為牠們的腳掌上有一個特別的構造——蹼，讓牠們的腳就像船槳一樣。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "紅冠水雞在生物分類上屬於哪一個家族？在臺灣常見的同科鳥類中，哪一種的數量最多、最容易見到？",
+          options: {
+            "1": "屬於雁鴨科；其中以全身黑色的白冠雞數量最多",
+            "2": "屬於秧雞科；其中以紅冠水雞的數量最多且最容易見到",
+            "3": "屬於鷺科；其中以臉頰白色的白腹秧雞數量最多",
+            "4": "屬於雉雞科；其中以赤紅色的緋秧雞數量最多"
+          },
+          answer: "2",
+          explanation: "文中第 2 頁敘述：「紅冠水雞是臺灣野外很常見的一種鳥類，牠屬於秧雞科的一種……其中，紅冠水雞的數量最多，也最容易見到。」",
+          sourceQuote: "「牠屬於秧雞科的一種……其中，紅冠水雞的數量最多，也最容易見到。」（第2頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "紅冠水雞從嘴巴根部一路延伸到額頭的那塊鮮紅色「額板」，在生態上有什麼重要的代表意義？",
+          options: {
+            "1": "代表牠剛吃完紅色的辣椒不小心中毒了",
+            "2": "可以在黑夜裡發出像手電筒一樣的紅光幫同伴照明",
+            "3": "代表這隻紅冠水雞已經長大成熟，具備繁殖下一代的能力",
+            "4": "代表牠是水塘裡年紀最大的長老，負責指揮所有鴨子"
+          },
+          answer: "3",
+          explanation: "文中第 5 頁說明：「從嘴巴的根部一路到額頭，有一塊紅色的『額板』……而這塊紅色的額板，還代表著這隻紅冠水雞已經長大成熟、具有繁殖下一代的能力。」",
+          sourceQuote: "「這塊紅色的額板，還代表著這隻紅冠水雞已經長大成熟、具有繁殖下一代的能力。」（第5頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "根據課文描述，剛從蛋裡破殼出生的小紅冠水雞寶寶外觀與活動能力如何？",
+          options: {
+            "1": "長得像小白兔；需要躺在巢裡一個月不能張開眼睛",
+            "2": "長得像小青蛙；只會在泥巴裡呱呱叫，不會游泳",
+            "3": "長得像粉紅小鳥；一出生就能展翅高飛到大樹上築巢",
+            "4": "全身布滿黑絨毛像顆小黑球；破殼沒多久就能自己站起來走路並跟著父母游泳"
+          },
+          answer: "4",
+          explanation: "文中第 7 頁描述：「身上幾乎都布滿了黑色的絨毛，加上此時牠的腳也是黑色的，讓牠看起來就像一顆小小的黑球一樣……破殼出生沒多久，就可以自己站起來走路。所以這時候的小水雞就能跟著爸爸、媽媽一起游泳。」",
+          sourceQuote: "「讓牠看起來就像一顆小小的黑球一樣……破殼出生沒多久，就可以自己站起來走路。」（第7頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "當紅冠水雞察覺有其他鳥類闖入自己的活動範圍時，牠會「高高翹起尾巴露出白色羽毛」，這種行為的主要推論是什麼？",
+          options: {
+            "1": "作為鮮明醒目的視覺警告信號，向入侵者宣示領域主權並發出驅離警告",
+            "2": "因為水溫太熱，翹起尾巴吹風散熱降溫",
+            "3": "想要把尾巴當成白色雨傘借給對方遮雨以示友好",
+            "4": "模仿天上的白雲飄動，假裝自己是一團棉花糖"
+          },
+          answer: "1",
+          explanation: "文中第 6 頁指出：「當紅冠水雞覺得有危險，或是有其他鳥兒闖進牠的活動範圍時，牠有時會把尾巴高高翹起，露出尾巴下面那一大塊白色羽毛，好像在對對方說：『這裡可是我的地方呵！』」可推論這是強烈的領地防衛與警告信號。",
+          sourceQuote: "「把尾巴高高翹起，露出尾巴下面那一大塊白色羽毛，好像在對對方說：『這裡可是我的地方呵！』」（第6頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "課文中提到紅冠水雞求偶時也會「不停上下翹動尾巴露出白羽毛」，這與遇到敵人時的翹尾巴相比，反映了尾羽在動物行為中的什麼特性？",
+          options: {
+            "1": "尾巴羽毛只有在嚇跑敵人時有用，求偶時只是隨便動動",
+            "2": "相同的身體構造在不同生活情境下，能傳遞出不同的交流溝通訊息（驅離警告或吸引配偶）",
+            "3": "證明紅冠水雞的尾巴神經壞掉了，不管發生任何事情都只能上下抽動",
+            "4": "代表紅冠水雞分不清楚配偶和敵人，把大家一律當成敵人對待"
+          },
+          answer: "2",
+          explanation: "同一種身體器官或斑紋在自然界中常具備多元功能，在領地防衛時作為威嚇警告，在繁殖季則作為吸引異性、展示健康活力的信號。",
+          sourceQuote: "「到了求偶的時候，紅冠水雞也會不停地上下翹動尾巴，露出白色的尾下羽毛，來吸引另一半的注意。」（第6頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "課文對比了「紅冠水雞寶寶」與「白頭翁、麻雀、綠繡眼等鳥寶寶」的不同，下列何者推論最合理？",
+          options: {
+            "1": "麻雀和綠繡眼的寶寶比水雞寶寶更強壯，出生當天就能自己抓魚吃",
+            "2": "紅冠水雞的父母很不負責任，把剛出生的寶寶丟在水裡不管",
+            "3": "紅冠水雞屬於「早熟型」雛鳥，破殼即具走動游泳能力；而樹棲的麻雀等鳥類多為「晚熟型」，需長期待在巢中由親鳥餵養",
+            "4": "所有的水鳥寶寶都不會游泳，只有紅冠水雞是特別突變的特例"
+          },
+          answer: "3",
+          explanation: "文章第 7 頁指出紅冠水雞破殼沒多久就能自己站起來走路、跟隨親鳥游泳覓食，這正是生物學上早熟型（precocial）與晚熟型（altricial）雛鳥生存適應策略的典型差異。",
+          sourceQuote: "「紅冠水雞寶寶和白頭翁、麻雀、綠繡眼等鳥寶寶有些不同，因為牠們破殼出生沒多久，就可以自己站起來走路。」（第7頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "紅冠水雞游泳時「頭會一前一後地擺動，尾巴也會跟著上下動」，從鳥類運動生理來推論，這種動作的主要功能是什麼？",
+          options: {
+            "1": "因為耳朵進水了，想把耳朵裡的水用力甩出來",
+            "2": "牠們正在配合水底青蛙的叫聲節奏跳水上芭蕾",
+            "3": "為了催眠水裡的小魚和小蝦，讓小魚忘記逃跑",
+            "4": "在沒有完全腳蹼的情況下，藉由頭頸規律擺動維持前進動力、身體平衡與觀察水面視野"
+          },
+          answer: "4",
+          explanation: "秧雞科鳥類腳趾細長無全蹼，游動時靠腿部推進，頭頸規律前後擺動（head-bobbing）能幫助水鳥在推進與滑行交替時維持視野穩定與身體動態平衡。",
+          sourceQuote: "「頭會隨著游泳的動作，一前一後地擺動，尾巴有時也會跟著上下動。」（第6頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "從紅冠水雞的食性（水生植物、昆蟲、小魚、螺類、稻穀、魚飼料麵包屑）來看，牠在生態系中展現了何種「食性特徵」？",
+          options: {
+            "1": "適應力極強的「雜食性」水鳥，能充分利用濕地自然資源與人造環境中的多樣食物",
+            "2": "專門捕食大型哺乳動物的兇猛頂級肉食性猛禽",
+            "3": "終生只能吸食花蜜、完全不能碰任何固體食物的極端草食動物",
+            "4": "只能依靠人類天天餵食爆米花才能活下去的完全依賴型寵物"
+          },
+          answer: "1",
+          explanation: "文章第 6 頁列出其食物包羅萬象，包括植物、昆蟲、魚蝦、螺貝、種子稻穀及人工飼料，展現了其不挑食、具高度環境適應力的雜食性特徵。",
+          sourceQuote: "「水中的植物、昆蟲、小魚、貝類、福壽螺等螺類，還有稻穀，都是牠們的食物……還會搶食魚飼料和麵包屑。」（第6頁）"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "紅冠水雞築巢繁殖時會「利用枯葉、枯枝與乾燥稻草在比較沒有水的地方築巢」，這反映了牠們在繁殖策略上的何種考量？",
+          options: {
+            "1": "故意遠離水源，因為紅冠水雞長大後變得非常討厭水",
+            "2": "確保鳥巢乾燥溫暖，避免潮濕低溫影響蛋的孵化，並降低水位暴漲淹沒巢卵的危險",
+            "3": "為了向樹上的松鼠炫耀自己的高超蓋房子技術",
+            "4": "打算在乾燥泥土裡挖掘地洞冬眠三年不出來"
+          },
+          answer: "2",
+          explanation: "水鳥產卵與孵化需要乾燥且具保溫效果的環境，將巢築在水位之上相對乾燥的高處，能防止蛋浸水受凍或被水流沖走，提高雛鳥孵化存活率。",
+          sourceQuote: "「到了要生寶寶的時候，牠們會利用枯葉、枯枝和乾燥的稻草，在比較沒有水的地方築巢，準備產卵、孵蛋。」（第7頁）"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "作者在介紹紅冠水雞的同時，也在文章中展示了「白腹秧雞、緋秧雞、白冠雞」等同科鳥類，這樣安排的主要寫作目的是什麼？",
+          options: {
+            "1": "為了湊齊文章版面隨便放照片填補空白",
+            "2": "想要告訴大家這些鳥類天天打架爭奪地盤",
+            "3": "透過比較同科相近物種的外型差異（如白臉、赤胸、白額板），拓展讀者對水鳥多樣性的整體認知與辨識能力",
+            "4": "證明作者只喜歡白腹秧雞，不喜歡紅冠水雞"
+          },
+          answer: "3",
+          explanation: "作者透過並列展示臺灣常見的四種秧雞科鳥類，引導讀者進行橫向對比觀察，理解同科鳥類各具特色的外貌特徵，提升生態觀察的廣度與深度。",
+          sourceQuote: "「在臺灣，常見的秧雞除了紅冠水雞以外，還有白腹秧雞、緋秧雞和白冠雞等。」（第2頁至第5頁圖文對照）"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "如果整合全文對紅冠水雞「生長發育歷程」的描述，下列哪一個成長變化順序完全正確？",
+          options: {
+            "1": "長出鮮紅額板的成鳥 ➔ 禿頂黑毛球幼雛 ➔ 額板未紅的年輕水雞 ➔ 產下鳥蛋",
+            "2": "產下鳥蛋 ➔ 長出鮮紅額板的成鳥 ➔ 禿頂黑毛球幼雛 ➔ 額板未紅的年輕水雞",
+            "3": "禿頂黑毛球幼雛 ➔ 產下鳥蛋 ➔ 長出鮮紅額板的成鳥 ➔ 額板未紅的年輕水雞",
+            "4": "產卵孵化 ➔ 破殼出黑毛球幼雛（親鳥餵食） ➔ 額板未紅的年輕水雞 ➔ 擁有鮮紅額板具繁殖力的成鳥"
+          },
+          answer: "4",
+          explanation: "文章第 7 頁描述產卵孵化出黑毛球幼雛、第 6 頁呈現未成熟年輕個體、第 5 頁說明成熟個體長出鮮紅額板並具繁殖能力，脈絡完整連貫。",
+          sourceQuote: "綜合第5頁成鳥額板特徵、第6頁未成熟個體圖片、第7頁破殼黑毛球寶寶之描述。"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "在都會公園水池中，常看到民眾向池塘丟擲吐司麵包或薯條給魚和紅冠水雞吃。從生態保育角度評估，下列何者是最恰當的態度？",
+          options: {
+            "1": "應減少甚至避免隨意餵食，因為加工精緻澱粉缺乏天然水鳥所需營養，且殘渣沉底會造成水質優養化與惡臭",
+            "2": "應該號召大家每天買十條土司去餵食，這樣水雞就不用辛苦在水田裡啄食福壽螺",
+            "3": "只要紅冠水雞能搶贏池塘裡的錦鯉，就代表餵食麵包完全沒有任何缺點",
+            "4": "應該在水池裡倒入汽水和奶茶，讓紅冠水雞體驗人類的美食文化"
+          },
+          answer: "1",
+          explanation: "人為投餵加工麵包高油鹽糖，不利野生動物消化代謝，容易使水鳥失去自然覓食本能；且大量有機物沉積池底會消耗水中溶氧、引發藻華，破壞水池生態。",
+          sourceQuote: "延伸課文第6頁「與池中的魚搶食魚飼料和麵包屑」之人與野生水鳥相處的反思。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "紅冠水雞能普遍繁衍在臺灣的水田、水圳、泥灘地與城市公園水塘，與許多瀕危鳥類相比，牠最值得我們借鏡的生態特質是什麼？",
+          options: {
+            "1": "牠長得比老鷹更兇猛，把所有人類和天敵都打跑了",
+            "2": "具備高度彈性的生活環境適應力與雜食性，能與農田生態及都會人工濕地和諧共生",
+            "3": "牠只吃純金製造的水稻種子，所以生命力比其他鳥類更旺盛",
+            "4": "牠完全不需要呼吸空氣就能在水底下生活幾個月"
+          },
+          answer: "2",
+          explanation: "紅冠水雞不挑食、能在半人工的水池濕地中找到築巢與覓食空間，展現出強韌的都市邊緣生態適應力，是人造環境與自然物種共生的最佳典範。",
+          sourceQuote: "整合第1頁（水田泥灘水塘）、第2頁與第6頁關於生活環境廣泛度之描述。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "作者在文章結尾寫道：「大自然無奇不有……只要你願意去觀察、去欣賞，就會發現每種動物特別又可愛的地方。」作者最希望四年級小朋友培養的核心素養是什麼？",
+          options: {
+            "1": "每天只看手機短影片，不用走出戶外觀察大自然",
+            "2": "看到不認識的水鳥就抓回家關在鐵籠裡當寵物飼養",
+            "3": "保持對生活周遭環境的好奇心，以敏銳的觀察力與欣賞的心態探索自然萬物的奧祕與價值",
+            "4": "把所有不漂亮或叫聲吵鬧的鳥兒通通驅趕出校園"
+          },
+          answer: "3",
+          explanation: "文章結尾勉勵學童從身邊最常見的自然生態出發，運用五感與探究精神走出教室、欣賞尊重每一種獨特生命的價值，實踐核心素養導向閱讀。",
+          sourceQuote: "「大自然無奇不有，在我們生活的周遭環境裡……只要你願意去觀察、去欣賞，就會發現每種動物特別又可愛的地方。」（第7頁至第8頁）"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "如果要為學校校園生態池營造友善紅冠水雞與水生動植物的環境，下列哪一項規劃最符合課文中所述的生態需求？",
+          options: {
+            "1": "把生態池四周全部鋪滿水泥磚牆，並把所有水草和水生植物拔除乾淨以防蚊蟲",
+            "2": "在水池周圍安裝強力探照燈，二十四小時不間斷播放重金屬音樂驅散害蟲",
+            "3": "在池塘中倒入漂白水進行全面消毒殺菌，確保沒有任何蟲子與螺類生存",
+            "4": "保留豐富水生植物與淺水泥灘，並在岸邊保留適度枯草灌木叢供水鳥覓食、隱蔽與乾燥築巢"
+          },
+          answer: "4",
+          explanation: "紅冠水雞需要水草、螺類、小蟲等自然食物來源，且築巢時需要枯草枝葉與避風隱蔽的乾燥灘地，營造多元植被的自然岸帶能提供最完善的棲地條件。",
+          sourceQuote: "綜合第1頁（水田泥灘）、第6頁（水生植物昆蟲螺類）與第7頁（枯葉乾草乾燥築巢）之生態需求。"
+        }
+      ],
+
+      // 開放式思考題（深度探究：AI 將詳細評析學生的論述是否確實呼應文章核心並給予分數等第）
+      openQuestion: {
+        id: "open-1",
+        title: "💡 小小生態導覽員：向大家介紹「很會游泳的雞」",
+        desc: "在公園水池或鄉間水田邊，常看到黑黑一隻、在水面上悠哉划水的水鳥。很多小朋友第一次看見時都會大喊：「哇！你看那隻黑鴨子！」這時候身為生態小達人的你，會怎麼跟大家介紹這隻其實是「秧雞家族」的<strong>紅冠水雞</strong>呢？<br><br>請嘗試寫一段生動有趣的解說詞（建議 40～120 字）：<br>1. 告訴大家牠為什麼叫「紅冠」？牠的嘴巴和額頭有什麼成熟標誌？<br>2. 介紹牠一個有趣的動作（例如：游泳時頭一前一後擺動、或是翹起尾巴露出白色羽毛代表什麼暗號）？<br>3. 如果看到有小朋友正拿吐司或薯條想要餵水雞，你會怎麼親切且具說服力地提醒他保護水塘環境呢？<br><br>請寫下你的想法，AI 會針對你的內容<strong>是否有確實呼應閱讀內容</strong>進行評分，並給予成績等第與評語喔！",
+        placeholder: "請在此寫下你的解說詞……例如：大家好！這隻不是鴨子，而是秧雞科的『紅冠水雞』喔！牠最特別的地方是從嘴巴根部到額頭有一塊鮮紅色的『額板』，這代表牠已經長大成熟了。當牠游泳時頭會前後擺動，如果翹起尾巴露出白色羽毛，就是警告闖入者『這是我的地盤！』另外，請大家不要拿麵包餵牠們，因為水塘裡的水草和螺類才是牠最健康的食物，麵包屑會讓水質變髒喔！",
+        rubric: {
+          keywords: ["紅冠", "額板", "嘴", "白", "尾", "警戒", "領地", "游泳", "秧雞", "擺動", "黑球", "寶寶", "福壽螺", "麵包", "飼料", "水質", "保護", "自然"],
+          minWords: 30
+        }
+      },
+
+      // 互動小遊戲配置：【水塘探險家：紅冠水雞生活日記】
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "第一關：外觀辨辨樂——找出真正的紅冠水雞",
+            desc: "水塘裡游來了幾隻特別的水鳥，請仔細觀察，哪一隻才是長大成熟的「紅冠水雞」呢？",
+            options: [
+              { name: "黑褐色羽毛、嘴巴紅色先端黃黃、額頭有鮮紅額板、尾下藏大塊白羽", icon: "🪿", isSafe: true, feedback: "太棒了！鮮紅額板是紅冠水雞長大成熟的最明顯特徵，尾下還有招牌白色羽毛！" },
+              { name: "全身粉紅色、脖子像大問號一樣長長的大型水鳥", icon: "🦩", isSafe: false, feedback: "那是熱帶的紅鶴（火烈鳥），不是住在臺灣水田的紅冠水雞喔！" },
+              { name: "嘴巴扁平像一把黑色大湯匙、全身羽毛純白色的候鳥", icon: "🥄", isSafe: false, feedback: "那是珍貴的黑面琵鷺，嘴巴像湯匙（琵琶），不是紅冠水雞啦！" },
+              { name: "嘴巴和額頭上的額板都是純白色、全身暗黑色的水鳥", icon: "🦢", isSafe: false, feedback: "哎呀！額板是白色的那是牠的親戚「白冠雞」，不是「紅冠」水雞喔！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "第二關：尾羽暗號解碼——水雞尾巴翹起來了！",
+            desc: "一隻外來的小白鷺不小心走進了紅冠水雞的地盤，這時水雞把尾巴高高翹起，露出尾下一大塊白色羽毛！牠到底在說什麼？",
+            options: [
+              { name: "「歡迎光臨！請來我的水塘一起喝下午茶！」", icon: "☕", isSafe: false, feedback: "不是喔！紅冠水雞領域性很強，這可不是在熱情歡迎客人！" },
+              { name: "「這裡可是我的地盤！警告你快點離開，否則我要發動攻擊了！」", icon: "🚩", isSafe: true, feedback: "答對了！翹起尾巴露出白羽毛是強烈的領域警告信號，提醒對方立刻離開！" },
+              { name: "「糟糕！我的尾巴被強力膠水黏住了，誰來救救我！」", icon: "🆘", isSafe: false, feedback: "哈哈，才沒有被黏住呢，這是牠特有的溝通肢體語言！" },
+              { name: "「現在是水上芭蕾表演時間，請為我的舞姿打分數！」", icon: "💃", isSafe: false, feedback: "雖然動作很逗趣，但牠是在認真保衛自己的家園喔！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "第三關：水塘健康大餐——水雞今天吃什麼？",
+            desc: "紅冠水雞肚子咕嚕咕嚕叫，在水田與水塘裡尋找美味早餐，哪一樣才是牠最天然健康的食物？",
+            options: [
+              { name: "遊客隨手掉在泥巴裡的麻辣火鍋肉片與洋芋片", icon: "🍟", isSafe: false, feedback: "不行！高油高鹽的加工食品會害野生動物拉肚子甚至生病！" },
+              { name: "漂浮在水池上的保麗龍便當盒與塑膠吸管", icon: "🥤", isSafe: false, feedback: "太危險了！誤食塑膠垃圾會造成腸胃阻塞死亡！" },
+              { name: "水田泥灘裡的水草、小蟲、小魚以及危害水稻的福壽螺", icon: "🌱", isSafe: true, feedback: "太聰明了！水草、昆蟲、小魚與福壽螺是牠最喜愛的天然雜食大餐，還能幫農夫吃螺除害呢！" },
+              { name: "工廠偷偷排進水溝裡的彩色化學肥皂泡泡水", icon: "🧼", isSafe: false, feedback: "化學毒水會毒死水鳥和水生生物，絕對不能喝！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "第四關：黑毛球寶寶破殼記——守護早熟型小水雞",
+            desc: "蛋殼破開了！全身黑絨毛、像顆黑色小毛球的水雞寶寶誕生了，鳥爸爸和鳥媽媽應該怎麼陪伴牠呢？",
+            options: [
+              { name: "把寶寶趕出水池，叫牠自己去搭高鐵去臺北找工作", icon: "🚄", isSafe: false, feedback: "小水雞寶寶才剛出生，怎麼可能搭車去工作呢！" },
+              { name: "帶牠在水邊站立走動、練習游泳，並耐心用嘴巴幫牠餵食小食物", icon: "🐣", isSafe: true, feedback: "太棒了！水雞是早熟型鳥類，出生不久就能站立游泳，但小嘴力氣不足，需要爸媽細心餵食長大！" },
+              { name: "命令小水雞爬到十層樓高的椰子樹頂端練習跳傘", icon: "🪂", isSafe: false, feedback: "天啊！水雞主要在水邊與草叢活動，摔下來會受重傷的！" },
+              { name: "把小水雞用油漆塗成金黃色，假裝牠是黃色小鴨", icon: "🎨", isSafe: false, feedback: "不可這樣做！油漆有劇毒，黑黑的小毛球才是牠最可愛的保護色！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">探險挑戰未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中紅冠水雞的紅色額板、翹尾暗號與早熟寶寶的特徵，重新出發吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🪿</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【水塘觀察家・紅冠水雞守護小達人】榮譽勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太棒了！你獲得了 <strong>${score}</strong> 分滿分！你已經完整掌握了紅冠水雞的紅額板特徵、翹尾巴領域信號、雜食習性以及像黑毛球般早熟寶寶的生態奧祕，表現超級傑出！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>

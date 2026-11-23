@@ -410,35 +410,58 @@ const QuizEngine = {
     }
 
     // 分析是否包含具體思考詞彙與邏輯連接詞
-    const thinkingKeywords = ["因為", "所以", "如果", "覺得", "發現", "例如", "像是", "比較", "可以", "認為", "觀察", "影響", "希望"];
+    const thinkingKeywords = ["因為", "所以", "如果", "覺得", "發現", "例如", "像是", "比較", "可以", "認為", "觀察", "影響", "希望", "建議", "應該"];
     let thinkingMatches = 0;
     thinkingKeywords.forEach(kw => {
       if (trimmed.includes(kw)) thinkingMatches++;
     });
 
-    // 分析字數與深度打分 (0 - 100)
-    let score = 60; // 基礎有回答分
+    // 分析是否呼應課文關鍵核心概念
+    let articleMatches = [];
+    const rubricKeywords = questionData && questionData.rubric && Array.isArray(questionData.rubric.keywords) 
+      ? questionData.rubric.keywords 
+      : [];
+    rubricKeywords.forEach(kw => {
+      if (trimmed.includes(kw) && !articleMatches.includes(kw)) {
+        articleMatches.push(kw);
+      }
+    });
+
+    // 基礎起評分 (60分)
+    let score = 60;
     let relevanceText = "已初步提出想法";
 
+    // 字數評量 (0-25分)
     if (len >= 60) {
       score += 25;
     } else if (len >= 35) {
       score += 18;
     } else if (len >= 20) {
-      score += 10;
+      score += 12;
     } else {
+      score += 6;
+    }
+
+    // 思考詞彙評量 (0-8分)
+    if (thinkingMatches >= 3) {
+      score += 8;
+    } else if (thinkingMatches >= 1) {
       score += 5;
     }
 
-    if (thinkingMatches >= 3) {
+    // 課文核心呼應度評量 (0-15分)
+    if (articleMatches.length >= 3) {
       score += 15;
-      relevanceText = "觀點具體，確實呼應課文核心";
-    } else if (thinkingMatches >= 1) {
+      relevanceText = `確實深度呼應課文（精準運用：${articleMatches.slice(0, 3).join("、")}等概念）`;
+    } else if (articleMatches.length >= 1) {
       score += 10;
-      relevanceText = "能結合想法與因果說明";
+      relevanceText = `有效呼應閱讀內容（提及：${articleMatches.join("、")}）`;
+    } else if (rubricKeywords.length > 0) {
+      score += 2;
+      relevanceText = "能表達個人觀點，若多融入課文所學特徵會更深刻";
     } else {
       score += 5;
-      relevanceText = "有表達基本意見";
+      relevanceText = "觀點具體，能結合想法說明";
     }
 
     // 最高 98 分，特優
@@ -450,7 +473,7 @@ const QuizEngine = {
         grade: "特優 (A+)",
         badgeClass: "tag-coral",
         relevance: relevanceText,
-        comment: "【確實深度呼應】思考深刻且內容豐富！能緊密結合課文的核心概念，提出具體且富創意的想法，理由邏輯完整，展現極佳的探究與寫作素養！"
+        comment: `【確實深度呼應】思考深刻且內容豐富！能緊密結合課文的核心概念${articleMatches.length > 0 ? "（如：" + articleMatches.join("、") + "）" : ""}，提出具體且富創意的想法，理由邏輯完整，展現極佳的探究與寫作素養！`
       };
     } else if (score >= 80) {
       return {
@@ -458,7 +481,7 @@ const QuizEngine = {
         grade: "優等 (A)",
         badgeClass: "tag-sage",
         relevance: relevanceText,
-        comment: "【有效呼應課文】回答完整流暢，能切合閱讀內容提出清楚明確的想法與具體理由，論述有條不紊，表現非常優異！"
+        comment: `【有效呼應課文】回答完整流暢，能切合閱讀內容提出清楚明確的想法與具體理由${articleMatches.length > 0 ? "（成功融入「" + articleMatches.join("、") + "」等要點）" : ""}，論述有條不紊，表現非常優異！`
       };
     } else if (score >= 70) {
       return {
@@ -466,7 +489,7 @@ const QuizEngine = {
         grade: "良好 (B+)",
         badgeClass: "tag-blue",
         relevance: relevanceText,
-        comment: "【基本呼應主題】能清楚表達出自己的觀察與觀點。若能再多引用一兩點課文中的關鍵原因或生活細節，內容會更充實精彩喔！"
+        comment: "【基本呼應主題】能清楚表達出自己的觀察與觀點。若能再多引用一兩點課文中的關鍵特徵或生活細節，內容會更充實精彩喔！"
       };
     } else {
       return {
