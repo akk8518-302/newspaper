@@ -79,6 +79,104 @@ const SoundPlayer = {
   }
 };
 
+// 輕巧簡約灑花引擎 (簡單清新彩色小碎紙片與小花瓣飄落，乾淨不遮擋畫面)
+const Confetti = {
+  canvas: null,
+  ctx: null,
+  particles: [],
+  animationId: null,
+  isActive: false,
+
+  init() {
+    if (this.canvas) return;
+    this.canvas = document.createElement("canvas");
+    this.canvas.id = "celebration-confetti-canvas";
+    this.canvas.style.position = "fixed";
+    this.canvas.style.top = "0";
+    this.canvas.style.left = "0";
+    this.canvas.style.width = "100vw";
+    this.canvas.style.height = "100vh";
+    this.canvas.style.pointerEvents = "none";
+    this.canvas.style.zIndex = "999999";
+    document.body.appendChild(this.canvas);
+    this.ctx = this.canvas.getContext("2d");
+    this.resize();
+    window.addEventListener("resize", () => this.resize());
+  },
+
+  resize() {
+    if (!this.canvas) return;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  },
+
+  celebrate(duration = 2000, count = 45) {
+    this.init();
+    this.resize();
+
+    const colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF", "#FF92A9", "#A0C49D", "#F4A261"];
+
+    for (let i = 0; i < count; i++) {
+      this.particles.push({
+        x: Math.random() * window.innerWidth,
+        y: -10 - Math.random() * 40,
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 2.8 + 2.2,
+        size: Math.random() * 8 + 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 5,
+        opacity: 1,
+        wobble: Math.random() * 10,
+        wobbleSpeed: 0.05 + Math.random() * 0.03
+      });
+    }
+
+    if (!this.isActive) {
+      this.isActive = true;
+      this.loop();
+    }
+  },
+
+  loop() {
+    if (!this.ctx || !this.canvas) return;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      p.x += p.vx + Math.sin(p.wobble) * 1.2;
+      p.y += p.vy;
+      p.wobble += p.wobbleSpeed;
+      p.rotation += p.rotationSpeed;
+
+      if (p.y > this.canvas.height * 0.75) {
+        p.opacity -= 0.03;
+      }
+
+      if (p.opacity <= 0 || p.y > this.canvas.height + 20) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      this.ctx.save();
+      this.ctx.globalAlpha = Math.max(0, p.opacity);
+      this.ctx.translate(p.x, p.y);
+      this.ctx.rotate((p.rotation * Math.PI) / 180);
+
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.6);
+      this.ctx.restore();
+    }
+
+    if (this.particles.length > 0) {
+      this.animationId = requestAnimationFrame(() => this.loop());
+    } else {
+      this.isActive = false;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }
+};
+
 // TTS 語音朗讀管理
 const SpeechManager = {
   synth: window.speechSynthesis,
@@ -217,6 +315,7 @@ const QuizEngine = {
   userAnswers: {},
   isSubmitted: false,
   openQuestionAnswer: "",
+  hintTimers: {},
 
   init(questionsData, openQuestionData) {
     this.questions = questionsData || [];
@@ -265,11 +364,14 @@ const QuizEngine = {
         <div class="question-meta-row">
           <span class="q-number-pill">第 ${q.id} 題</span>
           <span class="q-level-tag q-level-${q.level}">${levelNames[q.level]}</span>
+          <span class="q-chance-badge" id="chance-badge-${q.id}">最多可作答 2 次</span>
         </div>
         <div class="question-text">${q.question}</div>
         <div class="options-grid" id="opt-group-${q.id}">
           ${optionsHtml}
         </div>
+        <!-- 答錯即時小提示容器 (5秒自動關閉) -->
+        <div class="quiz-hint-popup" id="hint-box-${q.id}" style="display: none;"></div>
         <div class="answer-explanation-box" id="exp-box-${q.id}">
           <div class="exp-status-title" id="exp-title-${q.id}"></div>
           <div class="exp-text"><strong>🎯 正確答案：${q.answer}</strong><br>${q.explanation}</div>
@@ -287,6 +389,17 @@ const QuizEngine = {
 
   selectOption(qId, letter) {
     if (this.isSubmitted) return; // 繳交後鎖定
+
+    if (!this.attempts) this.attempts = {};
+    const count = this.attempts[qId] || 0;
+
+    // 每個題目最多只能更改一次答案，選擇第二次答案後就不能再更改選擇的答案
+    if (count >= 2) return;
+
+    // 若點擊的是已經選中的同一個選項，不重複累計
+    if (this.userAnswers[qId] === letter) return;
+
+    this.attempts[qId] = count + 1;
     this.userAnswers[qId] = letter;
 
     const optGroup = document.getElementById(`opt-group-${qId}`);
@@ -299,10 +412,95 @@ const QuizEngine = {
           btn.classList.remove("selected");
         }
       });
+
+      const chanceBadge = document.getElementById(`chance-badge-${qId}`);
+      if (this.attempts[qId] === 1) {
+        if (chanceBadge) {
+          chanceBadge.innerHTML = "✏️ 尚可更改 1 次";
+          chanceBadge.style.background = "#FFF3E0";
+          chanceBadge.style.color = "#E65100";
+          chanceBadge.style.borderColor = "#FFB74D";
+        }
+      } else if (this.attempts[qId] >= 2) {
+        // 第二次選擇後鎖定，不能再更改
+        btns.forEach(btn => {
+          btn.classList.add("locked");
+        });
+        if (chanceBadge) {
+          chanceBadge.innerHTML = "🔒 答案已確認鎖定";
+          chanceBadge.style.background = "#ECEFF1";
+          chanceBadge.style.color = "#546E7A";
+          chanceBadge.style.borderColor = "#CFD8DC";
+        }
+      }
     }
 
     this.updateAnswerProgress();
-    SoundPlayer.playTone(440, "sine", 0.08); // 輕脆點擊聲
+
+    // 判斷是否答對：答對立刻簡單灑花；答錯立刻給予小提示(5秒後自動消失)
+    const q = this.questions.find(item => String(item.id) === String(qId));
+    if (q) {
+      if (String(letter) === String(q.answer)) {
+        this.closeHint(qId); // 若原本有提示則立即收起
+        SoundPlayer.correct();
+        Confetti.celebrate(); // 簡單輕巧的灑花
+      } else {
+        SoundPlayer.wrong(); // 輕柔答錯音效
+        this.showWrongHint(qId, q); // 立刻跳出小提示(5秒後自動消失)
+      }
+    }
+  },
+
+  showWrongHint(qId, q) {
+    const hintBox = document.getElementById(`hint-box-${qId}`);
+    if (!hintBox) return;
+
+    // 清除先前的倒數定時器
+    if (this.hintTimers[qId]) {
+      clearTimeout(this.hintTimers[qId]);
+      delete this.hintTimers[qId];
+    }
+
+    const clueText = q.sourceQuote || q.hint || q.explanation || "請再仔細回到課文相關段落找找關鍵字喔！";
+
+    hintBox.innerHTML = `
+      <div class="hint-header">
+        <span class="hint-title">💡 思考小提示（5秒後自動關閉）</span>
+        <button class="hint-close-btn" onclick="QuizEngine.closeHint('${qId}')" title="關閉提示">✕</button>
+      </div>
+      <div class="hint-body">
+        先別灰心，再想一想喔！可以參考課文線索：<br>
+        <span style="color:#B95C25; font-weight:700;">📖「${clueText}」</span>
+      </div>
+      <div class="hint-timer-bar"></div>
+    `;
+
+    hintBox.style.display = "block";
+    hintBox.style.opacity = "1";
+    hintBox.style.transform = "translateY(0)";
+
+    // 5 秒後提示自動平滑淡出並消失
+    this.hintTimers[qId] = setTimeout(() => {
+      this.closeHint(qId);
+    }, 5000);
+  },
+
+  closeHint(qId) {
+    const hintBox = document.getElementById(`hint-box-${qId}`);
+    if (hintBox) {
+      hintBox.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+      hintBox.style.opacity = "0";
+      hintBox.style.transform = "translateY(-6px)";
+      setTimeout(() => {
+        hintBox.style.display = "none";
+        hintBox.style.transform = "";
+        hintBox.style.transition = "";
+      }, 400);
+    }
+    if (this.hintTimers[qId]) {
+      clearTimeout(this.hintTimers[qId]);
+      delete this.hintTimers[qId];
+    }
   },
 
   updateAnswerProgress() {
@@ -382,11 +580,13 @@ const QuizEngine = {
     // AI 針對小朋友開放式思考題進行深度評分、等第診斷與呼應度分析
     const openEval = this.evaluateOpenAnswer(this.openQuestionAnswer, this.openQuestionData);
 
-    // 播放音效
+    // 播放音效與大慶祝灑花
     if (score >= 80) {
       SoundPlayer.victory();
+      Confetti.celebrate(3500, 160);
     } else if (score >= 60) {
       SoundPlayer.correct();
+      Confetti.celebrate(2500, 100);
     } else {
       SoundPlayer.wrong();
     }
@@ -628,7 +828,12 @@ const QuizEngine = {
 
   retry() {
     this.userAnswers = {};
+    this.attempts = {};
     this.isSubmitted = false;
+    if (this.hintTimers) {
+      Object.keys(this.hintTimers).forEach(qId => clearTimeout(this.hintTimers[qId]));
+      this.hintTimers = {};
+    }
     const summaryCard = document.getElementById("quiz-summary-card");
     if (summaryCard) summaryCard.style.display = "none";
     this.renderQuestions();

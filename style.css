@@ -938,13 +938,18 @@ body {
 }
 
 .course-card-img-placeholder {
-  height: 140px;
+  height: 220px;
   background: linear-gradient(135deg, #DEECE5 0%, #D3E0EA 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 52px;
+  font-size: 80px;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.course-card-3d:hover .course-card-img-placeholder {
+  font-size: 88px;
 }
 
 .course-badge-floating {
@@ -991,6 +996,181 @@ body {
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--morandi-sage-dark);
+}
+
+/* 原始內容截圖展示區專用樣式（增大尺寸） */
+.original-docs-showcase {
+  background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+  border: 2px solid #D6E4DC;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 24px 0 36px;
+  box-shadow: 0 6px 18px rgba(78, 93, 85, 0.08);
+}
+.original-docs-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--morandi-sage-dark);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.docs-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)) !important;
+  gap: 24px !important;
+  margin-top: 18px !important;
+}
+.doc-preview-card {
+  background: white;
+  border-radius: var(--radius-md) !important;
+  border: 2.5px solid #E2EAE5 !important;
+  padding: 16px !important;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.doc-preview-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--morandi-coral) !important;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+.doc-img-frame {
+  border-radius: 12px !important;
+  overflow: hidden;
+  border: 1.5px solid #ECECEC;
+  margin-bottom: 12px;
+  background: #F9F9F9;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+.doc-img-frame img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 580px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.doc-img-frame:hover img {
+  transform: scale(1.03);
+}
+.doc-caption {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: var(--text-primary);
+  margin: 8px 0 10px !important;
+  line-height: 1.4;
+}
+
+.q-chance-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: #F4F6F5;
+  color: #7A8B82;
+  border: 1px solid #DCE5E0;
+  margin-left: auto;
+  transition: all 0.3s ease;
+}
+
+.option-btn.locked {
+  cursor: not-allowed !important;
+}
+
+.option-btn.locked:not(.selected) {
+  opacity: 0.55;
+  filter: grayscale(15%);
+}
+
+/* 答錯即時小提示彈窗樣式 (5秒自動消失) */
+.quiz-hint-popup {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #FFFDF8 0%, #FFF5EB 100%);
+  border: 2px dashed #E59866;
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  box-shadow: 0 6px 16px rgba(229, 152, 102, 0.16);
+  position: relative;
+  overflow: hidden;
+  animation: hintSlideDown 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes hintSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.hint-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #B95C25;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hint-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #B95C25;
+  opacity: 0.7;
+  padding: 0 4px;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.hint-close-btn:hover {
+  opacity: 1;
+}
+
+.hint-body {
+  font-size: 0.98rem;
+  color: #5A4A3E;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.hint-timer-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E59866, #E07A5F);
+  width: 100%;
+  animation: hintTimerCountdown 5s linear forwards;
+}
+
+@keyframes hintTimerCountdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
 }
 
 /* 頁尾 */
