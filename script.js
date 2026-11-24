@@ -522,21 +522,88 @@ const QuizEngine = {
           <span>💡 開放式思考題（深度探究）</span>
         </div>
         <div class="open-q-desc">${this.openQuestionData.prompt}</div>
-        <textarea id="open-question-input" class="open-q-textarea" placeholder="寫下你的想法或生活觀察經驗（請至少寫下 20 個字喔！）..."></textarea>
+        
+        <!-- 作答學生座號姓名確認欄位 -->
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; background:#FAF6F0; padding:8px 14px; border-radius:8px; border:1px solid #EADBCC; flex-wrap:wrap;">
+          <span style="font-weight:700; color:#795738;">👤 作答學生：</span>
+          <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4" style="width:65px; padding:4px 8px; border-radius:6px; border:1px solid #D9CEBF; text-align:center;">
+          <span style="font-weight:700; color:#795738;">號</span>
+          <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10" style="width:110px; padding:4px 8px; border-radius:6px; border:1px solid #D9CEBF;">
+          <span style="font-size:0.85rem; color:#A09285; margin-left:auto;">（已與頂部學生資訊同步）</span>
+        </div>
+
+        <textarea id="open-question-input" class="open-q-textarea" placeholder="寫下你的深刻想法或生活觀察經驗（請至少寫滿 50 個有效字喔！）..."></textarea>
+        
+        <!-- 即時字數進度與鼓勵狀態提示區 -->
+        <div id="open-q-status-bar" style="margin: 12px 0 8px; font-size: 0.95rem; font-weight: 800; padding: 10px 16px; border-radius: 8px; background: #FFF7EE; color: #E65100; border: 1.5px dashed #FFB74D; transition: all 0.3s ease;">
+          目前寫了 0 個字，再多寫 50 個字就能分享你的思考囉！加油，你可以的！✨
+        </div>
+
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:0.88rem; color:#8A7A6E;">
-          <span id="open-q-char-count">字數：0 字</span>
+          <span id="open-q-char-count">有效字數：0 字（還差 50 字）</span>
           <span>💭 思考提示：${this.openQuestionData.hint || "無標準答案，勇敢說出你的觀察！"}</span>
         </div>
       </div>
     `;
 
+    // 重新綁定學生資訊同步事件
+    if (window.StudentManager && typeof StudentManager.initInputs === "function") {
+      StudentManager.initInputs();
+    }
+
     const textarea = document.getElementById("open-question-input");
     const countEl = document.getElementById("open-q-char-count");
+    const statusBar = document.getElementById("open-q-status-bar");
+    const submitBtn = document.getElementById("btn-submit-quiz");
+
+    const updateWordCount = (val) => {
+      this.openQuestionAnswer = val;
+      // 使用 text.replace(/\s+/g, '') 去除所有半形空白、全形空白與換行符號
+      const validText = val.replace(/\s+/g, "");
+      const validLen = validText.length;
+
+      if (validLen < 50) {
+        const needMore = 50 - validLen;
+        if (statusBar) {
+          statusBar.style.background = "#FFF7EE";
+          statusBar.style.borderColor = "#FFB74D";
+          statusBar.style.color = "#E65100";
+          statusBar.innerHTML = `目前寫了 ${validLen} 個字，再多寫 ${needMore} 個字就能分享你的思考囉！加油，你可以的！✨`;
+        }
+        if (countEl) {
+          countEl.innerText = `有效字數：${validLen} 字（還差 ${needMore} 字達標）`;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
+          submitBtn.style.opacity = "0.55";
+          submitBtn.style.cursor = "not-allowed";
+        }
+      } else {
+        if (statusBar) {
+          statusBar.style.background = "#F1F8F4";
+          statusBar.style.borderColor = "#81C784";
+          statusBar.style.color = "#2E7D32";
+          statusBar.innerHTML = `太棒了！你已經寫了 ${validLen} 個字，想法好豐富，快按送出跟大家一起討論吧！🎉`;
+        }
+        if (countEl) {
+          countEl.innerText = `有效字數：${validLen} 字（已滿 50 字標準）`;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("disabled");
+          submitBtn.style.opacity = "1";
+          submitBtn.style.cursor = "pointer";
+        }
+      }
+    };
+
     if (textarea) {
       textarea.addEventListener("input", (e) => {
-        this.openQuestionAnswer = e.target.value;
-        if (countEl) countEl.innerText = `字數：${e.target.value.length} 字`;
+        updateWordCount(e.target.value);
       });
+      // 初始檢查
+      updateWordCount(textarea.value || "");
     }
   },
 
@@ -548,6 +615,20 @@ const QuizEngine = {
   },
 
   submitQuiz() {
+    // 檢查開放式思考題有效字數是否達 50 字
+    const validText = (this.openQuestionAnswer || "").replace(/\s+/g, "");
+    const validLen = validText.length;
+    if (validLen < 50) {
+      const needMore = 50 - validLen;
+      alert(`你的思考很棒喔！不過還差 ${needMore} 個字才滿 50 字，再多寫一點你的想法吧！💪`);
+      const textarea = document.getElementById("open-question-input");
+      if (textarea) {
+        textarea.scrollIntoView({ behavior: "smooth", block: "center" });
+        textarea.focus();
+      }
+      return;
+    }
+
     const answeredCount = Object.keys(this.userAnswers).length;
     const total = this.questions.length;
 
@@ -670,7 +751,7 @@ const QuizEngine = {
     if (score >= 90) {
       return {
         score: score,
-        grade: "特優 (A+)",
+        grade: "優等",
         badgeClass: "tag-coral",
         relevance: relevanceText,
         comment: `【確實深度呼應】思考深刻且內容豐富！能緊密結合課文的核心概念${articleMatches.length > 0 ? "（如：" + articleMatches.join("、") + "）" : ""}，提出具體且富創意的想法，理由邏輯完整，展現極佳的探究與寫作素養！`
@@ -678,7 +759,7 @@ const QuizEngine = {
     } else if (score >= 80) {
       return {
         score: score,
-        grade: "優等 (A)",
+        grade: "甲等",
         badgeClass: "tag-sage",
         relevance: relevanceText,
         comment: `【有效呼應課文】回答完整流暢，能切合閱讀內容提出清楚明確的想法與具體理由${articleMatches.length > 0 ? "（成功融入「" + articleMatches.join("、") + "」等要點）" : ""}，論述有條不紊，表現非常優異！`
@@ -686,7 +767,7 @@ const QuizEngine = {
     } else if (score >= 70) {
       return {
         score: score,
-        grade: "良好 (B+)",
+        grade: "乙等",
         badgeClass: "tag-blue",
         relevance: relevanceText,
         comment: "【基本呼應主題】能清楚表達出自己的觀察與觀點。若能再多引用一兩點課文中的關鍵特徵或生活細節，內容會更充實精彩喔！"
@@ -694,7 +775,7 @@ const QuizEngine = {
     } else {
       return {
         score: score,
-        grade: "尚可 (B)",
+        grade: "丙等",
         badgeClass: "tag-clay",
         relevance: relevanceText,
         comment: "【嘗試表達想法】有寫出自己的點子很棒！建議字數可再增加，試著多說明「為什麼這樣做能呼應課文內容」，讓想法更完整喔！"

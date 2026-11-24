@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跟著風獅爺，發現金門祕密 - 國小四年級 AI 互動閱讀教室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 原始內容截圖展示區專用樣式 */
+    .original-docs-showcase {
+      background: linear-gradient(135deg, #F3F7F5 0%, #EAF0EC 100%);
+      border: 2px solid #D6E4DC;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin: 24px 0 36px;
+      box-shadow: 0 6px 18px rgba(78, 93, 85, 0.08);
+    }
+    .original-docs-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--morandi-sage-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .docs-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin-top: 18px;
+    }
+    .doc-preview-card {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 2.5px solid #E2EAE5;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .doc-preview-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: var(--morandi-coral);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    .doc-img-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid #ECECEC;
+      margin-bottom: 12px;
+      background: #F9F9F9;
+      cursor: zoom-in;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .doc-img-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 580px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .doc-img-frame:hover img {
+      transform: scale(1.03);
+    }
+    .doc-caption {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .doc-btn-view {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--morandi-sage-light);
+      color: var(--morandi-sage-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      border: 1px solid var(--morandi-sage);
+      transition: all 0.2s ease;
+    }
+    .doc-btn-view:hover {
+      background: var(--morandi-sage);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.htm" class="logo-area" title="返回閱讀首頁">
+        <div class="logo-icon-3d">📚</div>
+        <div>
+          <div class="logo-title">AI 閱讀互動樂園</div>
+          <div class="logo-subtitle">國小四年級・深層素養閱讀</div>
+        </div>
+      </a>
+
+      <!-- 學生身分輸入列 -->
+      <div class="student-bar">
+        <span>🎒 學生：</span>
+        <input type="text" class="student-input student-seat-input seat" placeholder="座號" maxlength="4">
+        <span>號</span>
+        <input type="text" class="student-input student-name-input" placeholder="姓名" maxlength="10">
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="main-wrapper">
+
+    <!-- 文章標題看板 -->
+    <section class="article-header-banner">
+      <div class="meta-tags-row">
+        <span class="tag-badge tag-sage">國小四年級</span>
+        <span class="tag-badge tag-coral">鄉土歷史・生活智慧</span>
+        <span class="tag-badge tag-clay">★★ 難度</span>
+        <span class="tag-badge tag-blue">第 93 期【說明】專欄</span>
+      </div>
+      <h1 class="article-main-title">跟著風獅爺，發現金門祕密</h1>
+      <div class="article-sub-info">
+        <span>✍️ 作者：子非魚</span>
+        <span>📖 出處：【得報】第93期「說明」專欄 (2026年11月20日)</span>
+      </div>
+    </section>
+
+    <!-- 功能標籤頁 (Tab Navigation) -->
+    <nav class="section-nav-tabs">
+      <button class="tab-btn active" data-tab="read" onclick="TabManager.switchTab('read')">
+        📖 文章閱讀與原始圖件
+      </button>
+      <button class="tab-btn" data-tab="quiz" onclick="TabManager.switchTab('quiz')">
+        📝 深層閱讀測驗 (16題+思考題)
+      </button>
+      <button class="tab-btn" data-tab="game" onclick="TabManager.switchTab('game')">
+        🎮 益智互動遊戲：風獅爺大冒險
+      </button>
+    </nav>
+
+    <!-- ==================== 第一分頁：文章閱讀區 ==================== -->
+    <section id="read-section" class="content-section">
+      <div class="morandi-card">
+        <!-- 閱讀輔助工具列 -->
+        <div class="reading-toolbar">
+          <div class="tool-group">
+            <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-secondary);">字體大小：</span>
+            <button class="btn-tool" onclick="FontResizer.decrease()">A- 縮小</button>
+            <span id="font-size-label" style="font-weight:800; min-width:35px; text-align:center;">大</span>
+            <button class="btn-tool" onclick="FontResizer.increase()">A+ 放大</button>
+          </div>
+
+          <div class="tool-group">
+            <button id="btn-speech-toggle" class="btn-tool" onclick="SpeechManager.speakAll()">
+              <span>語音朗讀 🔊</span>
+            </button>
+            <button class="btn-tool" onclick="SpeechManager.stop()">
+              <span>停止 ⏹️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 技巧性嵌入文章原始內容截圖（保留原始樣，支援高畫質檢視） -->
+        <div class="original-docs-showcase">
+          <div class="original-docs-title">
+            <span>🖼️ 課文原始內容截圖展示（保留原汁原味）</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+            點擊各頁縮圖可在新視窗查看高解析度原件，仔細欣賞金門島嶼插畫與排版風貌喔！
+          </p>
+          <div class="docs-gallery-grid">
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson10_page1.png', '_blank')">
+                <img src="lesson10_page1.png" alt="第1頁：跟著風獅爺，發現金門祕密" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 1 頁：風獅爺開口說話・阿岱的金門奇遇</div>
+              <a href="lesson10_page1.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson10_page2.png', '_blank')">
+                <img src="lesson10_page2.png" alt="第2頁：砲彈菜刀・酒糟牛・瓊林坑道" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 2 頁：砲彈菜刀・酒糟飼料・瓊林戰備坑道</div>
+              <a href="lesson10_page2.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+            <div class="doc-preview-card">
+              <div class="doc-img-frame" onclick="window.open('lesson10_page3.png', '_blank')">
+                <img src="lesson10_page3.png" alt="第3頁：星空下的守護真諦" loading="lazy">
+              </div>
+              <div class="doc-caption">📄 第 3 頁：守護臺灣的前線・珍惜身邊的人</div>
+              <a href="lesson10_page3.png" target="_blank" class="doc-btn-view">🔍 點擊看高清大圖</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文章內文掛載點 -->
+        <article class="article-body" id="article-content-body">
+          
+          <h2 class="article-section-title">一、意外的暑假與會說話的石獅子</h2>
+          <p class="reading-paragraph">
+            放暑假，阿岱被爸媽「寄」到金門阿公家。「我又不是<span class="vocab-bubble" title="郵局寄送的物品包裹，阿岱用來幽默比喻自己被父母送出遠門">包裹</span>，為什麼要被送到金門？」他趴在窗邊嘟囔著。窗外，一尊咬著劍、瞪著圓眼的<span class="vocab-bubble" title="金門設立在聚落或路口的辟邪石獅，用以鎮風防砂、守護居民平安">風獅爺</span>站得筆直。
+          </p>
+          <p class="reading-paragraph">
+            「你這尊石獅子，到底有什麼本事？會說話嗎？」他調皮地扮了個鬼臉。忽然，一陣風「呼——」地吹過，沙子拍打在臉上。
+          </p>
+          <p class="reading-paragraph">
+            「小子，你吵醒我了。」低沉的聲音響起。「哇！你真的會說話！」「我是守護這座島嶼的風獅爺。今天，要帶你去看這座島嶼的祕密。」
+          </p>
+
+          <h2 class="article-section-title">二、老街打鐵聲：砲彈變身生活幫手</h2>
+          <p class="reading-paragraph">
+            老街上，打鐵聲叮叮噹噹。老師傅遞出一把厚重的菜刀，說道：「這把菜刀是用<span class="vocab-bubble" title="八二三砲戰等歷史戰役中射向金門的砲彈鋼鐵，質地極為堅硬緊實">砲彈鐵</span>鍛造出來的，很特別吧？」
+          </p>
+          <p class="reading-paragraph">
+            阿岱摸著冰涼的刀面，「哇！原來砲彈也能變成生活的幫手！」老師傅笑著說：「對呀！戰爭留下的砲彈，也能打造成大家每天都用得到的東西。」風獅爺點點頭：「金門人最懂得把<span class="vocab-bubble" title="金門軍民面對砲火苦難，將破壞的武器化為實用的菜刀，象徵堅毅的生存智慧">困境變成希望</span>。」
+          </p>
+
+          <h2 class="article-section-title">三、牧場酒糟香：海風提醒人站穩腳步</h2>
+          <p class="reading-paragraph">
+            牧場裡，黑牛咀嚼紅紅的<span class="vocab-bubble" title="金門釀造著名高粱酒後留下的酒糟渣，富含營養與香氣，成為餵養黑牛的極佳環保飼料">酒糟</span>。阿公說：「那是釀高粱酒剩下的，用來餵牛最剛好。」
+          </p>
+          <p class="reading-paragraph">
+            一陣海風吹過，阿岱端著飼料差點打翻。風獅爺笑著說：「在金門，風不只是風，它在提醒人要<span class="vocab-bubble" title="面對海島強風與艱辛歲月，必須扎穩腳步、堅忍不拔、不輕易退縮">站穩腳步</span>。」
+          </p>
+
+          <h2 class="article-section-title">四、走進瓊林坑道：撫摸彈痕看見和平珍貴</h2>
+          <p class="reading-paragraph">
+            傍晚，阿公帶他們走進「<span class="vocab-bubble" title="金門著名的地下民防戰備坑道，四通八達連接村內各防空洞，具防禦避難功能">瓊林坑道</span>」。涼意從洞口湧出，牆上保留彈痕。阿公說：「以前打仗時，大家會從自家防空洞躲進坑道。現在整理成觀光景點，讓大家知道和平多麼珍貴。」
+          </p>
+          <p class="reading-paragraph">
+            風獅爺忽然神情嚴肅下來。「很多年前，砲聲震耳欲聾。那時，不只天上有砲彈，敵軍還會趁夜裡偷偷游上岸。國軍弟兄們都不敢合眼，一整夜守在海邊，只為了讓大家能安心睡覺。」阿岱睜大眼睛問：「真的有人偷偷上來？」「當然。金門不只是小島，它還是守護臺灣的前線。風再大、夜再黑，人們都得繼續生活。」
+          </p>
+
+          <h2 class="article-section-title">五、夜空下的星光：守護與珍惜身邊的人</h2>
+          <p class="reading-paragraph">
+            阿岱靜靜聽著，心頭熱熱的，他第一次覺得這座島，不只是他暫時住的地方，而是一個被戰火淬鍊、仍然堅強的家。
+          </p>
+          <p class="reading-paragraph">
+            夜裡，風輕輕吹。阿岱抬頭望著星星，低聲說：「原來守護，不只是勇敢，更要懂得<span class="vocab-bubble" title="明白前人守護和平不易，進而體會家庭親情與日常安定的可貴">珍惜身邊的人</span>。」風獅爺微微笑了，金門的夜空也跟著亮了起來。
+          </p>
+
+        </article>
+
+        <!-- 閱讀完成引導至測驗 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 2px dashed #D4E2DA;">
+          <p style="font-size: 1.15rem; font-weight: 700; color: var(--morandi-sage-dark); margin-bottom: 16px;">
+            🎉 恭喜你和阿岱一起讀懂了風獅爺與金門的祕密！準備好接受四層次閱讀大挑戰了嗎？
+          </p>
+          <button class="btn-3d btn-3d-sage" onclick="TabManager.switchTab('quiz')">
+            📝 前往深層閱讀測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第二分頁：深層閱讀測驗區 ==================== -->
+    <section id="quiz-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="quiz-header-bar">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-bottom: 6px;">
+              四層次理解挑戰題
+            </h2>
+            <div style="color: var(--text-secondary); font-size: 0.95rem;">
+              共 16 題選擇題（選項 1.2.3.4，答案分散不規律）＋ 1 題開放思考題（滿 50 字智慧防呆與評等）
+            </div>
+          </div>
+          <div class="quiz-score-badge" id="quiz-progress-text">
+            已作答：0 / 16 題
+          </div>
+        </div>
+
+        <!-- 四層次篩選切換標籤 -->
+        <div class="level-filter-bar" style="margin-bottom: 24px;">
+          <span style="font-weight: 800; font-size: 0.95rem; align-self: center; margin-right: 6px;">題目層次：</span>
+          <button class="level-filter-pill active" data-level="all" onclick="QuizEngine.filterLevel('all')">全部題目 (16)</button>
+          <button class="level-filter-pill" data-level="1" onclick="QuizEngine.filterLevel('1')">層次一：提取訊息 (4)</button>
+          <button class="level-filter-pill" data-level="2" onclick="QuizEngine.filterLevel('2')">層次二：推論訊息 (4)</button>
+          <button class="level-filter-pill" data-level="3" onclick="QuizEngine.filterLevel('3')">層次三：詮釋整合 (4)</button>
+          <button class="level-filter-pill" data-level="4" onclick="QuizEngine.filterLevel('4')">層次四：比較評估 (4)</button>
+        </div>
+
+        <!-- 16 題題目渲染容器 -->
+        <div id="quiz-container"></div>
+
+        <!-- 開放式思考題容器 -->
+        <div id="open-question-container"></div>
+
+        <!-- 交卷按鈕區 -->
+        <div style="text-align: center; margin-top: 36px;">
+          <button id="btn-submit-quiz" class="btn-3d btn-3d-coral" style="font-size: 1.25rem; padding: 16px 40px;" onclick="QuizEngine.submitQuiz()">
+            🚀 繳交測驗・看成績、詳解與 AI 思考等第
+          </button>
+        </div>
+
+        <!-- 成績總結診斷報告區 (繳交後展開) -->
+        <div id="quiz-summary-card" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 第三分頁：主題互動遊戲區 ==================== -->
+    <section id="game-section" class="content-section" style="display: none;">
+      <div class="morandi-card">
+        <div class="game-container">
+          <div class="game-hud">
+            <div>🎮 關卡：<span id="game-stage-text">1 / 4</span></div>
+            <div>🏆 得分：<span id="game-score-text">0</span> 分</div>
+            <div>❤️ 生命值：<span id="game-hp-text">❤️❤️❤️</span></div>
+          </div>
+
+          <div class="game-stage-screen" id="game-screen-area">
+            <!-- 遊戲畫面動態注入 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>國小四年級 AI 互動閱讀素養平台 ｜ 柔和莫蘭迪 3D Q版兒童學習教材 ｜ GitHub Pages 靜態網站</p>
+  </footer>
+
+  <!-- 引用共用互動核心腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章專屬資料注入配置 -->
+  <script>
+    window.ARTICLE_CONFIG = {
+      id: "lesson-10",
+      pageFile: "index11.html",
+      title: "跟著風獅爺，發現金門祕密",
+      subtitle: "第93期【說明】專欄 / 作者：子非魚",
+      meta: {
+        grade: "國小四年級",
+        category: "鄉土歷史・生活智慧",
+        level: "★★ 難度",
+        issue: "第 93 期"
+      },
+      // 16 題四層次題庫（答案平均分散且不連續重複：3, 1, 4, 2, 4, 1, 3, 2, 1, 4, 2, 3, 4, 2, 1, 3）
+      questions: [
+        /* ---------- 層次一：提取訊息 (4題) ---------- */
+        {
+          id: 1,
+          level: 1,
+          question: "暑假時阿岱被爸媽送去哪裡？他一開始趴在窗邊的心情與想法是怎樣的？",
+          options: {
+            "1": "被送去澎湖外婆家，非常期待去沙灘游泳玩耍",
+            "2": "被送去綠島叔叔家，開心自己可以天天出海浮潛",
+            "3": "被送到金門阿公家，趴在窗邊嘟囔覺得自己像被寄送的包裹",
+            "4": "被送去阿里山舅舅家，興奮地想要搭高山小火車看日出"
+          },
+          answer: "3",
+          explanation: "文中第 1 頁開頭寫道：「放暑假，阿岱被爸媽『寄』到金門阿公家。『我又不是包裹，為什麼要被送到金門？』他趴在窗邊嘟囔著。」",
+          sourceQuote: "「放暑假，阿岱被爸媽『寄』到金門阿公家。『我又不是包裹，為什麼要被送到金門？』他趴在窗邊嘟囔著。」（第1頁）"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "在金門老街上，打鐵老師傅遞給阿岱一把厚重的菜刀，這把菜刀是用什麼特別原料鍛造出來的？",
+          options: {
+            "1": "用過去戰爭留下來的砲彈鋼鐵鍛造出來的",
+            "2": "用深海打撈上來的古代沉船鐵釘熔鑄而成的",
+            "3": "用外太空掉下來的隕石碎片精心磨製的",
+            "4": "用廢棄汽車的引擎外殼重新加熱壓鑄而成的"
+          },
+          answer: "1",
+          explanation: "文中第 2 頁老師傅遞出菜刀說道：「這把菜刀是用砲彈鐵鍛造出來的，很特別吧？」",
+          sourceQuote: "「老師傅遞出一把厚重的菜刀，說道：『這把菜刀是用砲彈鐵鍛造出來的，很特別吧？』」（第2頁）"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "金門牧場裡的黑牛嘴裡咀嚼著紅紅的飼料，阿公向阿岱說明那是什麼原料？",
+          options: {
+            "1": "新鮮採摘的草莓果肉，為了讓黑牛產出粉紅色牛奶",
+            "2": "特製的紅色辣椒粉，用來幫黑牛驅除體內的寄生蟲",
+            "3": "磨碎的紅磚瓦粉末，能幫助牛隻消化肚子裡的青草",
+            "4": "釀造金門高粱酒剩下的酒糟，用來餵牛最為剛好"
+          },
+          answer: "4",
+          explanation: "文中第 2 頁描述：「牧場裡，黑牛咀嚼紅紅的酒糟。阿公說：『那是釀高粱酒剩下的，用來餵牛最剛好。』」",
+          sourceQuote: "「牧場裡，黑牛咀嚼紅紅的酒糟。阿公說：『那是釀高粱酒剩下的，用來餵牛最剛好。』」（第2頁）"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "傍晚時，阿公帶阿岱參觀的「瓊林坑道」，在過去戰爭時期具備什麼重要的實用功能？",
+          options: {
+            "1": "儲存大量金門高粱酒與貢糖的低溫冷藏倉庫",
+            "2": "打仗時讓大家從自家防空洞躲進避難的地下防禦通道",
+            "3": "專門用來捕捉穿山甲與地鼠的迷宮機關陷阱",
+            "4": "供全島軍民在夏天舉辦大型歌唱比賽的地下音樂廳"
+          },
+          answer: "2",
+          explanation: "文中第 2 頁阿公說明：「以前打仗時，大家會從自家防空洞躲進坑道。現在整理成觀光景點，讓大家知道和平多麼珍貴。」",
+          sourceQuote: "「阿公說：『以前打仗時，大家會從自家防空洞躲進坑道。現在整理成觀光景點，讓大家知道和平多麼珍貴。』」（第2頁）"
+        },
+
+        /* ---------- 層次二：推論訊息 (4題) ---------- */
+        {
+          id: 5,
+          level: 2,
+          question: "老師傅說「戰爭留下的砲彈，也能打造成每天都用得到的東西」，風獅爺回應「金門人最懂得把困境變成希望」，這句話的主要推論是什麼？",
+          options: {
+            "1": "金門人希望戰爭永遠不要停止，這樣就有撿不完的免費鐵塊",
+            "2": "菜刀只能用來切菜，無法解決金門島上的任何生活困擾",
+            "3": "砲彈本來就是用來製造廚房菜刀的工具，跟打仗毫無關聯",
+            "4": "金門人展現強韌的生命智慧，能將破壞性的歷史傷痕轉化為造福生活的實用力量"
+          },
+          answer: "4",
+          explanation: "砲彈原本是戰爭摧毀的象徵，但金門人發揮巧思將其鍛造為日常生活的廚房菜刀，深刻體現出金門人不向逆境低頭、化危機為轉機的堅韌生活哲學。",
+          sourceQuote: "「老師傅笑著說：『對呀！戰爭留下的砲彈，也能打造成大家每天都用得到的東西。』風獅爺點點頭：『金門人最懂得把困境變成希望。』」（第2頁）"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "海風差點把阿岱手中的飼料吹翻時，風獅爺說「在金門，風不只是風，它在提醒人要站穩腳步」，這句話的深層意涵是什麼？",
+          options: {
+            "1": "金門強勁的風不僅是自然天候，更磨礪出金門人面對艱辛環境時堅定、不輕易退縮的生活態度",
+            "2": "風獅爺在警告阿岱走路姿勢不標準，必須立刻去武術館練習蹲馬步",
+            "3": "金門的海風是因為阿岱對風獅爺做鬼臉才故意颳起來報復的妖風",
+            "4": "風會把島上的所有居民吹進海裡，所以大家出門必須隨身綁著大石頭"
+          },
+          answer: "1",
+          explanation: "風獅爺借金門著名的強風作譬喻，說明生活在風大土瘠的前線海島，人們必須在艱難環境中學會扎穩腳步、堅定沉著地生活下去。",
+          sourceQuote: "「風獅爺笑著說：『在金門，風不只是風，它在提醒人要站穩腳步。』」（第2頁）"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "很多年前國軍弟兄整夜守在黑夜與寒風中的海邊連眼睛都不敢合，這反映了當時金門處於什麼樣的處境？",
+          options: {
+            "1": "弟兄們失眠睡不著覺，相約在海邊看星星吹風聊天",
+            "2": "海灘上有罕見的珍貴珊瑚礁，需要二十四小時專人防竊",
+            "3": "面臨敵軍趁黑夜游上岸偷襲與砲擊威脅，金門身處守護臺灣的最前線，一刻都不能鬆懈",
+            "4": "弟兄們在等待海裡的黑牛游上岸喝高粱酒慶祝豐收"
+          },
+          answer: "3",
+          explanation: "文章第 2 至 3 頁生動描寫敵軍趁夜游泳潛入的危機，國軍整夜不眠不休守在海線，突顯金門身為戰略前線的嚴峻歷史背景。",
+          sourceQuote: "「那時，不只天上有砲彈，敵軍還會趁夜裡偷偷游上岸。國軍弟兄們都不敢合眼，一整夜守在海邊，只為了讓大家能安心睡覺。」（第2至3頁）"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "阿岱聽完風獅爺說的歷史故事後「心頭熱熱的」，這種心理感受代表阿岱對金門產生了什麼樣的轉變？",
+          options: {
+            "1": "因為金門夏天的太陽太大，導致阿岱中暑發高燒",
+            "2": "從一開始抱怨被寄送的委屈與不耐，轉變為深刻體會到這座島嶼在戰火淬鍊下的堅強與溫暖認同",
+            "3": "覺得金門實在太無聊了，想要立刻搭機逃回臺灣買最新玩具",
+            "4": "生氣風獅爺講話聲音太過低沉，吵得他耳朵不舒服"
+          },
+          answer: "2",
+          explanation: "阿岱從剛到金門時嘟囔抱怨，在實地了解砲彈菜刀、坑道與守前線的歷史後，內心深受震撼與感動，開始對這座島嶼產生深厚的情感連結與尊敬。",
+          sourceQuote: "「阿岱靜靜聽著，心頭熱熱的，他第一次覺得這座島，不只是他暫時住的地方，而是一個被戰火淬鍊、仍然堅強的家。」（第3頁）"
+        },
+
+        /* ---------- 層次三：詮釋整合 (4題) ---------- */
+        {
+          id: 9,
+          level: 3,
+          question: "在金門傳統文化中，「風獅爺」扮演著什麼樣的精神象徵與聚落守護角色？",
+          options: {
+            "1": "既是鎮風止煞、守護聚落平安的民間信仰守護神，也是凝聚島民堅定信念的精神象徵",
+            "2": "用來代替捕鼠器抓老鼠的石頭雕刻寵物",
+            "3": "專門放置在門口供郵差放置信件包裹的裝飾信箱台",
+            "4": "過去國軍用來測試砲彈堅固程度的石製練習標靶"
+          },
+          answer: "1",
+          explanation: "文中風獅爺手持寶劍、昂然挺立，向阿岱娓娓道來島嶼的歷史與韌性，正體現了金門風獅爺世代守護島民、抵禦風沙與苦難的精神代表。",
+          sourceQuote: "綜合第1頁「一尊咬著劍、瞪著圓眼的風獅爺站得筆直」、「我是守護這座島嶼的風獅爺」及全文展現的守護意志。"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "課文中透過「砲彈做成菜刀」、「高粱酒糟餵牛」與「瓊林坑道轉型為景點」，共同展現了金門文化的哪一項核心精神？",
+          options: {
+            "1": "說明金門人只關心如何賣出更多高價菜刀賺錢",
+            "2": "表現金門人喜歡聚集在陰暗坑道裡喝高粱酒聊天",
+            "3": "證明金門所有的生活物品都是在戰場上免費撿來的",
+            "4": "展現金門人珍惜資源、在艱困環境中轉化危機為希望的生活智慧與愛好和平的價值觀"
+          },
+          answer: "4",
+          explanation: "砲彈化為實用菜刀、酒糟再利用成為牛隻飼料、避難坑道活化為和平教育景點，三個場景交相輝映，共同詮釋出金門人「把困境變成希望」與珍惜和平的文化精髓。",
+          sourceQuote: "整合第2頁菜刀、酒糟與坑道的具體敘述，扣合「金門人最懂得把困境變成希望」與「讓大家知道和平多麼珍貴」。"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "故事開頭阿岱嘟囔「我又不是包裹」，到故事結尾體悟「守護不只是勇敢，更要懂得珍惜身邊的人」，作者藉由這趟旅程傳達了什麼成長啟發？",
+          options: {
+            "1": "說明小孩子長大後一定要去當快遞員才能學會獨立生活",
+            "2": "從只看見自己的小委屈，昇華為理解前人守護之不易，進而懂得感恩珍惜身邊人事的同理心與成熟",
+            "3": "告訴大家出門旅行一定要自備許多零食才不會挨餓生氣",
+            "4": "證明只有被父母送去離島才能學會寫好作文"
+          },
+          answer: "2",
+          explanation: "阿岱的心境轉折是全文的情感主線：從開頭自怨自艾的小情緒，轉化為對土地歷史的共情，領悟真正的守護是溫柔珍惜身邊的至親與日常生活。",
+          sourceQuote: "對比第1頁開頭抱怨與第3頁結尾「阿岱抬頭望著星星，低聲說：『原來守護，不只是勇敢，更要懂得珍惜身邊的人。』」"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "故事最後寫道：「夜裡，風輕輕吹……金門的夜空也跟著亮了起來。」這裡的「夜空亮了起來」主要象徵著什麼？",
+          options: {
+            "1": "突然有未爆彈在遠處爆炸發出了強烈火光",
+            "2": "附近的大馬路剛好打開了一千盞高壓探照路燈",
+            "3": "象徵阿岱心中的領悟點亮了希望之光，也寓意走過戰火的金門正迎向平靜而明亮的未來",
+            "4": "風獅爺用手電筒照向天空跟天上的飛機打暗號"
+          },
+          answer: "3",
+          explanation: "作者採用景物烘托心境的文學筆法，夜空的晴朗明亮與星光，象徵歷史陰霾散去後人們心靈的澄澈、希望與對和平的珍視。",
+          sourceQuote: "「『原來守護，不只是勇敢，更要懂得珍惜身邊的人。』風獅爺微微笑了，金門的夜空也跟著亮了起來。」（第3頁）"
+        },
+
+        /* ---------- 層次四：比較評估 (4題) ---------- */
+        {
+          id: 13,
+          level: 4,
+          question: "將瓊林戰備坑道、防空洞保留下來並整理成觀光參觀景點，從歷史與人文教育的角度評估，這項做法最重要的價值是什麼？",
+          options: {
+            "1": "拆除所有老舊古蹟並改建摩天大樓才能展現現代化都市的繁榮氣派",
+            "2": "讓大家可以在坑道裡玩捉迷藏遊戲而不用回家寫功課",
+            "3": "向遊客炫耀戰爭是一場非常刺激有趣的真人冒險生存遊戲",
+            "4": "讓後代子孫能親身撫觸歷史與戰火彈痕，深刻體認戰爭的殘酷，進而倍加珍惜和平的來之不易"
+          },
+          answer: "4",
+          explanation: "保存戰役遺址能發揮深刻的和平歷史教育功能，讓從未經歷戰火的新生代走入真實坑道，感知和平生活是無數前人堅守的成果。",
+          sourceQuote: "呼應第2頁阿公所言：「以前打仗時，大家會從自家防空洞躲進坑道。現在整理成觀光景點，讓大家知道和平多麼珍貴。」"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "金門人將釀製高粱酒剩下的「酒糟」拿來餵養牧場黑牛，發展出特色的「金門酒糟牛」。從現代永續環境觀點評估，這種做法符合哪一種綠色智慧？",
+          options: {
+            "1": "單向線性資源消耗模式，用完即丟",
+            "2": "資源循環再利用（循環經濟），將釀造副產物轉化為高價值飼料，減少廢棄物並創造特色產業",
+            "3": "隨意把農業殘渣傾倒進河川與海灣以節省處理費用",
+            "4": "完全依賴國外進口高級化學飼料的昂貴畜牧方式"
+          },
+          answer: "2",
+          explanation: "高粱酒糟原本是釀酒後的剩餘物，金門人將其再利用作為牛隻的美味營養食物，達到零浪費與資源循環，是典型的循環經濟生活智慧。",
+          sourceQuote: "結合第2頁阿公所言：「那是釀高粱酒剩下的，用來餵牛最剛好」，展現金門人點石成金的環保智慧。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "如果將「由砲彈鋼鍛造的金門菜刀」與「工廠機器大量沖壓的普通鐵片菜刀」相比，金門菜刀最無可取代的特殊文化意涵是什麼？",
+          options: {
+            "1": "它凝聚了金門島民走過烽火歲月的堅韌記憶，將帶來摧毀痛苦的武器淬鍊成溫暖日常生活的器物",
+            "2": "它是一把能念咒語變成飛劍在天空翱翔的魔術玩具",
+            "3": "它保證廚師在切洋蔥或生辣椒時絕對不會流眼淚",
+            "4": "它是世界上唯一一把由純金與鑽石打造的皇家寶刀"
+          },
+          answer: "1",
+          explanation: "金門菜刀的價值不僅在於鋼質堅硬耐磨，更在於其歷史文化厚度——它是戰火淬鍊、化暴戾為祥和的歷史見證者與和平象徵。",
+          sourceQuote: "深層呼應第2頁：「原來砲彈也能變成生活的幫手！……金門人最懂得把困境變成希望。」"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "讀完阿岱在金門的成長故事後，身為四年級學生的你可以如何將「原來守護，不只是勇敢，更要懂得珍惜身邊的人」實踐在日常校園與家庭生活中？",
+          options: {
+            "1": "在班上霸道命令所有人都要聽自己的話，展現自己很勇敢",
+            "2": "放學回家後把自己鎖在房間裡玩手機，對家人的問候不理不睬",
+            "3": "主動關心家人與同學、用心傾聽彼此的需求，在他人遇到困難時給予溫暖陪伴與互助支援",
+            "4": "遇到考試或運動挫折時只會大聲抱怨，把過錯全部推卸給他人"
+          },
+          answer: "3",
+          explanation: "真正的守護落實於日常生活的小細節：懂得體貼父母長輩的付出、友愛同儕朋友，以善意與珍惜化作陪伴他人的力量，實踐素養教育的核心情懷。",
+          sourceQuote: "深化第3頁結尾核心哲思：「原來守護，不只是勇敢，更要懂得珍惜身邊的人。」"
+        }
+      ],
+
+      // 開放式思考題（深度探究：50字防呆、即時狀態鼓勵、AI智慧呼應度評量與等第）
+      openQuestion: {
+        id: "open-1",
+        title: "💡 深度探究：小小金門祕密導覽員——如果我是風獅爺的小幫手",
+        prompt: "在故事中，風獅爺帶領阿岱看見了「砲彈變成的鋼刀」、「高粱酒糟餵養的黑牛」以及「走過戰火的瓊林坑道」，讓阿岱領悟到「金門人最懂得把困境變成希望」與「守護不只是勇敢，更要懂得珍惜身邊的人」。<br><br>如果你是風獅爺的小幫手，請你寫一段話（<strong>請至少寫滿 50 個有效字</strong>）：<br>1. 選擇文章中一個你印象最深刻的金門祕密（例如：砲彈菜刀的堅強、海風提醒站穩腳步的哲理、或是坑道訴說的和平珍貴），說說它帶給你什麼啟發？<br>2. 在你的日常生活中，當你面對困難或挫折時，你會如何學習金門人「把困境變成希望」的精神，以及如何「守護與珍惜」你身邊的家人或好朋友呢？<br><br>請寫下你的具體想法與生活經驗，字數達標後送出，AI 導師會針對內容給予分數、成績等第（優等、甲等、乙等）與溫暖評語喔！",
+        hint: "結合課文中的砲彈菜刀、風獅爺、高粱酒糟、瓊林坑道或和平守護，寫下你的真實想法與生活經驗（至少 50 字以上才可送出喔）！",
+        rubric: {
+          keywords: ["風獅爺", "砲彈", "菜刀", "酒糟", "高粱", "瓊林", "坑道", "防空洞", "和平", "守護", "堅強", "困境", "希望", "站穩腳步", "珍惜", "戰火"],
+          minWords: 50
+        }
+      },
+
+      // 互動小遊戲配置：【風獅爺的金門祕密大冒險】
+      initGame: function() {
+        const gameData = [
+          {
+            stage: 1,
+            title: "第一關：老街尋寶——砲彈變身記",
+            desc: "老街上傳來叮叮噹噹的打鐵聲，老師傅要打造一把能把困境變成希望的特別菜刀，請問這把菜刀是用什麼材料做成的？",
+            options: [
+              { name: "戰爭時期留下來的堅硬砲彈鋼鐵", icon: "🗡️", isSafe: true, feedback: "答對了！老師傅將戰火砲彈鍛造成著名的金門菜刀，把困境變成生活的希望！" },
+              { name: "海灘上撿到的軟軟海苔與貝殼碎片", icon: "🐚", isSafe: false, feedback: "海苔軟軟的沒辦法打造成切菜的菜刀喔！" },
+              { name: "廚房用剩的彩色塑膠吸管", icon: "🥤", isSafe: false, feedback: "塑膠吸管遇熱會融化，不能拿來做耐用的菜刀啦！" },
+              { name: "超商買來的美味巧克力脆片", icon: "🍫", isSafe: false, feedback: "哈哈，那是肚子餓時吃的點心，不能打鐵啦！" }
+            ]
+          },
+          {
+            stage: 2,
+            title: "第二關：牧場智慧——高粱酒糟的妙用",
+            desc: "海風吹來一陣陣香氣，阿公正端著一桶紅紅的美味飼料餵黑牛，請問這桶兼具營養與環保的飼料是什麼？",
+            options: [
+              { name: "釀造金門高粱酒剩下的酒糟，營養又環保", icon: "🌾", isSafe: true, feedback: "太棒了！釀酒剩下的酒糟廢料變黃金，用來餵牛最剛好，展現循環智慧！" },
+              { name: "隔壁小朋友吃剩倒掉的麻辣泡麵湯", icon: "🍜", isSafe: false, feedback: "太辣了！黑牛吃了肚子會痛，絕對不能亂餵！" },
+              { name: "工廠排出的彩色化學肥皂泡泡水", icon: "🧼", isSafe: false, feedback: "化學毒水有劇毒，會危害黑牛生命！" },
+              { name: "火星太空船掉下來的紅色小石頭", icon: "☄️", isSafe: false, feedback: "黑牛是吃草食的動物，不能啃石頭喔！" }
+            ]
+          },
+          {
+            stage: 3,
+            title: "第三關：瓊林坑道探祕——撫觸和平的足跡",
+            desc: "走進涼爽而保留著彈痕的瓊林戰備坑道，過去居民打仗時躲進避難，現在整理成觀光景點，最想告訴大家什麼重要訊息？",
+            options: [
+              { name: "讓大家親歷戰火痕跡，深刻感受和平多麼珍貴", icon: "🕊️", isSafe: true, feedback: "答對了！走過坑道讓我們明白和平來之不易，一定要加倍珍惜！" },
+              { name: "在坑道裡面玩捉迷藏可以不用洗澡", icon: "🙈", isSafe: false, feedback: "坑道是莊嚴的歷史遺址，不是用來躲避洗澡的地方喔！" },
+              { name: "坑道深處藏著許多外星人的迷你飛碟", icon: "🛸", isSafe: false, feedback: "坑道是人工挖掘的戰備地下通道，沒有外星飛碟啦！" },
+              { name: "鼓勵大家多買幾顆真正的大砲彈回家收藏", icon: "💣", isSafe: false, feedback: "未爆砲彈極度危險，絕不可以私自收藏玩耍！" }
+            ]
+          },
+          {
+            stage: 4,
+            title: "第四關：風獅爺的守護考驗——守護的真諦",
+            desc: "夜裡風輕輕吹，阿岱望著滿天星空，說出了他心中對守護的真正領悟，請問這份深刻的體會是什麼？",
+            options: [
+              { name: "原來守護，不只是勇敢，更要懂得珍惜身邊的人", icon: "✨", isSafe: true, feedback: "太感動了！風獅爺微微笑了，金門的夜空也跟著亮了起來！" },
+              { name: "守護就是天天大吼大叫把所有小動物通通嚇跑", icon: "📢", isSafe: false, feedback: "大吼大叫不是守護，那是缺乏禮貌的行為喔！" },
+              { name: "守護就是把自己包成快遞包裹寄給別人", icon: "📦", isSafe: false, feedback: "那是阿岱開頭賭氣的玩笑話，不是守護的真諦啦！" },
+              { name: "守護就是天天躺在床上吹冷氣吃冰淇淋", icon: "🍨", isSafe: false, feedback: "這樣只會感冒蛀牙，沒有體會到守護的深刻意涵喔！" }
+            ]
+          }
+        ];
+
+        let currentStageIdx = 0;
+        let score = 0;
+        let hp = 3;
+
+        function updateHUD() {
+          const stageEl = document.getElementById("game-stage-text");
+          const scoreEl = document.getElementById("game-score-text");
+          const hpEl = document.getElementById("game-hp-text");
+          if (stageEl) stageEl.innerText = `${currentStageIdx + 1} / ${gameData.length}`;
+          if (scoreEl) scoreEl.innerText = score;
+          if (hpEl) hpEl.innerText = "❤️".repeat(Math.max(0, hp));
+        }
+
+        function renderStage() {
+          const screen = document.getElementById("game-screen-area");
+          if (!screen) return;
+
+          if (hp <= 0) {
+            SoundPlayer.wrong();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 54px; margin-bottom: 12px;">💔</div>
+                <h3 style="font-size: 1.5rem; font-weight:900; color:var(--morandi-danger); margin-bottom:8px;">金門祕密大冒險未完成</h3>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">回頭再看看課文中砲彈菜刀、酒糟牛與坑道的智慧，重新出發吧！</p>
+                <button class="btn-3d btn-3d-coral" onclick="window.ARTICLE_CONFIG.initGame()">🔄 重新開始挑戰</button>
+              </div>
+            `;
+            return;
+          }
+
+          if (currentStageIdx >= gameData.length) {
+            SoundPlayer.victory();
+            screen.innerHTML = `
+              <div class="game-intro-card">
+                <div style="font-size: 60px; margin-bottom: 12px;">🦁</div>
+                <h3 style="font-size: 1.6rem; font-weight:900; color:var(--morandi-sage-dark); margin-bottom:8px;">榮獲【金門守護小達人・和平之星】榮譽勳章！</h3>
+                <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+                  太棒了！你獲得了 <strong>${score}</strong> 分滿分！你已經完整揭開了金門風獅爺的祕密，體會了砲彈變菜刀的智慧、坑道和平的珍貴，並領悟了珍惜身邊人的守護真諦！
+                </p>
+                <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                  <button class="btn-3d btn-3d-sage" onclick="window.ARTICLE_CONFIG.initGame()">🎮 再玩一次</button>
+                  <button class="btn-3d btn-3d-blue" onclick="TabManager.switchTab('quiz')">📝 進行閱讀測驗</button>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          const current = gameData[currentStageIdx];
+          updateHUD();
+
+          let cardsHtml = "";
+          current.options.forEach((opt, idx) => {
+            cardsHtml += `
+              <div class="game-choice-card" onclick="window.handleGameChoice(${idx})">
+                <div class="game-card-icon">${opt.icon}</div>
+                <div class="game-card-title">${opt.name}</div>
+              </div>
+            `;
+          });
+
+          screen.innerHTML = `
+            <div style="background: rgba(255,255,255,0.92); border-radius: 16px; padding: 20px; max-width: 600px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.06);">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--morandi-sage-dark); margin-bottom: 6px;">${current.title}</h3>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">${current.desc}</p>
+              <div class="game-cards-container">
+                ${cardsHtml}
+              </div>
+              <div id="game-feedback-box" style="margin-top: 12px; font-weight: 700; font-size: 0.95rem; min-height: 24px;"></div>
+            </div>
+          `;
+        }
+
+        window.handleGameChoice = function(choiceIdx) {
+          const current = gameData[currentStageIdx];
+          const chosen = current.options[choiceIdx];
+          const fbBox = document.getElementById("game-feedback-box");
+
+          if (chosen.isSafe) {
+            score += 25;
+            SoundPlayer.correct();
+            if (typeof Confetti !== "undefined") Confetti.celebrate(2000, 45);
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-success);">⭕ 正確！${chosen.feedback}</span>`;
+            setTimeout(() => {
+              currentStageIdx++;
+              renderStage();
+            }, 1200);
+          } else {
+            hp--;
+            SoundPlayer.wrong();
+            updateHUD();
+            if (fbBox) fbBox.innerHTML = `<span style="color:var(--morandi-danger);">❌ 哎呀！${chosen.feedback}</span>`;
+            if (hp <= 0) {
+              setTimeout(() => {
+                renderStage();
+              }, 1200);
+            }
+          }
+        };
+
+        renderStage();
+      }
+    };
+  </script>
+</body>
+</html>
